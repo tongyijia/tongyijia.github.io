@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux基础,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1：文件属性的查看ls   -l    filename-     rw-r–r–  .    1   root   root  0   Jan 23  03:15     file-                 ##文件类型rw-r–r–            ##文件权限.             ##是否有权限列表 .代表没有 +代表有 这个问题以后会进一步了解1">
+<meta name="keywords" content="Linux基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单了解与设置文件的权限">
+<meta property="og:url" content="http://yoursite.com/2016/04/10/简单了解与设置文件的权限/index.html">
+<meta property="og:site_name" content="lele&#39;s home">
+<meta property="og:description" content="1：文件属性的查看ls   -l    filename-     rw-r–r–  .    1   root   root  0   Jan 23  03:15     file-                 ##文件类型rw-r–r–            ##文件权限.             ##是否有权限列表 .代表没有 +代表有 这个问题以后会进一步了解1">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-19T14:56:59.170Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="简单了解与设置文件的权限">
+<meta name="twitter:description" content="1：文件属性的查看ls   -l    filename-     rw-r–r–  .    1   root   root  0   Jan 23  03:15     file-                 ##文件类型rw-r–r–            ##文件权限.             ##是否有权限列表 .代表没有 +代表有 这个问题以后会进一步了解1">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/04/10/简单了解与设置文件的权限/">
+
+
+
+
+
+  <title>简单了解与设置文件的权限 | lele's home</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lele's home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-scategories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            scategories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/04/10/简单了解与设置文件的权限/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tong yijia">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/upload/im.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lele's home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">简单了解与设置文件的权限</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-04-10T22:52:47+08:00">
+                2016-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>1：文件属性的查看<br>ls   -l    filename<br>-     rw-r–r–  .    1   root   root  0   Jan 23  03:15     file<br>-                 ##文件类型<br>rw-r–r–            ##文件权限<br>.             ##是否有权限列表 .代表没有 +代表有 这个问题以后会进一步了解<br>1             ##文件副本个数<br>root             ##文件所有人<br>root            ##文件所有组<br>0             ##文件大小<br>Jan 23  03:15              ##文件最后一次被修改的时间<br>file             ##文件名<br>2:目录属性的查看<br>ls    -ld   directoryname<br>d  rwxr-xr-x   .   2  kiosk  kiosk  4096  Jan 23 16:05  blogs<br>d                ##d表示是目录，-表示是文件<br>rwxr-xr-x                ##目录的权限<br>.             ##是否有权限列表 .代表没有 +代表有 这个问题以后会进一步了解<br>2 ##子目录个数 一般情况下，一个新建的目录这个参数为2，因为算上了. 和..两个目录。可用ls -a 查看<br>kiosk                  ##目录所有者<br>kiosk             ##目录所有组<br>Jan 23 16:05               ##目录中最后内容变化的时间<br>blogs             ##目录名<br>3：文件所有用户，用户组的更改<br>chown   用户名    文件名            ##改变文件所有用户<br>chgrp  组名称    文件名            ##改变文件所有组<br>chown  -R  用户名    目录名           ##递归改变目录和目录中子文件的所有用户<br>chgrp -R 组名称   目录名            ##递归改变目录和目录中子文件的所有组<br>4：权限的识别<br>ls    -l    结果中的第2到第10个字符为文件权限<br>2，3，4 为此用户权限<br>5，6，7 为用户组的权限<br>8，9，10为其他用户的权限<br>5：权限种类<br>r：<br>r权限针对于文件表示可以查看文件的内容<br>r权限针对于目录表示可以用ls查看目录中存在的文件名称<br>w：<br>w权限针对于文件表示可以更改文件的内容<br>w权限针对于目录表示可以删除目录中的子文件或子目录<br>x：<br>x权限针对于文件表示可以开启文件中文件中记录的程序<br>x权限针对于目录表示可以进入到目录中<br>权限的数字表示：<br>r：4      w：2     x：1<br>三者可以相互组合    rwx=7   rw-=6  r-x=5  r–=4  -wx=3  -w-=2   –x=1<br>6：改变文件或目录的权限</p>
+<p>可以用chmod   ugo+-=rwx<br>  chmod     数字名    修改文件或目录的权限<br>u 代表文件所有人的权限<br>g 代表文件所有组的权限<br>o 代表其他人的权限<br>修改时可以用如下格式：<br>chmod   u+r        filename/directoryname<br>chmod   u-w        filename/directoryname<br>chmod   g=rwx     filename/directoryname<br>chmod   744        filename/directoryname</p>
+<p>7：特殊权限<br>@stickyid       ##强制位<br>o+t      ##针对目录，当一个目录有t权限时，这个目录中的文件只能被文件所有者删除<br>t=1<br>修改格式：chmod  o+t  directoryname 或 eg：chmod  1777  directoryname<br>@sgid ##粘滞位<br>g+s ##针对目录，在目录中创建的文件都自动归属到目录所有组中，针对二进制文件，文件内记录的程序在执行时和执行者的身份没有关系，而是以二进制文件的所有组的身份执行的<br>s=2<br>修改格式：chmod  g+s  file</p>
+<p>8.文件的默认权限<br>umask    ##显示系统预留权限值</p>
+<p>##########rd.break<br>vim /etc/bashrc        71行是普通用户的更改，73是超级用户的更改<br>vim /etc/profile    60行是普通用户的更改，62是超级用户的更改<br>source /etc/bashrc /etc/profile ##让更改立即生效</p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux基础/" rel="tag"> <i class="fa fa-tag"></i> Linux基础</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/02/简单了解用户，对用户的简单管理/" rel="next" title="简单了解用户，对用户的简单管理">
+                <i class="fa fa-chevron-left"></i> 简单了解用户，对用户的简单管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/20/用fdisk工具分区，swap分区的管理/" rel="prev" title="用fdisk工具分区，swap分区的管理">
+                用fdisk工具分区，swap分区的管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/upload/im.jpg" alt="Tong yijia">
+            
+              <p class="site-author-name" itemprop="name">Tong yijia</p>
+              <p class="site-description motion-element" itemprop="description">abc~</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/tongyijia" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://me.csdn.net/tongyijia" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.jeyzhang.com/" title="xu" target="_blank">xu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wiki.archlinux.org/" title="arch" target="_blank">arch</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tong yijia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

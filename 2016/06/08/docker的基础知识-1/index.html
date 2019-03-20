@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="docker,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言本次使用的环境为rhel3.10.0-229.el7.x86_64 安装和启动dockeryum install docker-engine-1.8.3-1.el7.centos.x86_64 -y #安装systemctl start docker #启动 查看docker信息docker version #查看docker版本123456789101112131415Client: Ver">
+<meta name="keywords" content="docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker的基础知识[1] ">
+<meta property="og:url" content="http://yoursite.com/2016/06/08/docker的基础知识-1/index.html">
+<meta property="og:site_name" content="lele&#39;s home">
+<meta property="og:description" content="前言本次使用的环境为rhel3.10.0-229.el7.x86_64 安装和启动dockeryum install docker-engine-1.8.3-1.el7.centos.x86_64 -y #安装systemctl start docker #启动 查看docker信息docker version #查看docker版本123456789101112131415Client: Ver">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-19T13:17:17.325Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="docker的基础知识[1] ">
+<meta name="twitter:description" content="前言本次使用的环境为rhel3.10.0-229.el7.x86_64 安装和启动dockeryum install docker-engine-1.8.3-1.el7.centos.x86_64 -y #安装systemctl start docker #启动 查看docker信息docker version #查看docker版本123456789101112131415Client: Ver">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/06/08/docker的基础知识-1/">
+
+
+
+
+
+  <title>docker的基础知识[1]  | lele's home</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lele's home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-scategories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            scategories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/06/08/docker的基础知识-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tong yijia">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/upload/im.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lele's home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">docker的基础知识[1] </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-08T21:07:40+08:00">
+                2016-06-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本次使用的环境为rhel3.10.0-229.el7.x86_64</p>
+<h1 id="安装和启动docker"><a href="#安装和启动docker" class="headerlink" title="安装和启动docker"></a>安装和启动docker</h1><p><code>yum install docker-engine-1.8.3-1.el7.centos.x86_64 -y</code> #安装<br><code>systemctl start docker</code> #启动</p>
+<h1 id="查看docker信息"><a href="#查看docker信息" class="headerlink" title="查看docker信息"></a>查看docker信息</h1><p><code>docker version</code> #查看docker版本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Client:</span><br><span class="line"> Version:      1.8.3</span><br><span class="line"> API version:  1.20</span><br><span class="line"> Go version:   go1.4.2</span><br><span class="line"> Git commit:   f4bf5c7</span><br><span class="line"> Built:        Mon Oct 12 06:06:01 UTC 2015</span><br><span class="line"> OS/Arch:      linux/amd64</span><br><span class="line"></span><br><span class="line">Server:</span><br><span class="line"> Version:      1.8.3</span><br><span class="line"> API version:  1.20</span><br><span class="line"> Go version:   go1.4.2</span><br><span class="line"> Git commit:   f4bf5c7</span><br><span class="line"> Built:        Mon Oct 12 06:06:01 UTC 2015</span><br><span class="line"> OS/Arch:      linux/amd64</span><br></pre></td></tr></table></figure></p>
+<p><code>docker info</code> #查看docker系统信息 </p>
+<h1 id="加载平台镜像"><a href="#加载平台镜像" class="headerlink" title="加载平台镜像"></a>加载平台镜像</h1><p>我们可以从公有的docker仓库Docker Hub上下载所需镜像也可以从自己或别人的docker镜像仓库中下载<br>加载镜像<br><code>docker load -i rhel7.tar</code><br>列出镜像<br><code>docker images</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE</span><br><span class="line">rhel7               latest              e1f5733f050b        23 months ago       140.2 MB</span><br></pre></td></tr></table></figure></p>
+<p>检索镜像<br><code>docker search image_name</code><br>下载镜像<br><code>docker pull image_name</code><br>删除镜像<br><code>docker rmi image_name</code><br>显示一个镜像的改动历史<br><code>docker history image_name</code></p>
+<h1 id="运行docker容器"><a href="#运行docker容器" class="headerlink" title="运行docker容器"></a>运行docker容器</h1><p>非交互式在容器中运行命令：<br><code>docker run --rm rhel7 cat /etc/hosts</code>rm参数的意义可以通过<code>docker run –help</code> 来查询(Automatically remove the container when it exits,在运行完指定指令后立即删除此容器)<br>交互式运行容器<br>docker run -it rhel7 bash # -i -t 参数可自行查询 </p>
+<h1 id="列出容器"><a href="#列出容器" class="headerlink" title="列出容器"></a>列出容器</h1><p><code>docker ps -a</code> ##列出所有系统容器<br><code>docker ps</code> ##列出正在运行的容器<br><code>docker ps</code>-l ##列出最近一次启动的容器 </p>
+<h1 id="重启停止运行的容器"><a href="#重启停止运行的容器" class="headerlink" title="重启停止运行的容器"></a>重启停止运行的容器</h1><p><code>docker start container_name</code><br>重新连接还在运行的容器<br><code>docker attach container_name</code></p>
+<h1 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h1><p><code>docker rm container_Name/ID / docker rm ’docker ps -a -q ‘</code> (删除所有容器)</p>
+<h1 id="停止，启动，杀死容器"><a href="#停止，启动，杀死容器" class="headerlink" title="停止，启动，杀死容器"></a>停止，启动，杀死容器</h1><p><code>docker stop container_Name/ID</code><br><code>docker start container_Name/ID</code><br><code>docker kill container_Name/ID</code></p>
+<h1 id="查看容器的详细信息"><a href="#查看容器的详细信息" class="headerlink" title="查看容器的详细信息"></a>查看容器的详细信息</h1><p><code>docker inspect vm1</code></p>
+<h1 id="从一个容器中获取日志"><a href="#从一个容器中获取日志" class="headerlink" title="从一个容器中获取日志"></a>从一个容器中获取日志</h1><p><code>docker logs container_Name/ID</code></p>
+<h1 id="列出容器中被改变的文件"><a href="#列出容器中被改变的文件" class="headerlink" title="列出容器中被改变的文件"></a>列出容器中被改变的文件</h1><p><code>docker diff container_Name/ID</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">C /etc                             #C代表被改变的</span><br><span class="line">C /etc/yum.repos.d</span><br><span class="line">A /etc/yum.repos.d/dvd.repo        #A代表增加的</span><br><span class="line">D /etc/yum.repos.d/rhel7.repo      #D代表被删除的</span><br><span class="line">C /var</span><br><span class="line">C /var/cache</span><br><span class="line">C /var/cache/yum</span><br><span class="line">A /var/cache/yum/x86_64</span><br><span class="line">A /var/cache/yum/x86_64/7Server</span><br></pre></td></tr></table></figure></p>
+<h1 id="显示一个运行的容器里面的进程信息"><a href="#显示一个运行的容器里面的进程信息" class="headerlink" title="显示一个运行的容器里面的进程信息"></a>显示一个运行的容器里面的进程信息</h1><p><code>docker top container_Name/ID</code></p>
+<h1 id="从容器里面拷贝文件-目录到本地一个路径-或相反"><a href="#从容器里面拷贝文件-目录到本地一个路径-或相反" class="headerlink" title="从容器里面拷贝文件/目录到本地一个路径,或相反"></a>从容器里面拷贝文件/目录到本地一个路径,或相反</h1><p><code>docker cp Name/ID:/container_path to_path</code> #或相反 </p>
+<h1 id="创建docker镜像"><a href="#创建docker镜像" class="headerlink" title="创建docker镜像"></a>创建docker镜像</h1><p><code>docker commit vm1 rhel7:v1</code>#vm1：容器名 rhel7：镜像名 v1：版本号<br><code>docker images</code> #查看<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE</span><br><span class="line">rhel7               v1                  eb4cf1bf36a5        7 seconds ago       229.4 MB</span><br><span class="line">rhel7               latest              e1f5733f050b        23 months ago       140.2 MB</span><br></pre></td></tr></table></figure></p>
+<h1 id="输出镜像到文件"><a href="#输出镜像到文件" class="headerlink" title="输出镜像到文件"></a>输出镜像到文件</h1><p><code>docker save --output=rhel7-v1.tar rhel7:v1</code><br><code>tar -tf rhel7-v1.tar</code> # 查看</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">e1f5733f050b2488a17b7630cb038bfbea8b7bdfa9bdfb99e63a33117e28d02f/</span><br><span class="line">e1f5733f050b2488a17b7630cb038bfbea8b7bdfa9bdfb99e63a33117e28d02f/VERSION</span><br><span class="line">e1f5733f050b2488a17b7630cb038bfbea8b7bdfa9bdfb99e63a33117e28d02f/json</span><br><span class="line">e1f5733f050b2488a17b7630cb038bfbea8b7bdfa9bdfb99e63a33117e28d02f/layer.tar</span><br><span class="line">eb4cf1bf36a5e25d5cb0fc023ac6c06c416b927652dbec95c7f25a610cc79cf9/</span><br><span class="line">eb4cf1bf36a5e25d5cb0fc023ac6c06c416b927652dbec95c7f25a610cc79cf9/VERSION</span><br><span class="line">eb4cf1bf36a5e25d5cb0fc023ac6c06c416b927652dbec95c7f25a610cc79cf9/json</span><br><span class="line">eb4cf1bf36a5e25d5cb0fc023ac6c06c416b927652dbec95c7f25a610cc79cf9/layer.tar</span><br><span class="line">repositories</span><br></pre></td></tr></table></figure>
+<p>此文件包含了镜像重建所必须的所有层,可以把它拷贝到其他docker主机,使用docker load加载 </p>
+<p>感谢阅读，欢迎指正。</p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/docker/" rel="tag"> <i class="fa fa-tag"></i> docker</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/28/算法-递归-棋盘覆盖问题/" rel="next" title="算法[递归]-棋盘覆盖问题">
+                <i class="fa fa-chevron-left"></i> 算法[递归]-棋盘覆盖问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/10/算法-动态规划-矩阵连乘问题/" rel="prev" title="算法[动态规划]-矩阵连乘问题 ">
+                算法[动态规划]-矩阵连乘问题  <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/upload/im.jpg" alt="Tong yijia">
+            
+              <p class="site-author-name" itemprop="name">Tong yijia</p>
+              <p class="site-description motion-element" itemprop="description">abc~</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/tongyijia" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://me.csdn.net/tongyijia" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.jeyzhang.com/" title="xu" target="_blank">xu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wiki.archlinux.org/" title="arch" target="_blank">arch</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装和启动docker"><span class="nav-number">2.</span> <span class="nav-text">安装和启动docker</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看docker信息"><span class="nav-number">3.</span> <span class="nav-text">查看docker信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#加载平台镜像"><span class="nav-number">4.</span> <span class="nav-text">加载平台镜像</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运行docker容器"><span class="nav-number">5.</span> <span class="nav-text">运行docker容器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#列出容器"><span class="nav-number">6.</span> <span class="nav-text">列出容器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#重启停止运行的容器"><span class="nav-number">7.</span> <span class="nav-text">重启停止运行的容器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#删除容器"><span class="nav-number">8.</span> <span class="nav-text">删除容器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#停止，启动，杀死容器"><span class="nav-number">9.</span> <span class="nav-text">停止，启动，杀死容器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看容器的详细信息"><span class="nav-number">10.</span> <span class="nav-text">查看容器的详细信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#从一个容器中获取日志"><span class="nav-number">11.</span> <span class="nav-text">从一个容器中获取日志</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#列出容器中被改变的文件"><span class="nav-number">12.</span> <span class="nav-text">列出容器中被改变的文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#显示一个运行的容器里面的进程信息"><span class="nav-number">13.</span> <span class="nav-text">显示一个运行的容器里面的进程信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#从容器里面拷贝文件-目录到本地一个路径-或相反"><span class="nav-number">14.</span> <span class="nav-text">从容器里面拷贝文件/目录到本地一个路径,或相反</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建docker镜像"><span class="nav-number">15.</span> <span class="nav-text">创建docker镜像</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#输出镜像到文件"><span class="nav-number">16.</span> <span class="nav-text">输出镜像到文件</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tong yijia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="docker,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="LXC的介绍概述LXC（linux容器技术）为linux container 的简写，是一种内核虚拟化技术。LXC可以提供轻量级的虚拟化，以隔离进程和资源，而且不需要提供指令解释机制以及全虚拟化的其他复杂性。相当于C++中的namespace。容器有效的将由单个操作系统管理的资源划分到孤立的组中，以更好地在孤立的组之间平衡有冲突的资源使用需求。与传统的虚拟化相比，它的优势在于：1：与宿主机使用同一">
+<meta name="keywords" content="docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker的初步接触 ">
+<meta property="og:url" content="http://yoursite.com/2016/05/22/docker的初步接触/index.html">
+<meta property="og:site_name" content="lele&#39;s home">
+<meta property="og:description" content="LXC的介绍概述LXC（linux容器技术）为linux container 的简写，是一种内核虚拟化技术。LXC可以提供轻量级的虚拟化，以隔离进程和资源，而且不需要提供指令解释机制以及全虚拟化的其他复杂性。相当于C++中的namespace。容器有效的将由单个操作系统管理的资源划分到孤立的组中，以更好地在孤立的组之间平衡有冲突的资源使用需求。与传统的虚拟化相比，它的优势在于：1：与宿主机使用同一">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-19T13:00:16.222Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="docker的初步接触 ">
+<meta name="twitter:description" content="LXC的介绍概述LXC（linux容器技术）为linux container 的简写，是一种内核虚拟化技术。LXC可以提供轻量级的虚拟化，以隔离进程和资源，而且不需要提供指令解释机制以及全虚拟化的其他复杂性。相当于C++中的namespace。容器有效的将由单个操作系统管理的资源划分到孤立的组中，以更好地在孤立的组之间平衡有冲突的资源使用需求。与传统的虚拟化相比，它的优势在于：1：与宿主机使用同一">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/05/22/docker的初步接触/">
+
+
+
+
+
+  <title>docker的初步接触  | lele's home</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lele's home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-scategories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            scategories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/05/22/docker的初步接触/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tong yijia">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/upload/im.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lele's home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">docker的初步接触 </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-22T20:56:03+08:00">
+                2016-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="LXC的介绍"><a href="#LXC的介绍" class="headerlink" title="LXC的介绍"></a>LXC的介绍</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>LXC（linux容器技术）为linux container 的简写，是一种内核虚拟化技术。<br>LXC可以提供轻量级的虚拟化，以隔离进程和资源，而且不需要提供指令解释机制以及全虚拟化的其他复杂性。相当于C++中的namespace。容器有效的将由单个操作系统管理的资源划分到孤立的组中，以更好地在孤立的组之间平衡有冲突的资源使用<br>需求。与传统的虚拟化相比，它的优势在于：<br>1：与宿主机使用同一个内核，性能损耗小；<br>2：不需要指令级模拟<br>3：不需要即时编译<br>4：容器可以在CPU核心的本地运行指令，不需要任何专门的解释机制<br>5：避免了准虚拟化和系统调用替换中的复杂性<br>6：轻量级隔离，在隔离的同时还提供共享主机，以实现容器与宿主机的资源共享 </p>
+<p>总结：LXC 是一种轻量级的虚拟化手段，是一种操作系统层面上的资源虚拟化 </p>
+<h2 id="LXC的实现"><a href="#LXC的实现" class="headerlink" title="LXC的实现"></a>LXC的实现</h2><p>LXC在资源管理方面依赖于Linux内核的cgroups子系统，cgroups子系统是Linux内核提供的一个基于进程组的资源管理框架<br>可以为特定的进程组限定可以使用的资源<br>LXC在隔离控制方面依赖于Linux内核的namespace特性。 </p>
+<h1 id="docker-的初步认知"><a href="#docker-的初步认知" class="headerlink" title="docker 的初步认知"></a>docker 的初步认知</h1><h2 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h2><p>docker是一个基于LXC的开源的应用容器引擎，让开发者可以打包他们的应用及依赖包到一个可移植的容器当中,然后部署到<br>任何linux机器上，也可以实现虚拟化。容器完全使用沙箱机制，相互之间不会有任何接口（类似与iphone上的app）。它们不依赖<br>于任何语言框架和包装系统。<br>docker中一些值得关注的特性<br><strong><em>文件系统隔离</em></strong>:每个进程容器运行在一个完全独立的根文件系统里。<br><strong><em>资源隔离</em></strong>:系统资源,像CPU和内存等可以分配到不同的容器中,使用cgroup。<br><strong><em>网络隔离</em></strong>:每个进程容器运行在自己的网络空间,虚拟接口和IP地址。<br><strong><em>日志记录</em></strong>:Docker将会收集和记录每个进程容器的标准流(stdout/stderr/stdin),用于实时检索或批量检索。<br><strong><em>变更管理</em></strong>:容器文件系统的变更可以提交到新的映像中,并可重复使用以创建更多的容器。无需使用模板或手动配置。<br><strong><em>交互式shell</em></strong>:Docker可以分配一个虚拟终端并关联到任何容器的标准输入上,例如运行一个一次性交互shell。 </p>
+<h2 id="cgroup简述"><a href="#cgroup简述" class="headerlink" title="cgroup简述"></a>cgroup简述</h2><p>cgroups 实现了对资源的配额和度量。 cgroups 的使用非常简单,提供类似文<br>件的接口,在 /cgroup目录下新建一个文件夹即可新建一个group,在此文件夹<br>中新建task文件,并将pid写入该文件,即可实现对该进程的资源控制。<br>cgroups可以限制哪些资源:<br><em>cpu</em>: 在cgroup中,并不能像硬件虚拟化方案一样能够定义CPU能力,但是能够定义<br>CPU轮转的优先级,因此具有较高CPU优先级的进程会更可能得到CPU运算。<br><em>cpusets</em>：cpusets 定义了有几个CPU可以被这个group使用,或者哪几个CPU可以供这<br>个group使用。在某些场景下,单CPU绑定可以防止多核间缓存切换,从而提高效<br>率。<br><em>memory</em>: 内存相关的限制。<br><em>blkio</em>: block IO相关的统计和限制,byte/operation统计和限制(IOPS等),读写速度限<br>制等,但是这里主要统计的都是同步IO.<br>netcls, cpuacct , devices , freezer 等其他可管理项。 </p>
+<h2 id="docker镜像"><a href="#docker镜像" class="headerlink" title="docker镜像"></a>docker镜像</h2><p>Docker镜像是一个只读的模板。举个例子,一个镜像可以包含一个运行在Apache<br>上的Web应用和其使用的redhat操作系统。<br>镜像是用来创建容器的。Docker提供了简单的用来建立新的镜像或者升级现有的<br>镜像,你也可以下载别人已经创建好的镜像。Docker镜像是Docker的构造部分。 </p>
+<h2 id="docker仓库"><a href="#docker仓库" class="headerlink" title="docker仓库"></a>docker仓库</h2><p>Docker仓库用来保存镜像。可以理解为代码控制中的代码仓库。同样的,Docker仓库<br>也有公有和私有的概念。公有的Docker仓库名字是Docker Hub。Docker Hub提供了庞大<br>的镜像集合供使用。这些镜像可以是你自己创建的,或者你也可以在别人的镜像基础<br>上创建。Docker仓库是Docker的分发部分。 </p>
+<h2 id="docker容器"><a href="#docker容器" class="headerlink" title="docker容器"></a>docker容器</h2><p>Docker容器和文件夹很类似。一个Docker容器包含了所有的某个应用运行所需要的环<br>境。每一个Docker容器都是从Docker镜像创建的。Docker容器可以运行、开始、停止、<br>移动和删除。每一个Docker容器都是独立和安全的应用平台。Docker容器是Docker的运<br>行部分。  </p>
+<p>感谢阅读，欢迎指正。</p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/docker/" rel="tag"> <i class="fa fa-tag"></i> docker</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/20/MarkDown-语法积累（持续更新-）/" rel="next" title="MarkDown 语法积累（持续更新--）">
+                <i class="fa fa-chevron-left"></i> MarkDown 语法积累（持续更新--）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/23/算法-回溯-八皇后问题/" rel="prev" title="算法[回溯]-八皇后问题">
+                算法[回溯]-八皇后问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/upload/im.jpg" alt="Tong yijia">
+            
+              <p class="site-author-name" itemprop="name">Tong yijia</p>
+              <p class="site-description motion-element" itemprop="description">abc~</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/tongyijia" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://me.csdn.net/tongyijia" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.jeyzhang.com/" title="xu" target="_blank">xu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wiki.archlinux.org/" title="arch" target="_blank">arch</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LXC的介绍"><span class="nav-number">1.</span> <span class="nav-text">LXC的介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LXC的实现"><span class="nav-number">1.2.</span> <span class="nav-text">LXC的实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#docker-的初步认知"><span class="nav-number">2.</span> <span class="nav-text">docker 的初步认知</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述-1"><span class="nav-number">2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cgroup简述"><span class="nav-number">2.2.</span> <span class="nav-text">cgroup简述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker镜像"><span class="nav-number">2.3.</span> <span class="nav-text">docker镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker仓库"><span class="nav-number">2.4.</span> <span class="nav-text">docker仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker容器"><span class="nav-number">2.5.</span> <span class="nav-text">docker容器</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tong yijia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

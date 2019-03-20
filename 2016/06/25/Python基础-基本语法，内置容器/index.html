@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Python的一些小知识Python 第一个版本于1989年圣诞节发布Python2.0 2000年发布Python3 2008年发布 不兼容python2，目前两者共存通常所说的python由C开发，除此之外还有jython（java开发），ironpython(运行在.net平台上，兼容.net库)pypy（由python写的python）此篇博客主要运用python2.7  第一个简单的py">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python基础-基本语法，内置容器 ">
+<meta property="og:url" content="http://yoursite.com/2016/06/25/Python基础-基本语法，内置容器/index.html">
+<meta property="og:site_name" content="lele&#39;s home">
+<meta property="og:description" content="Python的一些小知识Python 第一个版本于1989年圣诞节发布Python2.0 2000年发布Python3 2008年发布 不兼容python2，目前两者共存通常所说的python由C开发，除此之外还有jython（java开发），ironpython(运行在.net平台上，兼容.net库)pypy（由python写的python）此篇博客主要运用python2.7  第一个简单的py">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-19T13:43:12.063Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python基础-基本语法，内置容器 ">
+<meta name="twitter:description" content="Python的一些小知识Python 第一个版本于1989年圣诞节发布Python2.0 2000年发布Python3 2008年发布 不兼容python2，目前两者共存通常所说的python由C开发，除此之外还有jython（java开发），ironpython(运行在.net平台上，兼容.net库)pypy（由python写的python）此篇博客主要运用python2.7  第一个简单的py">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/06/25/Python基础-基本语法，内置容器/">
+
+
+
+
+
+  <title>Python基础-基本语法，内置容器  | lele's home</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lele's home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-scategories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            scategories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/06/25/Python基础-基本语法，内置容器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tong yijia">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/upload/im.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lele's home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python基础-基本语法，内置容器 </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-25T21:21:44+08:00">
+                2016-06-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Python的一些小知识"><a href="#Python的一些小知识" class="headerlink" title="Python的一些小知识"></a>Python的一些小知识</h1><p>Python 第一个版本于1989年圣诞节发布<br>Python2.0 2000年发布<br>Python3 2008年发布 不兼容python2，目前两者共存<br>通常所说的python由C开发，除此之外还有jython（java开发），ironpython(运行在.net平台上，兼容.net库)<br>pypy（由python写的python）<br>此篇博客主要运用python2.7 </p>
+<h1 id="第一个简单的python程序"><a href="#第一个简单的python程序" class="headerlink" title="第一个简单的python程序"></a>第一个简单的python程序</h1><h2 id="直接使用交互式Python"><a href="#直接使用交互式Python" class="headerlink" title="直接使用交互式Python"></a>直接使用交互式Python</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@tonglele /mnt # python</span><br><span class="line">Python 2.7.5 (default, Feb 11 2014, 07:46:25)</span><br><span class="line">[GCC 4.8.2 20140120 (   Hat 4.8.2-13)] on linux2</span><br><span class="line">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span><br><span class="line">&gt;&gt;&gt; print &quot;hello world&quot;</span><br><span class="line">hello world</span><br></pre></td></tr></table></figure>
+<h2 id="使用vim编辑一个python程序，并用python指令运行"><a href="#使用vim编辑一个python程序，并用python指令运行" class="headerlink" title="使用vim编辑一个python程序，并用python指令运行"></a>使用vim编辑一个python程序，并用python指令运行</h2><p>vim test.py<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line">print &quot;hello world&quot;</span><br></pre></td></tr></table></figure></p>
+<p>此时：第一行 #!/usr/bin/env python 表示引用环境变量里自定义的python版本，具有可移植性，推荐这种写法<br>也可以写成 #!/usr/bin/python 这种写法直接引用系统默认的python版本，这样此程序移植到其他机子上运行的时候可能和你预期使用的版本不同<br>结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@tonglele /mnt # python test.py</span><br><span class="line">hello world</span><br></pre></td></tr></table></figure></p>
+<p>或者：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@tonglele /mnt # ll</span><br><span class="line">total 4.0K</span><br><span class="line">-rw-r--r-- 1 root root 42 Jun  4 21:10 test.py</span><br><span class="line">root@tonglele /mnt # chmod +x test.py </span><br><span class="line">root@tonglele /mnt # ./test.py </span><br><span class="line">hello world</span><br></pre></td></tr></table></figure></p>
+<h2 id="输出汉字的问题"><a href="#输出汉字的问题" class="headerlink" title="输出汉字的问题"></a>输出汉字的问题</h2><p>由于python2的发布在unicode发布之前，所以它默认的是ascii编码，在我们想要显示汉字时应该显示的指定编码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> root@tonglele /mnt # cat test.py                                                                           :(</span><br><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">print &quot;hello world&quot;</span><br><span class="line">print &quot;你好！世界！&quot;</span><br><span class="line">root@tonglele /mnt # ./test.py  </span><br><span class="line">  File &quot;./test.py&quot;, line 4</span><br><span class="line">  SyntaxError: Non-ASCII character &apos;\xe4&apos; in file ./test.py on line 4, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details</span><br><span class="line"></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">root@tonglele /mnt # cat test.py</span><br><span class="line">#!/usr/bin/env python</span><br><span class="line"># coding=utf-8</span><br><span class="line">print &quot;hello world&quot;</span><br><span class="line">print &quot;你好！世界！&quot;</span><br><span class="line">root@tonglele /mnt # ./test.py  </span><br><span class="line">hello world</span><br><span class="line">你好！世界！</span><br></pre></td></tr></table></figure></p>
+<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>指向内存中一段区域的符号（类似于C中的指针）<br>命名规范：由字母，数字，下划线，组成，不以数字开头，关键字不能作为变量名<br>python中的所有变量都是引用 </p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>首先介绍一个函数type（），它可以查看变量或常量的数据类型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; type(1)</span><br><span class="line">&lt;type &apos;int&apos;&gt;</span><br><span class="line">&gt;&gt;&gt; a = 1</span><br><span class="line">&gt;&gt;&gt; type(1)</span><br><span class="line">&lt;type &apos;int&apos;&gt;</span><br><span class="line">&gt;&gt;&gt; type(2)</span><br><span class="line">&lt;type &apos;int&apos;&gt;</span><br><span class="line">&gt;&gt;&gt; type(2.0)</span><br><span class="line">&lt;type &apos;float&apos;&gt;</span><br><span class="line">&gt;&gt;&gt; type(True)</span><br><span class="line">&lt;type &apos;bool&apos;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>python是一种强类型的动态语言,每一个数据都有一个类型,不同类型之间的数据不能做运算,如数字和字符不能相加.所谓的动态语言是指,数据类型可以<br>在运算时改变<br>在python中数据类型分为字符串型和数字型（整型，浮点型，长整型）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a = &apos;tonglele&apos;    #字符串型</span><br><span class="line">&gt;&gt;&gt; b = 10         #整型</span><br><span class="line">&gt;&gt;&gt; c = 2.3        #浮点型</span><br><span class="line">&gt;&gt;&gt; b + c</span><br><span class="line">12.3          #都是数字型则可以相加</span><br><span class="line">&gt;&gt;&gt; a +b   #一个数字型一个字符串型，相加会报错</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">  TypeError: cannot concatenate &apos;str&apos; and &apos;int&apos; objects</span><br><span class="line">&gt;&gt;&gt; int(c)    #c为浮点型，精度比整型高，所以在从高精度向低精度转化时会有数据损失</span><br><span class="line">2</span><br></pre></td></tr></table></figure></p>
+<h2 id="运算符和表达式"><a href="#运算符和表达式" class="headerlink" title="运算符和表达式"></a>运算符和表达式</h2><p>算术运算符 + / * // %<br>位操作运算符&lt;&lt; &gt;&gt; &amp; | ^ ~<br>比较运算符 &lt; &lt;= &gt;= == &gt; !=<br>逻辑运算符 and or not<br>赋值运算符 =<br>其他运算符<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; 7 / 2      #两个整型相除得到一个整型，精度丢失问题</span><br><span class="line">3</span><br><span class="line">&gt;&gt;&gt; 7 /2.0    #将其中一个换为float类型，得到的为float类型</span><br><span class="line">3.5</span><br><span class="line">&gt;&gt;&gt; 3 ** 2   #幂运算</span><br><span class="line">9</span><br><span class="line">&gt;&gt;&gt; 10 // 3  #除法取整</span><br><span class="line">3</span><br><span class="line">&gt;&gt;&gt; 10 % 3  #取余</span><br><span class="line">1</span><br><span class="line">&gt;&gt;&gt; 2 &lt;&lt; 3  #左移位 （效率高）</span><br><span class="line">16</span><br><span class="line">&gt;&gt;&gt; 8 &gt;&gt; 2 #右移位（效率高）</span><br><span class="line">2</span><br><span class="line">&gt;&gt;&gt; 3 &amp; 2  #按位与</span><br><span class="line">2</span><br><span class="line">&gt;&gt;&gt; 3 | 2  #按位或</span><br><span class="line">3</span><br><span class="line">&gt;&gt;&gt; 3 ^ 2  #异或</span><br><span class="line">1</span><br></pre></td></tr></table></figure></p>
+<h2 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h2><p>单目运算符高于双目运算符,not例外; 单目运算符,只有一个数的运算符,如正负号,按位取反,not .python里没有三目运算符<br>算数运算符高于位运算符<br>位运算符高于比较运算符<br>比较运算符高于逻辑运算符<br>赋值运算符优先级最低<br>（）提示运算符的优先级 </p>
+<h1 id="程序结构"><a href="#程序结构" class="headerlink" title="程序结构"></a>程序结构</h1><h2 id="if-else语句"><a href="#if-else语句" class="headerlink" title="if-else语句"></a>if-else语句</h2><p>if condition:<br>   expression<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root@tonglele /mnt # cat if.py </span><br><span class="line">#!/usr/bin/env python</span><br><span class="line">if 3 &lt; 4:</span><br><span class="line">    print &quot;3 less than 5&quot;</span><br><span class="line">else:</span><br><span class="line">    print &quot;4 less than 3&quot;</span><br><span class="line">root@tonglele /mnt # python if.py </span><br><span class="line">3 less than 5</span><br></pre></td></tr></table></figure></p>
+<h2 id="elif语句"><a href="#elif语句" class="headerlink" title="elif语句"></a>elif语句</h2><p>python中没有switch case语句，但我们可以用很多个elif语句，完成的效果相同<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">#!/usr/bin/env python</span><br><span class="line">a = 1</span><br><span class="line">if a == 1:</span><br><span class="line">    print &quot;a is 1&quot;</span><br><span class="line">elif a == 2:        #可以有多个elif</span><br><span class="line">    print &quot;a is 2&quot;</span><br><span class="line">else:</span><br><span class="line">    print &quot;a is ?&quot;</span><br></pre></td></tr></table></figure></p>
+<h1 id="循环结构"><a href="#循环结构" class="headerlink" title="循环结构"></a>循环结构</h1><h2 id="while-语句"><a href="#while-语句" class="headerlink" title="while 语句"></a>while 语句</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">vim while.py</span><br><span class="line"></span><br><span class="line">#!/usr/bin/env python</span><br><span class="line">a = 0</span><br><span class="line">while a &lt; 5:</span><br><span class="line">    print a</span><br><span class="line">    a += 1</span><br><span class="line"></span><br><span class="line">=========结果===</span><br><span class="line">root@tonglele /mnt # python while.py </span><br><span class="line">0</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
+<h2 id="for语句"><a href="#for语句" class="headerlink" title="for语句"></a>for语句</h2><p>for item in iterator:<br>    expression<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line">for i in range(1,10):   #in 后跟一个迭代器</span><br><span class="line">    print i</span><br><span class="line"></span><br><span class="line">======结果=====</span><br><span class="line">root@tonglele /mnt # python for.py  </span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td></tr></table></figure></p>
+<h1 id="python内置容器"><a href="#python内置容器" class="headerlink" title="python内置容器"></a>python内置容器</h1><h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p>列表是我们常用的一种内置的容器，它可以将不同数据类型的值存储再一个列表中。</p>
+<h3 id="初始化一个列表"><a href="#初始化一个列表" class="headerlink" title="初始化一个列表"></a>初始化一个列表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; li = []</span><br><span class="line">&gt;&gt;&gt; li2 = list()</span><br><span class="line">&gt;&gt;&gt; type(li)</span><br><span class="line">&lt;type &apos;list&apos;&gt;</span><br><span class="line">&gt;&gt;&gt; type(li2)</span><br><span class="line">&lt;type &apos;list&apos;&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="列表的下标"><a href="#列表的下标" class="headerlink" title="列表的下标"></a>列表的下标</h3><p>列表是有序的，下标从0开始<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; li = [1,2,3,4]</span><br><span class="line">&gt;&gt;&gt; li[0]</span><br><span class="line">1</span><br><span class="line">&gt;&gt;&gt; li[2]</span><br><span class="line">3</span><br><span class="line">&gt;&gt;&gt; len(li)    #len()函数，得到list的长度</span><br><span class="line">4</span><br></pre></td></tr></table></figure></p>
+<h3 id="一些简单的操作"><a href="#一些简单的操作" class="headerlink" title="一些简单的操作"></a>一些简单的操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[1, 2, 3, 4]</span><br><span class="line">&gt;&gt;&gt; del li[0]   #删除列表的第0个元素</span><br><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[2, 3, 4]</span><br><span class="line">&gt;&gt;&gt; 4 in li    #判断一个值是否在列表中</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; 5 in li</span><br><span class="line">False</span><br></pre></td></tr></table></figure>
+<h3 id="列表（list-对象）的一些方法"><a href="#列表（list-对象）的一些方法" class="headerlink" title="列表（list 对象）的一些方法"></a>列表（list 对象）的一些方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dir(li)   #查看li的方法</span><br><span class="line">[&apos;__add__&apos;, &apos;__class__&apos;, &apos;__contains__&apos;, &apos;__delattr__&apos;, &apos;__delitem__&apos;, &apos;__delslice__&apos;, &apos;__doc__&apos;, &apos;__eq__&apos;, &apos;__format__&apos;, &apos;__ge__&apos;, &apos;__getattribute__&apos;, &apos;__getitem__&apos;, &apos;__getslice__&apos;, &apos;__gt__&apos;, &apos;__hash__&apos;, &apos;__iadd__&apos;, &apos;__imul__&apos;, &apos;__init__&apos;, &apos;__iter__&apos;, &apos;__le__&apos;, &apos;__len__&apos;, &apos;__lt__&apos;, &apos;__mul__&apos;, &apos;__ne__&apos;, &apos;__new__&apos;, &apos;__reduce__&apos;, &apos;__reduce_ex__&apos;, &apos;__repr__&apos;, &apos;__reversed__&apos;, &apos;__rmul__&apos;, &apos;__setattr__&apos;, &apos;__setitem__&apos;, &apos;__setslice__&apos;, &apos;__sizeof__&apos;, &apos;__str__&apos;, &apos;__subclasshook__&apos;, &apos;append&apos;, &apos;count&apos;, &apos;extend&apos;, &apos;index&apos;, &apos;insert&apos;, &apos;pop&apos;, &apos;remove&apos;, &apos;reverse&apos;, &apos;sort&apos;]</span><br></pre></td></tr></table></figure>
+<h4 id="append"><a href="#append" class="headerlink" title="append"></a>append</h4><p>在原列表后追加元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[1, 2, 3, 4, 5, 5]</span><br><span class="line">&gt;&gt;&gt; li.append(100)</span><br><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[1, 2, 3, 4, 5, 5, 100]</span><br><span class="line">&gt;&gt;&gt; li.append([90,89])</span><br><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[1, 2, 3, 4, 5, 5, 100, [90, 89]]</span><br></pre></td></tr></table></figure></p>
+<h4 id="extend"><a href="#extend" class="headerlink" title="extend"></a>extend</h4><p>在列表后扩展<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; li = [1,4,5]</span><br><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[1, 4, 5]</span><br><span class="line">&gt;&gt;&gt; li.extend([9,80,777])</span><br><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[1, 4, 5, 9, 80, 777]</span><br></pre></td></tr></table></figure></p>
+<h4 id="insert"><a href="#insert" class="headerlink" title="insert"></a>insert</h4><p>向列表中插入元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[1, 2, 3, 222, 4]</span><br><span class="line">&gt;&gt;&gt; li.insert(1,&apos;hello&apos;)    #第一个参数为插入的位置的下标，第二个参数为要插入的元素</span><br><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[1, &apos;hello&apos;, 2, 3, 222, 4]</span><br></pre></td></tr></table></figure></p>
+<h4 id="remove"><a href="#remove" class="headerlink" title="remove"></a>remove</h4><p>删除列表中的元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[1, 1, 2, 4]</span><br><span class="line">&gt;&gt;&gt; li.remove(1)   #如果这个元素在列表中出现多次，默认删除下标值小的那个</span><br><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[1, 2, 4]</span><br><span class="line">&gt;&gt;&gt; li.remove(4)</span><br><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[1, 2]</span><br></pre></td></tr></table></figure></p>
+<h4 id="pop"><a href="#pop" class="headerlink" title="pop"></a>pop</h4><p>返回一个列表中的元素，可以指定下标，若未指定则默认为最后一个,并将其从列表中删除<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[2, 3, 5, 6]</span><br><span class="line">&gt;&gt;&gt; a = li.pop()</span><br><span class="line">&gt;&gt;&gt; a</span><br><span class="line">6</span><br><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[2, 3, 5]</span><br><span class="line">&gt;&gt;&gt; </span><br><span class="line">&gt;&gt;&gt; b = li.pop(1)</span><br><span class="line">&gt;&gt;&gt; b</span><br><span class="line">3</span><br></pre></td></tr></table></figure></p>
+<h4 id="count"><a href="#count" class="headerlink" title="count"></a>count</h4><p>返回某个值在列表中出现的次数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[&apos;a&apos;, &apos;a&apos;, 1, 1, 7]</span><br><span class="line">&gt;&gt;&gt; li.count(&apos;a&apos;)</span><br><span class="line">2</span><br><span class="line">&gt;&gt;&gt; li.count(7)</span><br><span class="line">1</span><br></pre></td></tr></table></figure></p>
+<h4 id="index"><a href="#index" class="headerlink" title="index"></a>index</h4><p>返回第一个所查值的下标:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[&apos;a&apos;, &apos;a&apos;, 1, 1, 7]</span><br><span class="line">&gt;&gt;&gt; li.index(1)</span><br><span class="line">2</span><br><span class="line">&gt;&gt;&gt; li.index(&apos;a&apos;)</span><br><span class="line">0</span><br><span class="line">&gt;&gt;&gt; li.index(7)</span><br><span class="line">4</span><br></pre></td></tr></table></figure></p>
+<h4 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h4><p>对列表按升序排列<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; li = [2,6,3,7,10]</span><br><span class="line">&gt;&gt;&gt; li.sort()</span><br><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[2, 3, 6, 7, 10]</span><br></pre></td></tr></table></figure></p>
+<h4 id="reverse"><a href="#reverse" class="headerlink" title="reverse"></a>reverse</h4><p>将列表反转</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[2, 3, 6, 7, 10]</span><br><span class="line">&gt;&gt;&gt; li.reverse()</span><br><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[10, 7, 6, 3, 2]</span><br></pre></td></tr></table></figure>
+<h3 id="list切片"><a href="#list切片" class="headerlink" title="list切片"></a>list切片</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[10, 7, 6, 3, 2]</span><br><span class="line">&gt;&gt;&gt; li[2:4]   #从下标为2的元素切到4-1</span><br><span class="line">[6, 3]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[10, 7, 6, 3, 2]</span><br><span class="line">&gt;&gt;&gt; li[2:5:1]   #第三个参数代表步长</span><br><span class="line">[6, 3, 2]</span><br><span class="line">&gt;&gt;&gt; li[2:5:2]</span><br><span class="line">[6, 2]</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[10, 7, 6, 3, 2]</span><br><span class="line">&gt;&gt;&gt; li[::-1]     #将列表反转</span><br><span class="line">[2, 3, 6, 7, 10]</span><br><span class="line"></span><br><span class="line">#列表的拷贝为传址</span><br><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[10, 7, 6, 3, 2]</span><br><span class="line">&gt;&gt;&gt; li2 = li</span><br><span class="line">&gt;&gt;&gt; li2</span><br><span class="line">[10, 7, 6, 3, 2]</span><br><span class="line">&gt;&gt;&gt; li2.append(1000)</span><br><span class="line">&gt;&gt;&gt; li2</span><br><span class="line">[10, 7, 6, 3, 2, 1000]</span><br><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[10, 7, 6, 3, 2, 1000]</span><br><span class="line">&gt;&gt;&gt; id(li)</span><br><span class="line">140270212409896</span><br><span class="line">&gt;&gt;&gt; id(li2)</span><br><span class="line">140270212409896</span><br><span class="line"></span><br><span class="line">#深拷贝</span><br><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[10, 7, 6, 3, 2, 1000]</span><br><span class="line">&gt;&gt;&gt; li2 = li[:]</span><br><span class="line">&gt;&gt;&gt; li2</span><br><span class="line">[10, 7, 6, 3, 2, 1000]</span><br><span class="line">&gt;&gt;&gt; id(li)</span><br><span class="line">140270212409896</span><br><span class="line">&gt;&gt;&gt; id(li2)</span><br><span class="line">140270403391360</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[10, 7, 6, 3, 2, 1000]</span><br><span class="line">&gt;&gt;&gt; li[::2]   #得到下标为偶数的元素</span><br><span class="line">[10, 6, 2]</span><br><span class="line">&gt;&gt;&gt; li[1::2]  #得到下标为奇数的元素</span><br><span class="line">[7, 3, 1000]</span><br></pre></td></tr></table></figure>
+<p>列表的切片操作是一个复制操作,并不对原始列表进行修改。</p>
+<h3 id="列表解析"><a href="#列表解析" class="headerlink" title="列表解析"></a>列表解析</h3><p>[expression for item in iterator]<br>此处只做简要介绍，具体使用我会再开一篇博文<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; li</span><br><span class="line">[10, 7, 6, 3, 2, 1000]</span><br><span class="line">&gt;&gt;&gt; [x + 1 for x in li]</span><br><span class="line">[11, 8, 7, 4, 3, 1001]</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; t = (x + 1 for x in li)   #得到一个生成器</span><br><span class="line">&gt;&gt;&gt; t.next()</span><br><span class="line">11</span><br><span class="line">&gt;&gt;&gt; t.next()</span><br><span class="line">8</span><br><span class="line">&gt;&gt;&gt; t.next()</span><br><span class="line">7</span><br></pre></td></tr></table></figure></p>
+<h2 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h2><p>元组是有序的，元组的元素是不可改变的，元组的元素也支持下标操作 </p>
+<h3 id="定义和初始化元祖（tuple）"><a href="#定义和初始化元祖（tuple）" class="headerlink" title="定义和初始化元祖（tuple）"></a>定义和初始化元祖（tuple）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; t = ()</span><br><span class="line">&gt;&gt;&gt; type(t)</span><br><span class="line">&lt;type &apos;tuple&apos;&gt;</span><br><span class="line">&gt;&gt;&gt; t1 = tuple()</span><br><span class="line">&gt;&gt;&gt; type(t1)</span><br><span class="line">&lt;type &apos;tuple&apos;&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="元组的切片操作"><a href="#元组的切片操作" class="headerlink" title="元组的切片操作"></a>元组的切片操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; t</span><br><span class="line">(1, 2, 3, 5)</span><br><span class="line">&gt;&gt;&gt; t[0]</span><br><span class="line">1</span><br><span class="line">&gt;&gt;&gt; t[1:3]</span><br><span class="line">(2, 3)</span><br><span class="line">&gt;&gt;&gt; t[3] = 1000   #元组元素不可改变</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">  TypeError: &apos;tuple&apos; object does not support item assignment</span><br></pre></td></tr></table></figure>
+<h3 id="元组中列表元素的修改"><a href="#元组中列表元素的修改" class="headerlink" title="元组中列表元素的修改"></a>元组中列表元素的修改</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; t</span><br><span class="line">(1, 2, 4, &apos;a&apos;, [1, 3, 100])</span><br><span class="line">&gt;&gt;&gt; t[4][2] = 200</span><br><span class="line">&gt;&gt;&gt; t</span><br><span class="line">(1, 2, 4, &apos;a&apos;, [1, 3, 200])</span><br></pre></td></tr></table></figure>
+<h3 id="元组的count-index"><a href="#元组的count-index" class="headerlink" title="元组的count,index"></a>元组的count,index</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; t = (1,1,&apos;a&apos;,&apos;hello&apos;,[1,2])</span><br><span class="line">&gt;&gt;&gt; t.count(1)</span><br><span class="line">2</span><br><span class="line">&gt;&gt;&gt; t.index(&apos;a&apos;)</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><p>集合是无序的，集合中的元素不重复，python根据合中的每个元素的hash值来判断是否重复,所以集合中的每个元素必须是可hash的对象。在python中如果一个对象有一个hash 的方法,<br>表示该对象可hash<br>集合不支持切片操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = set()  #集合的定义方式</span><br><span class="line">&gt;&gt;&gt; type(s)</span><br><span class="line">&lt;type &apos;set&apos;&gt;</span><br><span class="line">&gt;&gt;&gt; s1 = &#123;&#125;   #不能这样定义集合，这样的定义为字典</span><br><span class="line">&gt;&gt;&gt; type(s1)</span><br><span class="line">&lt;type &apos;dict&apos;&gt;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; s = &#123;1,1,1,3,&apos;a&apos;,&apos;hello&apos;&#125;</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">set([&apos;a&apos;, 1, 3, &apos;hello&apos;])   #集合中的元素不重复，无序</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; s = &#123;1,1,1,3,&apos;a&apos;,&apos;hello&apos;,[1,2]&#125;</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">  TypeError: unhashable type: &apos;list&apos;    #集合中的元素必须可哈希</span><br></pre></td></tr></table></figure></p>
+<h3 id="集合的一些简单操作"><a href="#集合的一些简单操作" class="headerlink" title="集合的一些简单操作"></a>集合的一些简单操作</h3><h4 id="add"><a href="#add" class="headerlink" title="add"></a>add</h4><p>向集合中增加元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s</span><br><span class="line">set([&apos;a&apos;, 1, 3, &apos;hello&apos;])</span><br><span class="line">&gt;&gt;&gt; s.add(23)</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">set([&apos;a&apos;, 1, 3, &apos;hello&apos;, 23])</span><br></pre></td></tr></table></figure></p>
+<h4 id="update"><a href="#update" class="headerlink" title="update"></a>update</h4><p>迭代器作为参数,将迭代器中的所有元素追加到集合中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s</span><br><span class="line">set([&apos;a&apos;, 1, 3, &apos;hello&apos;, 23])</span><br><span class="line">&gt;&gt;&gt; s.update([4,67,&apos;hu&apos;])</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">set([&apos;a&apos;, 1, 3, 4, &apos;hu&apos;, 67, 23, &apos;hello&apos;])</span><br></pre></td></tr></table></figure></p>
+<h4 id="remove-1"><a href="#remove-1" class="headerlink" title="remove"></a>remove</h4><p>删除集合中的某个元素，若不存在则报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s</span><br><span class="line">set([&apos;a&apos;, 1, 3, 4, &apos;hu&apos;, 67, 23, &apos;hello&apos;])</span><br><span class="line">&gt;&gt;&gt; s.remove(1)</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">set([&apos;a&apos;, 3, 4, &apos;hu&apos;, 67, 23, &apos;hello&apos;])</span><br><span class="line">&gt;&gt;&gt; s.remove(100)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">  KeyError: 100</span><br><span class="line">  &quot;&lt;/stdin&gt;&quot;</span><br></pre></td></tr></table></figure></p>
+<h4 id="discard"><a href="#discard" class="headerlink" title="discard"></a>discard</h4><p>删除某个元素,若该元素不存在则不做任何操作。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s</span><br><span class="line">set([&apos;a&apos;, 3, 4, &apos;hu&apos;, 67, 23, &apos;hello&apos;])</span><br><span class="line">&gt;&gt;&gt; s.discard(4)</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">set([&apos;a&apos;, 3, &apos;hu&apos;, 67, 23, &apos;hello&apos;])</span><br><span class="line">&gt;&gt;&gt; s.discard(100)</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">set([&apos;a&apos;, 3, &apos;hu&apos;, 67, 23, &apos;hello&apos;])</span><br></pre></td></tr></table></figure></p>
+<h4 id="pop-1"><a href="#pop-1" class="headerlink" title="pop"></a>pop</h4><p>随机删除某个元素,并返回该元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s</span><br><span class="line">set([&apos;a&apos;, 3, &apos;hu&apos;, 67, 23, &apos;hello&apos;])</span><br><span class="line">&gt;&gt;&gt; s.pop()</span><br><span class="line">&apos;a&apos;</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">set([3, &apos;hu&apos;, 67, 23, &apos;hello&apos;])</span><br></pre></td></tr></table></figure>
+<h4 id="clear"><a href="#clear" class="headerlink" title="clear"></a>clear</h4><p>清空集合<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s</span><br><span class="line">set([&apos;hu&apos;, 67, 23, &apos;hello&apos;])</span><br><span class="line">&gt;&gt;&gt; s.clear()</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">set([])</span><br></pre></td></tr></table></figure></p>
+<h3 id="集合的运算"><a href="#集合的运算" class="headerlink" title="集合的运算"></a>集合的运算</h3><h4 id="difference"><a href="#difference" class="headerlink" title="difference"></a>difference</h4><p>两个集合的差集，不修改原来两个集合<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s1 = &#123;1,2,3,4&#125;</span><br><span class="line">&gt;&gt;&gt; s2 = &#123;4,5,6,7&#125;</span><br><span class="line">&gt;&gt;&gt; s1.difference(s2)</span><br><span class="line">set([1, 2, 3])</span><br><span class="line">&gt;&gt;&gt; s2.difference(s1)</span><br><span class="line">set([5, 6, 7])</span><br><span class="line">&gt;&gt;&gt; s1 -s2   #也可直接用减号</span><br><span class="line">set([1, 2, 3])</span><br></pre></td></tr></table></figure></p>
+<h4 id="difference-update"><a href="#difference-update" class="headerlink" title="difference_update"></a>difference_update</h4><p>两个集合的差集,但修改原来的集合,不返回值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s1</span><br><span class="line">set([1, 2, 3, 4])</span><br><span class="line">&gt;&gt;&gt; s2</span><br><span class="line">set([4, 5, 6, 7])</span><br><span class="line">&gt;&gt;&gt; s1.difference_update(s2)</span><br><span class="line">&gt;&gt;&gt; s1</span><br><span class="line">set([1, 2, 3])</span><br></pre></td></tr></table></figure></p>
+<h4 id="intersection-intersection-update"><a href="#intersection-intersection-update" class="headerlink" title="intersection intersection_update"></a>intersection intersection_update</h4><p>intersection 两个集合的交集,返回值,不修改原来的集合<br>intersection_update 两个集合的交集,无返回值,修改原来的集合<br>具体实现参见difference difference_update </p>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s1</span><br><span class="line">set([1, 2, 3, 4, 5])</span><br><span class="line">&gt;&gt;&gt; s2</span><br><span class="line">set([4, 5, 6, 7])</span><br><span class="line">&gt;&gt;&gt; s1 &amp; s2    #直接求交集</span><br><span class="line">set([4, 5])</span><br><span class="line">&gt;&gt;&gt; s1.union(s2)   #求并集</span><br><span class="line">set([1, 2, 3, 4, 5, 6, 7])</span><br><span class="line">&gt;&gt;&gt; s1  | s2    #求并集</span><br><span class="line">set([1, 2, 3, 4, 5, 6, 7])</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; s1.isdisjoint(s2)   #查看是否有交集，有则返回False</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; s1.issubset(s2)    #看s1是否为s2的子集，是则返回为True</span><br><span class="line">False</span><br></pre></td></tr></table></figure>
+<h2 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h2><h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; t = &#123;&#125;</span><br><span class="line">&gt;&gt;&gt; type(t)</span><br><span class="line">&lt;type &apos;dict&apos;&gt;</span><br><span class="line">&gt;&gt;&gt; t = &#123;&apos;name&apos;:&apos;tonglele&apos;,&apos;age&apos;:18&#125;    #存放健值对</span><br><span class="line">&gt;&gt;&gt; t</span><br><span class="line">&#123;&apos;name&apos;: &apos;tonglele&apos;, &apos;age&apos;: 18&#125;</span><br><span class="line">&gt;&gt;&gt; t = &#123;&apos;name&apos;:&apos;tonglele&apos;,&apos;name&apos;:&apos;tongyijia&apos;&#125;</span><br><span class="line">&gt;&gt;&gt; t</span><br><span class="line">&#123;&apos;name&apos;: &apos;tongyijia&apos;&#125;    #字典中key不允许重复，后者覆盖前者，而且必须是可哈希</span><br></pre></td></tr></table></figure>
+<h3 id="字典的一些操作"><a href="#字典的一些操作" class="headerlink" title="字典的一些操作"></a>字典的一些操作</h3><h4 id="keys"><a href="#keys" class="headerlink" title="keys"></a>keys</h4><p>将字典的所有key作为一个列表返回<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; t</span><br><span class="line">&#123;&apos;name&apos;: &apos;tonglele&apos;, &apos;age&apos;: 18&#125;</span><br><span class="line">&gt;&gt;&gt; t.keys()</span><br><span class="line">[&apos;name&apos;, &apos;age&apos;]</span><br></pre></td></tr></table></figure></p>
+<h4 id="iterkeys"><a href="#iterkeys" class="headerlink" title="iterkeys"></a>iterkeys</h4><p>将字典的所有key作为一个迭代器返回<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; t</span><br><span class="line">&#123;&apos;name&apos;: &apos;tonglele&apos;, &apos;age&apos;: 18&#125;</span><br><span class="line">&gt;&gt;&gt; t.iterkeys()</span><br><span class="line">&lt;dictionary-keyiterator object at 0x7f295c40ec00&gt;</span><br><span class="line">&gt;&gt;&gt; it = t.iterkeys()</span><br><span class="line">&gt;&gt;&gt; it.next()</span><br><span class="line">&apos;name&apos;</span><br><span class="line">&gt;&gt;&gt; it.next()</span><br><span class="line">&apos;age&apos;</span><br><span class="line">&gt;&gt;&gt; it.next()</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">  StopIteration</span><br></pre></td></tr></table></figure></p>
+<h4 id="values"><a href="#values" class="headerlink" title="values"></a>values</h4><p>返回一个列表,该列表是所有元素的值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; t</span><br><span class="line">&#123;&apos;name&apos;: &apos;tonglele&apos;, &apos;age&apos;: 18&#125;</span><br><span class="line">&gt;&gt;&gt; t.values()</span><br><span class="line">[&apos;tonglele&apos;, 18]</span><br></pre></td></tr></table></figure></p>
+<h4 id="items"><a href="#items" class="headerlink" title="items"></a>items</h4><p>返回一个列表,列表中的每个元素是一个元组,元组中的两个值分别是key和value<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; t</span><br><span class="line">&#123;&apos;name&apos;: &apos;tonglele&apos;, &apos;age&apos;: 18&#125;</span><br><span class="line">&gt;&gt;&gt; t.values()</span><br><span class="line">[&apos;tonglele&apos;, 18]</span><br><span class="line">&gt;&gt;&gt; t</span><br><span class="line">&#123;&apos;name&apos;: &apos;tonglele&apos;, &apos;age&apos;: 18&#125;</span><br><span class="line">&gt;&gt;&gt; t.items()</span><br><span class="line">[(&apos;name&apos;, &apos;tonglele&apos;), (&apos;age&apos;, 18)]</span><br><span class="line">&gt;&gt;&gt; for i,j in t.items():</span><br><span class="line">...     print i,j</span><br><span class="line">... </span><br><span class="line">name tonglele</span><br><span class="line">age 18</span><br></pre></td></tr></table></figure></p>
+<h4 id="get"><a href="#get" class="headerlink" title="get"></a>get</h4><p>按照key取值,若存在则返回,否则返回None<br>可以给get 传递第二个参数,表示若key不存在,则返回这个值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; t</span><br><span class="line">&#123;&apos;name&apos;: &apos;tonglele&apos;, &apos;age&apos;: 18&#125;</span><br><span class="line">&gt;&gt;&gt; t.get(&apos;name&apos;)</span><br><span class="line">&apos;tonglele&apos;</span><br><span class="line">&gt;&gt;&gt; t.get(&apos;num&apos;)</span><br><span class="line">&gt;&gt;&gt; t.get(&apos;num&apos;,9)</span><br><span class="line">9</span><br></pre></td></tr></table></figure></p>
+<h4 id="has-key"><a href="#has-key" class="headerlink" title="has_key"></a>has_key</h4><p>判断某个key是否存在,返回True/False<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; t</span><br><span class="line">&#123;&apos;name&apos;: &apos;tonglele&apos;, &apos;age&apos;: 18&#125;</span><br><span class="line">&gt;&gt;&gt; t.has_key(&apos;name&apos;)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; t.has_key(&apos;num&apos;)</span><br><span class="line">False</span><br></pre></td></tr></table></figure></p>
+<h3 id="给字典一个键值对"><a href="#给字典一个键值对" class="headerlink" title="给字典一个键值对"></a>给字典一个键值对</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; t</span><br><span class="line">&#123;&apos;name&apos;: &apos;tonglele&apos;, &apos;age&apos;: 18&#125;</span><br><span class="line">&gt;&gt;&gt; t[&apos;num&apos;] = 97</span><br><span class="line">&gt;&gt;&gt; t</span><br><span class="line">&#123;&apos;num&apos;: 97, &apos;name&apos;: &apos;tonglele&apos;, &apos;age&apos;: 18&#125;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; t</span><br><span class="line">&#123;&apos;num&apos;: 97, &apos;name&apos;: &apos;tonglele&apos;, &apos;age&apos;: 18&#125;</span><br><span class="line">&gt;&gt;&gt; t.update(&#123;&apos;address&apos;:&apos;shannxi&apos;,&apos;school&apos;:&apos;XAUT&apos;&#125;)</span><br><span class="line">&gt;&gt;&gt; t</span><br><span class="line">&#123;&apos;school&apos;: &apos;XAUT&apos;, &apos;num&apos;: 97, &apos;name&apos;: &apos;tonglele&apos;, &apos;age&apos;: 18, &apos;address&apos;: &apos;shannxi&apos;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Python-字典为引用传值"><a href="#Python-字典为引用传值" class="headerlink" title="Python 字典为引用传值"></a>Python 字典为引用传值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; t1 = t</span><br><span class="line">&gt;&gt;&gt; id(t)</span><br><span class="line">9015776</span><br><span class="line">&gt;&gt;&gt; id(t1)</span><br><span class="line">9015776</span><br></pre></td></tr></table></figure>
+<h3 id="字典的复制"><a href="#字典的复制" class="headerlink" title="字典的复制"></a>字典的复制</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; t</span><br><span class="line">&#123;&apos;school&apos;: &apos;XAUT&apos;, &apos;num&apos;: 97, &apos;name&apos;: &apos;tonglele&apos;, &apos;age&apos;: 18, &apos;address&apos;: &apos;shannxi&apos;&#125;</span><br><span class="line">&gt;&gt;&gt; t1 = t.copy()</span><br><span class="line">&gt;&gt;&gt; t1</span><br><span class="line">&#123;&apos;school&apos;: &apos;XAUT&apos;, &apos;num&apos;: 97, &apos;name&apos;: &apos;tonglele&apos;, &apos;age&apos;: 18, &apos;address&apos;: &apos;shannxi&apos;&#125;</span><br><span class="line">&gt;&gt;&gt; t</span><br><span class="line">&#123;&apos;school&apos;: &apos;XAUT&apos;, &apos;num&apos;: 97, &apos;name&apos;: &apos;tonglele&apos;, &apos;age&apos;: 18, &apos;address&apos;: &apos;shannxi&apos;&#125;</span><br><span class="line">&gt;&gt;&gt; id(t1)</span><br><span class="line">8985424</span><br><span class="line">&gt;&gt;&gt; id(t)</span><br><span class="line">9015776</span><br></pre></td></tr></table></figure>
+<p>感谢阅读，欢迎指正。</p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"> <i class="fa fa-tag"></i> Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/20/0-1背包的动态规划，回溯，分支限界三种解法/" rel="next" title="0-1背包的动态规划，回溯，分支限界三种解法 ">
+                <i class="fa fa-chevron-left"></i> 0-1背包的动态规划，回溯，分支限界三种解法 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/05/Python基础-函数-1/" rel="prev" title="Python基础-函数[1] ">
+                Python基础-函数[1]  <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/upload/im.jpg" alt="Tong yijia">
+            
+              <p class="site-author-name" itemprop="name">Tong yijia</p>
+              <p class="site-description motion-element" itemprop="description">abc~</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/tongyijia" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://me.csdn.net/tongyijia" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.jeyzhang.com/" title="xu" target="_blank">xu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wiki.archlinux.org/" title="arch" target="_blank">arch</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python的一些小知识"><span class="nav-number">1.</span> <span class="nav-text">Python的一些小知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第一个简单的python程序"><span class="nav-number">2.</span> <span class="nav-text">第一个简单的python程序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#直接使用交互式Python"><span class="nav-number">2.1.</span> <span class="nav-text">直接使用交互式Python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用vim编辑一个python程序，并用python指令运行"><span class="nav-number">2.2.</span> <span class="nav-text">使用vim编辑一个python程序，并用python指令运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出汉字的问题"><span class="nav-number">2.3.</span> <span class="nav-text">输出汉字的问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本概念"><span class="nav-number">3.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#变量"><span class="nav-number">3.1.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">3.2.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运算符和表达式"><span class="nav-number">3.3.</span> <span class="nav-text">运算符和表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优先级"><span class="nav-number">3.4.</span> <span class="nav-text">优先级</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程序结构"><span class="nav-number">4.</span> <span class="nav-text">程序结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#if-else语句"><span class="nav-number">4.1.</span> <span class="nav-text">if-else语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#elif语句"><span class="nav-number">4.2.</span> <span class="nav-text">elif语句</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#循环结构"><span class="nav-number">5.</span> <span class="nav-text">循环结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#while-语句"><span class="nav-number">5.1.</span> <span class="nav-text">while 语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#for语句"><span class="nav-number">5.2.</span> <span class="nav-text">for语句</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python内置容器"><span class="nav-number">6.</span> <span class="nav-text">python内置容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#列表"><span class="nav-number">6.1.</span> <span class="nav-text">列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化一个列表"><span class="nav-number">6.1.1.</span> <span class="nav-text">初始化一个列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列表的下标"><span class="nav-number">6.1.2.</span> <span class="nav-text">列表的下标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些简单的操作"><span class="nav-number">6.1.3.</span> <span class="nav-text">一些简单的操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列表（list-对象）的一些方法"><span class="nav-number">6.1.4.</span> <span class="nav-text">列表（list 对象）的一些方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#append"><span class="nav-number">6.1.4.1.</span> <span class="nav-text">append</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#extend"><span class="nav-number">6.1.4.2.</span> <span class="nav-text">extend</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#insert"><span class="nav-number">6.1.4.3.</span> <span class="nav-text">insert</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#remove"><span class="nav-number">6.1.4.4.</span> <span class="nav-text">remove</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pop"><span class="nav-number">6.1.4.5.</span> <span class="nav-text">pop</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#count"><span class="nav-number">6.1.4.6.</span> <span class="nav-text">count</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#index"><span class="nav-number">6.1.4.7.</span> <span class="nav-text">index</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sort"><span class="nav-number">6.1.4.8.</span> <span class="nav-text">sort</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#reverse"><span class="nav-number">6.1.4.9.</span> <span class="nav-text">reverse</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#list切片"><span class="nav-number">6.1.5.</span> <span class="nav-text">list切片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列表解析"><span class="nav-number">6.1.6.</span> <span class="nav-text">列表解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#元组"><span class="nav-number">6.2.</span> <span class="nav-text">元组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义和初始化元祖（tuple）"><span class="nav-number">6.2.1.</span> <span class="nav-text">定义和初始化元祖（tuple）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元组的切片操作"><span class="nav-number">6.2.2.</span> <span class="nav-text">元组的切片操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元组中列表元素的修改"><span class="nav-number">6.2.3.</span> <span class="nav-text">元组中列表元素的修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元组的count-index"><span class="nav-number">6.2.4.</span> <span class="nav-text">元组的count,index</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集合"><span class="nav-number">6.3.</span> <span class="nav-text">集合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#集合的一些简单操作"><span class="nav-number">6.3.1.</span> <span class="nav-text">集合的一些简单操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#add"><span class="nav-number">6.3.1.1.</span> <span class="nav-text">add</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#update"><span class="nav-number">6.3.1.2.</span> <span class="nav-text">update</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#remove-1"><span class="nav-number">6.3.1.3.</span> <span class="nav-text">remove</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#discard"><span class="nav-number">6.3.1.4.</span> <span class="nav-text">discard</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pop-1"><span class="nav-number">6.3.1.5.</span> <span class="nav-text">pop</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#clear"><span class="nav-number">6.3.1.6.</span> <span class="nav-text">clear</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集合的运算"><span class="nav-number">6.3.2.</span> <span class="nav-text">集合的运算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#difference"><span class="nav-number">6.3.2.1.</span> <span class="nav-text">difference</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#difference-update"><span class="nav-number">6.3.2.2.</span> <span class="nav-text">difference_update</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#intersection-intersection-update"><span class="nav-number">6.3.2.3.</span> <span class="nav-text">intersection intersection_update</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他"><span class="nav-number">6.3.2.4.</span> <span class="nav-text">其他</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字典"><span class="nav-number">6.4.</span> <span class="nav-text">字典</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化"><span class="nav-number">6.4.1.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字典的一些操作"><span class="nav-number">6.4.2.</span> <span class="nav-text">字典的一些操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#keys"><span class="nav-number">6.4.2.1.</span> <span class="nav-text">keys</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iterkeys"><span class="nav-number">6.4.2.2.</span> <span class="nav-text">iterkeys</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#values"><span class="nav-number">6.4.2.3.</span> <span class="nav-text">values</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#items"><span class="nav-number">6.4.2.4.</span> <span class="nav-text">items</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#get"><span class="nav-number">6.4.2.5.</span> <span class="nav-text">get</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#has-key"><span class="nav-number">6.4.2.6.</span> <span class="nav-text">has_key</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给字典一个键值对"><span class="nav-number">6.4.3.</span> <span class="nav-text">给字典一个键值对</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python-字典为引用传值"><span class="nav-number">6.4.4.</span> <span class="nav-text">Python 字典为引用传值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字典的复制"><span class="nav-number">6.4.5.</span> <span class="nav-text">字典的复制</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tong yijia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

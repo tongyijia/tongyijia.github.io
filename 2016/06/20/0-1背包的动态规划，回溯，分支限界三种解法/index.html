@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据结构与算法,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="0-1背包的动态规划，回溯，分支限界三种解法1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939">
+<meta name="keywords" content="数据结构与算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0-1背包的动态规划，回溯，分支限界三种解法 ">
+<meta property="og:url" content="http://yoursite.com/2016/06/20/0-1背包的动态规划，回溯，分支限界三种解法/index.html">
+<meta property="og:site_name" content="lele&#39;s home">
+<meta property="og:description" content="0-1背包的动态规划，回溯，分支限界三种解法1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-19T13:20:50.159Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="0-1背包的动态规划，回溯，分支限界三种解法 ">
+<meta name="twitter:description" content="0-1背包的动态规划，回溯，分支限界三种解法1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/06/20/0-1背包的动态规划，回溯，分支限界三种解法/">
+
+
+
+
+
+  <title>0-1背包的动态规划，回溯，分支限界三种解法  | lele's home</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lele's home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-scategories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            scategories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/06/20/0-1背包的动态规划，回溯，分支限界三种解法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tong yijia">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/upload/im.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lele's home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">0-1背包的动态规划，回溯，分支限界三种解法 </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-20T21:18:43+08:00">
+                2016-06-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>0-1背包的动态规划，回溯，分支限界三种解法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line"></span><br><span class="line">int Traceback(int **map, int n, int *X, int Max_Weight, int *Weight);</span><br><span class="line">int Knaspack(int *Weight, int * Value, int Max_Weight, int n, int **map);</span><br><span class="line">int max(int m,int n);</span><br><span class="line">int min(int m,int n);</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int i;</span><br><span class="line">    int Weight[] = &#123;0,2,2,6,5,4&#125;;           //一维数组，存有每个物品的重量，Weight[0]存为0，无实际意义。</span><br><span class="line">    int Value[] = &#123;0,6,3,5,4,6&#125;;            //一维数组，存有每个物品的价值，同上。</span><br><span class="line">    int Max_Weight = 10;                    //背包所能放的最大重量。</span><br><span class="line"></span><br><span class="line">    int n = sizeof(Weight) / sizeof(Weight[0]) - 1; //n:物品的个数。</span><br><span class="line"></span><br><span class="line">    int **map =(int **)malloc(sizeof(int *) * (n + 1));   //二维数组map作为地图，行数为n+1，列数为Max_Weight+1;</span><br><span class="line">    for(i = 0;i &lt; n + 1;i++)&#123;</span><br><span class="line">        map[i] = (int *)malloc(sizeof(int) * (Max_Weight + 1));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int *X = (int *)malloc(sizeof(int) * (n + 1));    //一维数组X存储结果</span><br><span class="line"></span><br><span class="line">    Knaspack(Weight, Value, Max_Weight, n, map);           //填表</span><br><span class="line"></span><br><span class="line">    Traceback(map, n, X, Max_Weight, Weight);      //由表得出结果</span><br><span class="line"></span><br><span class="line">    for(i = 1; i &lt;= n; i++)&#123;</span><br><span class="line">         printf(&quot;第%d个：%2d\n&quot;, i, X[i]);      //打印结果</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    printf(&quot;%d\n&quot;,map[1][Max_Weight]);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int Knaspack(int *Weight, int * Value, int Max_Weight, int n, int **map)</span><br><span class="line">&#123;</span><br><span class="line">     int i,j;</span><br><span class="line">     int jMax = min(Weight[n] - 1,Max_Weight);     //先开始填表的最后一行，即：先开始考虑第n个物品拿不拿。此处，选取两者中的最小为拿不拿第n个物品的分界点。</span><br><span class="line"></span><br><span class="line">     for(j = 0; j &lt;= jMax; j++)&#123;      //此处为不能拿第n个物品时，所得的价值为0.</span><br><span class="line">          map[n][j] = 0;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     for(j = Weight[n]; j &lt; Max_Weight; j++)&#123;  //此处为拿第n个物品时，所得价值为Vanlue[n];</span><br><span class="line">          map[n][j] = Value[n];</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     for(i = n - 1; i &gt; 1; i--)&#123;</span><br><span class="line">          jMax = min(Weight[i] - 1, Max_Weight); //能不能拿第i个物体的分界</span><br><span class="line">          for(j = 0; j &lt;= jMax; j++)&#123;</span><br><span class="line">               map[i][j] = map[i+1][j];     //不能拿时所得价值维持不变</span><br><span class="line">          &#125;</span><br><span class="line">          for(j = Weight[i]; j &lt;= Max_Weight; j++)&#123;</span><br><span class="line">              map[i][j] = max(map[i + 1][j], map[i + 1][j - Weight[i]] + Value[i]); //比较两者，前者为选择不拿此物品所能得的价值，后者为拿此物品所得的价值，相比较取最大。</span><br><span class="line">          &#125;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     map[1][Max_Weight] = map[2][Max_Weight];</span><br><span class="line">     if(Max_Weight &gt;= Weight[1])&#123;</span><br><span class="line">         map[1][Max_Weight] = max(map[1][Max_Weight],map[2][Max_Weight - Weight[1]] + Value[1]);</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int max(int m,int n)</span><br><span class="line">&#123;</span><br><span class="line">    if(m &lt; n)&#123;</span><br><span class="line">        return n;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        return m;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">int min(int m,int n)</span><br><span class="line">&#123;</span><br><span class="line">    if(m &lt; n)&#123;</span><br><span class="line">         return m;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        return n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int Traceback(int **map, int n, int *X, int Max_Weight, int *Weight)</span><br><span class="line">&#123;</span><br><span class="line">     int i;</span><br><span class="line">     for(i = 1; i &lt; n; i++)&#123;</span><br><span class="line">         if(map[i][Max_Weight] == map[i + 1][Max_Weight])&#123;   //如果这两个数相等则说明没有拿此物品</span><br><span class="line">             X[i] = 0;</span><br><span class="line">         &#125;</span><br><span class="line">         else&#123;</span><br><span class="line">              X[i] = 1;</span><br><span class="line">              Max_Weight -= Weight[i];</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     X[n] = (map[n][Max_Weight])? 1 : 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">float Knapsack(float *p, int *w , int c, int n);</span><br><span class="line">int Sort(float *p, int *w, int n);</span><br><span class="line">class Knap&#123;                     //每个节点</span><br><span class="line">    friend float Knapsack(float *, int *, int, int);</span><br><span class="line">    private:</span><br><span class="line">        float Bound(int i);</span><br><span class="line">        void Backtrack(int i);</span><br><span class="line">        int c;      //背包容量</span><br><span class="line">        int n;        //物品数</span><br><span class="line">        int *w;     //物品重量数组</span><br><span class="line">        float *p;     //物品价值数组</span><br><span class="line">        int cw;     //当前重量</span><br><span class="line">        float cp;     //当前价值</span><br><span class="line">        float bestp;  //当前最优价值</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void Knap::Backtrack(int i)</span><br><span class="line">&#123;</span><br><span class="line">    if (i &gt; n)&#123;                 //到达叶节点</span><br><span class="line">        bestp = cp;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(cw + w[i] &lt;= c)&#123;        //如果当前重量加上第i个物品的重量还未超重，那么可以进入左子树，即决定拿第i个物品。</span><br><span class="line">         cw += w[i];           //此时当前重量变化，当前价值也变化</span><br><span class="line">         cp += p[i];</span><br><span class="line">         Backtrack(i + 1);     //装上第i个商品时再继续向树的下方走</span><br><span class="line">         cw -= w[i];          //当前的重量，价值恢复，为了在判断右子树时参数都正确。</span><br><span class="line">         cp -= p[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(Bound(i + 1) &gt; bestp)&#123;   //如果右子树的上界大于当前最优价值，那么进入右子树。</span><br><span class="line">         Backtrack(i + 1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">float Knap::Bound(int i)   //计算上界</span><br><span class="line">&#123;</span><br><span class="line">     int cleft = c - cw;     //计算剩余容量</span><br><span class="line">     float b = cp;          //记录当前价值</span><br><span class="line"></span><br><span class="line">     while(i &lt;= n &amp;&amp; w[i] &lt;= cleft)&#123;      //以物品单位重量递减的顺序装入商品。</span><br><span class="line">          cleft -= w[i];</span><br><span class="line">          b += p[i];</span><br><span class="line">          i++;</span><br><span class="line">     &#125;</span><br><span class="line">     if (i &lt;= n)&#123;</span><br><span class="line">          b += p[i] * cleft / w[i];     //将能装的最后一个物品装入一部分，此时将背包装满，为上界。</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     return b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">float Knapsack(float *p, int *w , int c, int n)</span><br><span class="line">&#123;</span><br><span class="line">    int i,j;</span><br><span class="line">    Sort(p,w,n);</span><br><span class="line">    Knap K;</span><br><span class="line"></span><br><span class="line">    K.p = new float[n + 1];</span><br><span class="line">    K.w = new int[n + 1];</span><br><span class="line">    for(i = 1; i &lt; n; i++)&#123;</span><br><span class="line">         K.p[i] = p[i];</span><br><span class="line">         K.w[i] = w[i];</span><br><span class="line">    &#125;</span><br><span class="line">    K.cp = 0;</span><br><span class="line">    K.cw = 0;</span><br><span class="line">    K.c = c;</span><br><span class="line">    K.n = n;</span><br><span class="line">    K.bestp = 0;</span><br><span class="line"></span><br><span class="line">    K.Backtrack(1);</span><br><span class="line"></span><br><span class="line">    delete []K.w;</span><br><span class="line">    delete []K.p;</span><br><span class="line"></span><br><span class="line">    return K.bestp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int Sort(float *p, int *w, int n)   //排序函数(冒泡)</span><br><span class="line">&#123;</span><br><span class="line">     int i,j,swap;</span><br><span class="line"></span><br><span class="line">     for(i = 1; i &lt; n; i++)&#123;</span><br><span class="line">         swap = 0;</span><br><span class="line">         for(j = 1; j &lt;= n - i; j++)&#123;</span><br><span class="line">             if((p[j] / w[j]) &lt; (p[j+1] / w[j+1]))&#123;</span><br><span class="line">                 w[0] = w[j];</span><br><span class="line">                 p[0] = p[j];</span><br><span class="line"></span><br><span class="line">                 w[j] = w[j+1];</span><br><span class="line">                 p[j] = p[j+1];</span><br><span class="line"></span><br><span class="line">                 w[j+1] = w[0];</span><br><span class="line">                 p[j+1] = p[0];</span><br><span class="line"></span><br><span class="line">                 swap = 1;</span><br><span class="line">             &#125;</span><br><span class="line"></span><br><span class="line">         &#125;</span><br><span class="line">             if(swap == 0)&#123;</span><br><span class="line">                  break;</span><br><span class="line">             &#125;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     for(i = 1; i &lt;= n; i++)&#123;</span><br><span class="line">            cout &lt;&lt; (p[i]/w[i])&lt;&lt;endl;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">     int i,j;</span><br><span class="line">     int Weight[] = &#123;0,2,2,6,5,4&#125;;</span><br><span class="line">     float value[] = &#123;0,6,3,5,4,6&#125;;</span><br><span class="line"></span><br><span class="line">     int Max_Weight = 10;</span><br><span class="line"></span><br><span class="line">     int n = sizeof(Weight) / sizeof(Weight[0]) - 1;</span><br><span class="line"></span><br><span class="line">     float answer = Knapsack(value,Weight,Max_Weight,n);</span><br><span class="line"></span><br><span class="line">     cout&lt;&lt;answer&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">     return 0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构与算法/" rel="tag"> <i class="fa fa-tag"></i> 数据结构与算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/10/算法-动态规划-矩阵连乘问题/" rel="next" title="算法[动态规划]-矩阵连乘问题 ">
+                <i class="fa fa-chevron-left"></i> 算法[动态规划]-矩阵连乘问题 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/25/Python基础-基本语法，内置容器/" rel="prev" title="Python基础-基本语法，内置容器 ">
+                Python基础-基本语法，内置容器  <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/upload/im.jpg" alt="Tong yijia">
+            
+              <p class="site-author-name" itemprop="name">Tong yijia</p>
+              <p class="site-description motion-element" itemprop="description">abc~</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/tongyijia" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://me.csdn.net/tongyijia" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.jeyzhang.com/" title="xu" target="_blank">xu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wiki.archlinux.org/" title="arch" target="_blank">arch</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tong yijia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

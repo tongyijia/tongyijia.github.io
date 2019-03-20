@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux基础,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前几天在红黑联盟上看了一篇博客《Linux文件系统十问—深入理解文件存储方式》，上一篇博客简单的了解了一下linux文件系统，所以想自己再深入理解一下这十个问题。先来看看这十个问题：1、机械磁盘随机读写时速度非常慢，操作系统是采用什么技巧来提高随机读写的性能的？2、touch一个新的空文件占用磁盘空间吗？ 占用的话占用多少？3、新建一个空目录占用磁盘空间吗？占用多少？和新建一个文件相比，哪个占用的">
+<meta name="keywords" content="Linux基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux文件系统十问---深入理解文件存储方式(rhel6.5，EXT4)">
+<meta property="og:url" content="http://yoursite.com/2016/09/10/Linux文件系统十问-深入理解文件存储方式-rhel6-5，EXT4/index.html">
+<meta property="og:site_name" content="lele&#39;s home">
+<meta property="og:description" content="前几天在红黑联盟上看了一篇博客《Linux文件系统十问—深入理解文件存储方式》，上一篇博客简单的了解了一下linux文件系统，所以想自己再深入理解一下这十个问题。先来看看这十个问题：1、机械磁盘随机读写时速度非常慢，操作系统是采用什么技巧来提高随机读写的性能的？2、touch一个新的空文件占用磁盘空间吗？ 占用的话占用多少？3、新建一个空目录占用磁盘空间吗？占用多少？和新建一个文件相比，哪个占用的">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://img.blog.csdn.net/20161015171000962">
+<meta property="og:image" content="http://img.blog.csdn.net/20161016092657189">
+<meta property="og:image" content="http://img.blog.csdn.net/20161016092858749">
+<meta property="og:image" content="http://img.blog.csdn.net/20161016094407428">
+<meta property="og:image" content="http://img.blog.csdn.net/20161017101622561">
+<meta property="og:image" content="http://img.blog.csdn.net/20161017102204329">
+<meta property="og:image" content="http://img.blog.csdn.net/20161017102615221">
+<meta property="og:image" content="http://img.blog.csdn.net/20161017103016207">
+<meta property="og:image" content="http://img.blog.csdn.net/20161017103443749">
+<meta property="og:image" content="http://img.blog.csdn.net/20161017104039835">
+<meta property="og:image" content="http://img.blog.csdn.net/20161017104233243">
+<meta property="og:image" content="http://img.blog.csdn.net/20161017104426481">
+<meta property="og:image" content="http://img.blog.csdn.net/20161017110036423">
+<meta property="og:updated_time" content="2019-03-19T15:03:02.047Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux文件系统十问---深入理解文件存储方式(rhel6.5，EXT4)">
+<meta name="twitter:description" content="前几天在红黑联盟上看了一篇博客《Linux文件系统十问—深入理解文件存储方式》，上一篇博客简单的了解了一下linux文件系统，所以想自己再深入理解一下这十个问题。先来看看这十个问题：1、机械磁盘随机读写时速度非常慢，操作系统是采用什么技巧来提高随机读写的性能的？2、touch一个新的空文件占用磁盘空间吗？ 占用的话占用多少？3、新建一个空目录占用磁盘空间吗？占用多少？和新建一个文件相比，哪个占用的">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20161015171000962">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/10/Linux文件系统十问-深入理解文件存储方式-rhel6-5，EXT4/">
+
+
+
+
+
+  <title>Linux文件系统十问---深入理解文件存储方式(rhel6.5，EXT4) | lele's home</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lele's home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-scategories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            scategories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/10/Linux文件系统十问-深入理解文件存储方式-rhel6-5，EXT4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tong yijia">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/upload/im.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lele's home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux文件系统十问---深入理解文件存储方式(rhel6.5，EXT4)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-10T23:00:58+08:00">
+                2016-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前几天在红黑联盟上看了一篇博客《Linux文件系统十问—深入理解文件存储方式》，上一篇博客简单的了解了一下linux文件系统，所以想自己再深入理解一下这十个问题。<br>先来看看这十个问题：<br>1、机械磁盘随机读写时速度非常慢，操作系统是采用什么技巧来提高随机读写的性能的？<br>2、touch一个新的空文件占用磁盘空间吗？ 占用的话占用多少？<br>3、新建一个空目录占用磁盘空间吗？占用多少？和新建一个文件相比，哪个占用的更大？<br>4、你知道文件名是记录在磁盘的什么地方吗？<br>5、文件名最长多长？受什么制约？<br>6、文件名太长了会影响系统性能吗？为什么会产生影响？<br>7、一个目录下最多能建立多少个文件？<br>8、新建一个内容大小1k的文件，实际会占用多大的磁盘空间？<br>9、向操作系统发起读取文件2Byte的命令，操作系统实际会读取多少呢？<br>10、我们使用文件时要怎么样来能提高磁盘IO速度？</p>
+<p>一：磁盘构成及分区</p>
+<p>1：磁盘的物理结构</p>
+<p>先说一下磁盘的物理结构，这里机械硬盘，固态硬盘SSD这里不做讨论。对于管理磁盘，分磁盘面，磁头，磁道，柱面和扇区。</p>
+<ul>
+<li>磁盘面：一个磁盘是由一叠组成的。</li>
+<li>磁头(heads)：每个对应一个磁盘面，负责该磁盘面上的数据读写。</li>
+<li>磁道(track)：每个圆心划分出多个同心圆圈，每个圆圈叫做一个磁道。</li>
+<li>柱面(cylinders)：所有盘面上的同一位置的磁道组成的立体叫做一个柱面。</li>
+<li>扇区(sector)：以磁道为单位管理磁盘仍然太大，所以又把每个分出了多个扇区。</li>
+</ul>
+<p>如图：</p>
+<p><img src="http://img.blog.csdn.net/20161015171000962" alt></p>
+<p>在原文章中笔者用fdisk -l查看了当前系统使用磁盘的物理信息，结果可以磁头数，磁道，扇区数等等。</p>
+<p><img src="http://img.blog.csdn.net/20161016092657189" alt></p>
+<p>可以看出他的磁盘有255个heads，也就是说共有255个盘面。3263个cylinders，也就是说每个盘面上都有3263个磁道， 63sectors/track说的是每个磁道上共有63个扇区。命令结果也给出了Sector size的值是512bytes。算一下该磁盘的大小：</p>
+<p>　　255盘面  <em> 3263柱面 </em> 63扇区 * 每个扇区512bytes = 26839088640byte。<br>结果是26.8G,和磁盘的总大小相符（至于fdisk给出的详细结果相差了约4M的大小，笔者也没有弄彻底明白，有兴趣的读者可以继续研究）。</p>
+<p>　　另外查看了其它两台机器的磁盘情况，发现个有意思的事情。如下图，无论磁盘的容量大或者是小，其磁头数和每磁道扇区数都是不变的，只是磁道变多了而已。<br>　　<img src="http://img.blog.csdn.net/20161016092858749" alt></p>
+<p>2：分区</p>
+<p>分区的话，我们先根据磁盘的物理结构两个方案：</p>
+<p>　方案一： 255个盘面，C盘是0-100盘面， D盘是101-200个盘面,……</p>
+<p>　方案二：3263个柱面，C盘0-1000个柱面，D盘1001-20001个柱面,……</p>
+<p>要想选取两种方案较高效的一个，我们先来看一下磁盘IO时的过程。第一步，首先是磁头径向移动来寻找数据所在的磁道。这部分时间叫寻道时间。第二步，找到目标磁道后通过盘面旋转，将目标扇区移动到磁头的正下方。第三步，向目标扇区读取或者写入数据。到此为止，一次磁盘IO完成，故：</p>
+<p>　　单次磁盘IO时间 = 寻道时间 + 旋转延迟 + 存取时间。</p>
+<p>同一分区的数据经常会一起读取，所以再来看看两种方案，如果使用方案一的话，磁头就需要在多个磁道间不停地跳来跳去，这样磁盘的寻道时间就会翻倍，磁盘性能就会下降。对于方案二的话，磁头只需要在较少量的磁道移动即可，大大降低了寻道时间。</p>
+<p>所以，方案二的分区方式可以降低磁盘IO时间中的寻道时间部分，所以所有的操作系统采用的都是方案二，没有用方案一的。</p>
+<p>在Linux下使用过fdisk进行分区的话可以注意到以下信息：</p>
+<p><img src="http://img.blog.csdn.net/20161016094407428" alt></p>
+<p>这充分证明了操作系统是采用方案二的。</p>
+<p>回到开篇提出的问题1，操作系统是采用什么技巧来降低随机读写的性能问题的呢？<strong>操作系统通过按磁道对应的柱面划分分区，来降低磁盘IO所花费的的寻道时间 ，进而提高磁盘的读写性能。</strong></p>
+<p>二：目录与文件</p>
+<p>1：引出问题</p>
+<p>将磁盘的基础简单了解，我们正式来看一下linux的文件系统。那么，对于文件系统中我们熟悉目录和文件我们又了解多少呢？先来创建一个空的目录和文件：<br><img src="http://img.blog.csdn.net/20161017101622561" alt></p>
+<p>我们知道，ls命令第五列显示的是文件占用空间的大小，那么，先来提出几个问题：</p>
+<ul>
+<li>为什么目录目录占用的空间是4096？</li>
+<li>为什么空文件占用的空间是0？</li>
+<li>如果空文件占用的空间是0，那么该文件的文件名，权限等相关属性存在哪里？</li>
+</ul>
+<p>2：空文件不占空间？</p>
+<p>这里用一下df   -i命令。<br><img src="http://img.blog.csdn.net/20161017102204329" alt></p>
+<p>其实我们可以根据以上命令发现在创建了一个新文件时，消耗掉了一个inode，inode的概念前面博文有讲。</p>
+<p>inode的大小可以用dumpe2fs查看：<br><img src="http://img.blog.csdn.net/20161017102615221" alt></p>
+<p>可以看到一个inode有256bytes大小。</p>
+<p>所以，我们可以回答开篇提出的第二个问题，当touch一个新文件时其实是占用磁盘空间的，实际占用是一个inode的大小，inode的大小在文件系统格式化的时候就已经确定。</p>
+<p>再来说新建目录，同样，使用df  -i命令来查看：<br><img src="http://img.blog.csdn.net/20161017103016207" alt><br>可以看出，新建一个空目录也会占用一个inode。所以，现在开篇的第三个问题也有答案了，新建一个空目录时，占用的空间是1个block+1个inode。</p>
+<p>3：空目录的4KB</p>
+<p><img src="http://img.blog.csdn.net/20161017103443749" alt><br>特地查看了一些目录，发现不管目录里内容的多少，目录所占空间大多都是4K。那么这4K是干什么的呢？</p>
+<p>先进入建立的空目录查看：</p>
+<p><img src="http://img.blog.csdn.net/20161017104039835" alt></p>
+<p>接着建立两个新的空文件：</p>
+<p><img src="http://img.blog.csdn.net/20161017104233243" alt></p>
+<p>空文件不占block，所以，4K还是没什么变化。这时创建更多的文件名长的空文件：</p>
+<p><img src="http://img.blog.csdn.net/20161017104426481" alt></p>
+<p>这时，4K就变成了12K。占用了3个block。所以开篇的第四个问题就有了答案，文件名是存在目录所占用的block中的。<br>所以，第六个问题我们现在也可以回答了，文件名太长对系统性能当然会有影响，因为这可能会导致更多的磁盘IO。如果文件名特别特别长，文件数量相当大的时候就要考虑文件名是否导致目录所占的block太多。占空间大小倒是小事，磁盘便宜，但是你得考虑下在目录下查找文件时操作系统的感受，操作系统可需要用你你提供的文件名进行字符串比较，而且运气不好的话需要将其名下所有block都搞一遍才行啊。（当然了，你的文件名长度不变态，而且数量没有达到十万数量级的话实际上这个开销也不会太大，但是这个开销你还是知道的为好）</p>
+<p>来说开篇问题五，文件名最长多长呢？linux系统为了避免程序员不节制地使用长文件名，强加了个限制，不能超过255byte。</p>
+<p>开篇问题七，一个目录下能创建多少个文件？其实这个最多是受限与你目录所在分区的inode数量。有一百万个inode，你最多就可以新建一百万个文件。但是，单个目录下文件数量最好不要过万，否则会带来系统性能的问题。</p>
+<p>4：文件的block</p>
+<p>来做个关于文件的实验，创建一个空目录，然后在其下建立一个空文件，在这个文件里写入一个数字再保存。</p>
+<p><img src="http://img.blog.csdn.net/20161017110036423" alt></p>
+<p>8K中有4K是目录的，也就是说系统为一个只有一个数字的文件分配了4K。其实文件的block比较简单的了，不像目录的block里会存很多文件系统的结构体，文件的block里只会保存文件的数据。上面这个实验表明，操作系统分配空间时是以block为最小单位。也就是说只要你的文件数据不为空，操作系统就至少会给你分配一个block来存储，直到你超过了4KB，操作系统再给你分配下一个block。</p>
+<p>开篇问题八：新建一个1K大小的文件实际会占用一个block大小的空间。</p>
+<p>开篇问题九：文件系统在向磁盘发起IO请求时也是一block size为单位的，向操作系统发起读取文件的2byte，操作系统会一次性读给你1个block大小。因此磁盘的IO很慢。</p>
+<p>开篇问题十：使用文件时要怎么样来能提高磁盘IO速度？原理就是尽量将一个文件的block连续一些。这个前面有讲到。如果知道要新建的文件大概有多大，就在创建时给操作系统说一下，将文件的大小预留下来。这样就尽可能的为一个文件分配到连续的block，再读取文件时磁头就会省去很多寻道时间，IO速度就会明显快一些。</p>
+<p>感谢阅读，欢迎指正。</p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux基础/" rel="tag"> <i class="fa fa-tag"></i> Linux基础</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/25/树莓派（一）安装系统与连接/" rel="next" title="树莓派（一）安装系统与连接 ">
+                <i class="fa fa-chevron-left"></i> 树莓派（一）安装系统与连接 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/15/文件系统的特性，linux的EXT2文件系统/" rel="prev" title="文件系统的特性，linux的EXT2文件系统">
+                文件系统的特性，linux的EXT2文件系统 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/upload/im.jpg" alt="Tong yijia">
+            
+              <p class="site-author-name" itemprop="name">Tong yijia</p>
+              <p class="site-description motion-element" itemprop="description">abc~</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/tongyijia" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://me.csdn.net/tongyijia" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.jeyzhang.com/" title="xu" target="_blank">xu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wiki.archlinux.org/" title="arch" target="_blank">arch</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tong yijia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

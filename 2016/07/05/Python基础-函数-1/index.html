@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="简单函数的定义def 关键字定义函数1234567891011#!/usr/bin/env pythondef func_name():             # def关键字定义函数    print &amp;quot;hello world&amp;quot;func_name()    #调用所定义的函数========结果=====root@tonglele /mnt # python fun.py">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python基础-函数[1] ">
+<meta property="og:url" content="http://yoursite.com/2016/07/05/Python基础-函数-1/index.html">
+<meta property="og:site_name" content="lele&#39;s home">
+<meta property="og:description" content="简单函数的定义def 关键字定义函数1234567891011#!/usr/bin/env pythondef func_name():             # def关键字定义函数    print &amp;quot;hello world&amp;quot;func_name()    #调用所定义的函数========结果=====root@tonglele /mnt # python fun.py">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-19T13:58:19.634Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python基础-函数[1] ">
+<meta name="twitter:description" content="简单函数的定义def 关键字定义函数1234567891011#!/usr/bin/env pythondef func_name():             # def关键字定义函数    print &amp;quot;hello world&amp;quot;func_name()    #调用所定义的函数========结果=====root@tonglele /mnt # python fun.py">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/05/Python基础-函数-1/">
+
+
+
+
+
+  <title>Python基础-函数[1]  | lele's home</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lele's home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-scategories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            scategories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/05/Python基础-函数-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tong yijia">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/upload/im.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lele's home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python基础-函数[1] </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-05T21:47:25+08:00">
+                2016-07-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="简单函数的定义"><a href="#简单函数的定义" class="headerlink" title="简单函数的定义"></a>简单函数的定义</h1><h2 id="def-关键字定义函数"><a href="#def-关键字定义函数" class="headerlink" title="def 关键字定义函数"></a>def 关键字定义函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">def func_name():             # def关键字定义函数</span><br><span class="line">    print &quot;hello world&quot;</span><br><span class="line"></span><br><span class="line">func_name()    #调用所定义的函数</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">========结果=====</span><br><span class="line">root@tonglele /mnt # python fun.py </span><br><span class="line">hello world</span><br></pre></td></tr></table></figure>
+<h2 id="局部变量和全局变量"><a href="#局部变量和全局变量" class="headerlink" title="局部变量和全局变量"></a>局部变量和全局变量</h2><p>作用域： 变量生效的范围<br>局部变量： 在某一函数内定义的变量，作用域为此函数体<br>全局变量： 定义在函数之外，作用域为整个模块，如果要在函数体内使用则使用global关键字标记<br>全局变量尽量少用。但有些配置性的信息可以设置为全局变量方便使用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">（局部变量与全局变量）</span><br><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">a = 5               #这里的a为全局变量</span><br><span class="line">def func_name():</span><br><span class="line">    a = &apos;hello&apos;    #这个a为局部变量，它的作用域为此函数</span><br><span class="line">    print a</span><br><span class="line"></span><br><span class="line">func_name()   #调用函数</span><br><span class="line">print a   #这里打印的为全局变量a</span><br><span class="line"></span><br><span class="line">========结果========</span><br><span class="line">root@tonglele /mnt # python fun.py</span><br><span class="line">hello</span><br><span class="line">5</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">（global关键字）</span><br><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">a = 5</span><br><span class="line">def func_name():</span><br><span class="line">    global a            #这里使用global关键字定义a是全局变量a，在这个函数体内所有对a的赋值操作都是对全局变量a的改变</span><br><span class="line">    a = &apos;hello&apos;</span><br><span class="line">    print a</span><br><span class="line"></span><br><span class="line">func_name()</span><br><span class="line">print a</span><br><span class="line"></span><br><span class="line">==========结果=======</span><br><span class="line">root@tonglele /mnt # python fun.py</span><br><span class="line">hello</span><br><span class="line">hello</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">(在函数体内可以直接调用全局变量)</span><br><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">a = 5</span><br><span class="line">def func_name():</span><br><span class="line">    print a</span><br><span class="line"></span><br><span class="line">func_name()</span><br><span class="line">print a</span><br><span class="line"></span><br><span class="line">=======结果=======</span><br><span class="line">root@tonglele /mnt # python fun.py</span><br><span class="line">5</span><br><span class="line">5</span><br></pre></td></tr></table></figure></p>
+<h1 id="带不可变参数的函数"><a href="#带不可变参数的函数" class="headerlink" title="带不可变参数的函数"></a>带不可变参数的函数</h1><p>在调用函数时传入一个或多个参数，函数体接收之后作出相应工作。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(传入一个参数)</span><br><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">def func_name(arg):  #arg 形参</span><br><span class="line">    print arg      #arg作为参数传进来，相当于一个局部变量</span><br><span class="line"></span><br><span class="line">func_name(&apos;hello tonglele&apos;)   #&apos;hello tonglele&apos;就是实参，是在调用函数时传给函数的参数</span><br><span class="line"></span><br><span class="line">=======结果=======</span><br><span class="line">root@tonglele /mnt # python fun.py</span><br><span class="line">hello tonglele</span><br></pre></td></tr></table></figure></p>
+<h2 id="传入多个参数"><a href="#传入多个参数" class="headerlink" title="传入多个参数"></a>传入多个参数</h2><h3 id="位置参数"><a href="#位置参数" class="headerlink" title="位置参数"></a>位置参数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">def func_name(arg1,arg2):      #arg1,arg2为两个形参，中间用‘，’隔开</span><br><span class="line">    print arg1+arg2      #打印arg1+arg2的结果</span><br><span class="line"></span><br><span class="line">func_name(1,2)   #在调用函数时传入两个时参，中间用逗号隔开,需要注意的是顺序要按照所调用的函数定义的顺序</span><br><span class="line">========结果======</span><br><span class="line">root@tonglele /mnt # python fun.py</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+<h3 id="关键字参数"><a href="#关键字参数" class="headerlink" title="关键字参数"></a>关键字参数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">def func_name(arg1,arg2):</span><br><span class="line">    print arg1</span><br><span class="line">    print arg2</span><br><span class="line"></span><br><span class="line">func_name(arg2=1,arg1=2)    #在关键字传参时顺序就不那么重要了，但需要把参数名与值一一对应好</span><br><span class="line">=======结果======</span><br><span class="line">root@tonglele /mnt # python fun.py</span><br><span class="line">2</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+<h3 id="关键字参数和位置参数混合使用"><a href="#关键字参数和位置参数混合使用" class="headerlink" title="关键字参数和位置参数混合使用"></a>关键字参数和位置参数混合使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">def func_name(arg1,arg2,arg3):</span><br><span class="line">    print arg1</span><br><span class="line">    print arg2</span><br><span class="line">    print arg3</span><br><span class="line"></span><br><span class="line">func_name(1,arg3=2,arg2=5)   #位置参数必须在关键字参数之前，否则会出现语法错误。eg:SyntaxError: non-keyword arg after keyword arg</span><br></pre></td></tr></table></figure>
+<h3 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">def func_name(arg1,arg2,arg3=3):   #给arg3一个默认值，如果在调用此函数时未给arg3传值，则取默认值3</span><br><span class="line">    print arg1</span><br><span class="line">    print arg2</span><br><span class="line">    print arg3</span><br><span class="line"></span><br><span class="line">func_name(1,2)     #此时未给arg3传参</span><br><span class="line">==========结果========</span><br><span class="line">root@tonglele /mnt # python fun.py</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line"></span><br><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">def func_name(arg1,arg2,arg3=3):    #在函数定义的时候,带默认值的参数必须放在不带默认值参数的后边。</span><br><span class="line">    print arg1</span><br><span class="line">    print arg2</span><br><span class="line">    print arg3</span><br><span class="line"></span><br><span class="line">func_name(1,2,5)    #此时给arg3传参，默认值将被覆盖</span><br><span class="line">=======结果======</span><br><span class="line">root@tonglele /mnt # python fun.py</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">5</span><br></pre></td></tr></table></figure>
+<h1 id="带可变参数的函数"><a href="#带可变参数的函数" class="headerlink" title="带可变参数的函数"></a>带可变参数的函数</h1><p>在Python中支持可变参数，即你可以传入0或多个参数，对参数的个数没用固定的要求 </p>
+<h2 id="可变位置参数"><a href="#可变位置参数" class="headerlink" title="可变位置参数"></a>可变位置参数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">def func_name(*args):</span><br><span class="line">    print type(args)</span><br><span class="line">    for x in args:</span><br><span class="line">        print x</span><br><span class="line"></span><br><span class="line">func_name(1,2,5,&apos;hello&apos;,&apos;tonglele&apos;)</span><br><span class="line">=======结果=======</span><br><span class="line">root@tonglele /mnt # python fun.py</span><br><span class="line">&lt;type &apos;tuple&apos;&gt;     #我们可以看出函数将传进来的参数打包成了一个元组</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">5</span><br><span class="line">hello</span><br><span class="line">tonglele</span><br></pre></td></tr></table></figure>
+<h2 id="可变关键字参数"><a href="#可变关键字参数" class="headerlink" title="可变关键字参数"></a>可变关键字参数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">def func_name(**kwargs):</span><br><span class="line">    print type(kwargs)</span><br><span class="line">    for k,v in kwargs.items():</span><br><span class="line">        print &quot;%s  ==&gt;  %s&quot; % (k,v)</span><br><span class="line"></span><br><span class="line">func_name(name=&apos;tonglele&apos;,age=&apos;19&apos;,school=&apos;XAUT&apos;)</span><br><span class="line">===========结果===========</span><br><span class="line">root@tonglele /mnt # python fun.py</span><br><span class="line">&lt;type &apos;dict&apos;&gt;   #函数将传进去的变量打包成一个字典</span><br><span class="line">age  ==&gt;  19</span><br><span class="line">name  ==&gt;  tonglele</span><br><span class="line">school  ==&gt;  XAUT</span><br></pre></td></tr></table></figure>
+<h1 id="非可变参数与可变参数的结合"><a href="#非可变参数与可变参数的结合" class="headerlink" title="非可变参数与可变参数的结合"></a>非可变参数与可变参数的结合</h1><p>非可变参数必须要在可变参数之前<br>可变位置参数要在关键字参数之前<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">def func_name(arg1,arg2,*args):</span><br><span class="line">    print arg1</span><br><span class="line">    print arg2</span><br><span class="line">    print args</span><br><span class="line"></span><br><span class="line">func_name(1,2,3,4,5,5)</span><br><span class="line">=======结果=======</span><br><span class="line">root@tonglele /mnt # python fun.py</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">(3, 4, 5, 5)</span><br></pre></td></tr></table></figure></p>
+<h1 id="参数解包"><a href="#参数解包" class="headerlink" title="参数解包"></a>参数解包</h1><h2 id="用于解包序列为位置参数"><a href="#用于解包序列为位置参数" class="headerlink" title="*用于解包序列为位置参数"></a>*用于解包序列为位置参数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">def func_name(arg1,arg2,arg3):</span><br><span class="line">    print arg1</span><br><span class="line">    print arg2</span><br><span class="line">    print arg3</span><br><span class="line"></span><br><span class="line">li = [1,2,3]</span><br><span class="line">func_name(*li)    #将一个列表解包传递进去</span><br><span class="line">=======结果======</span><br><span class="line">root@tonglele /mnt # python fun.py </span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+<h2 id="用于解包字典为关键字参数"><a href="#用于解包字典为关键字参数" class="headerlink" title="** 用于解包字典为关键字参数"></a>** 用于解包字典为关键字参数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">def func_name(arg1,arg2,arg3):</span><br><span class="line">    print arg1</span><br><span class="line">    print arg2</span><br><span class="line">    print arg3</span><br><span class="line"></span><br><span class="line">dic = &#123;&apos;arg1&apos;:1,&apos;arg2&apos;:2,&apos;arg3&apos;:3&#125;</span><br><span class="line">func_name(**dic)    #将一个字典解包传递进去</span><br><span class="line">======结果======</span><br><span class="line">root@tonglele /mnt # python fun.py</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+<h1 id="函数返回值"><a href="#函数返回值" class="headerlink" title="函数返回值"></a>函数返回值</h1><p>主要使用<code>return</code>关键字<br>可以返回任何对象<br>python中以元组的形式可以返回多个值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">def func_name(arg1,arg2):</span><br><span class="line">    arg3 = arg1 + arg2</span><br><span class="line">    arg4 = arg1 * arg2</span><br><span class="line">    return arg3,arg4</span><br><span class="line"></span><br><span class="line">i,j = func_name(2,3)</span><br><span class="line">print i</span><br><span class="line">print j</span><br><span class="line">===========结果===========</span><br><span class="line">root@tonglele /mnt # python fun.py</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td></tr></table></figure></p>
+<h1 id="python中的递归函数"><a href="#python中的递归函数" class="headerlink" title="python中的递归函数"></a>python中的递归函数</h1><p>递归：函数直接或间接调用自身的函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">def func_name(n):</span><br><span class="line">    if n&lt;= 1:</span><br><span class="line">        return 1</span><br><span class="line">    else:</span><br><span class="line">        return n * func_name(n - 1)</span><br><span class="line"></span><br><span class="line">answer = func_name(10)</span><br><span class="line">print answer</span><br><span class="line">=========结果=======</span><br><span class="line">root@tonglele /mnt # python fun.py      </span><br><span class="line">3628800      #即计算10的阶乘    #shell中一条命令计算阶乘：seq -s \* 1 10 | bc</span><br></pre></td></tr></table></figure></p>
+<p>python 中函数递归的最大深度为1000，所以要尽量避免使用递归，可是使用迭代代替:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">def func_name(n):</span><br><span class="line">    answer = 1</span><br><span class="line">    for x in range(1,n,1):</span><br><span class="line">        answer *= x</span><br><span class="line">    return answer</span><br><span class="line"></span><br><span class="line">answer = func_name(1001)</span><br><span class="line">print answer</span><br></pre></td></tr></table></figure></p>
+<h1 id="函数作为参数"><a href="#函数作为参数" class="headerlink" title="函数作为参数"></a>函数作为参数</h1><p>在python中函数也可以当作参数，可以作为函数的返回值函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">def fun1():</span><br><span class="line">    print &quot;calling fun1&quot;</span><br><span class="line"></span><br><span class="line">def fun2(f):</span><br><span class="line">    print &quot;calling fun2&quot;</span><br><span class="line">    f()</span><br><span class="line"></span><br><span class="line">fun2(fun1)</span><br><span class="line">=========结果======</span><br><span class="line">root@tonglele /mnt # python fun.py </span><br><span class="line">calling fun2</span><br><span class="line">calling fun1</span><br></pre></td></tr></table></figure></p>
+<h1 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h1><p>在python中以函数作为参数的函数叫做高阶函数<br>下面介绍三个内置的高阶函数 </p>
+<h2 id="filter函数"><a href="#filter函数" class="headerlink" title="filter函数"></a>filter函数</h2><p>filter:filter(function or none,seq)<br>可以看作是一个过滤函数 当函数返回值为true时，会将当前值加进序列<br>简单的使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">li = [0,1,2,3,4,5,6,7,8,9,10]</span><br><span class="line"></span><br><span class="line">def fun(x):</span><br><span class="line">    return x % 2 == 0</span><br><span class="line"></span><br><span class="line">print filter(fun,li)</span><br><span class="line">===========结果=======</span><br><span class="line">root@tonglele /mnt # python fun.py </span><br><span class="line">[0, 2, 4, 6, 8, 10]  #类似于列表解析</span><br></pre></td></tr></table></figure></p>
+<p>自己用代码实现filter函数的功能：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">li = [1,2,3,4,5,6,7,8,9,10]</span><br><span class="line"></span><br><span class="line">def afilter(f,li):</span><br><span class="line">    li1 = []</span><br><span class="line">    for i in li:</span><br><span class="line">        if f(i):</span><br><span class="line">            li1.append(i)</span><br><span class="line">    return li1</span><br><span class="line"></span><br><span class="line">def fun(x):</span><br><span class="line">    return x % 2 == 0</span><br><span class="line"></span><br><span class="line">print afilter(fun,li)</span><br><span class="line">=======结果======</span><br><span class="line">root@tonglele /home/tyj/Desktop/Python1[基础]/code/6-5 # python filter.py</span><br><span class="line">[2, 4, 6, 8, 10]</span><br></pre></td></tr></table></figure></p>
+<h2 id="map函数"><a href="#map函数" class="headerlink" title="map函数"></a>map函数</h2><p>map:map(function or none,seq)<br>对列表中的所有元素执行一个函数<br>简单使用map函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">li = [0,1,2,3,4,5,6,7,8,9,10]</span><br><span class="line"></span><br><span class="line">def fun(x):</span><br><span class="line">    return x ** 2</span><br><span class="line"></span><br><span class="line">print map(fun,li)</span><br><span class="line">==========结果==========</span><br><span class="line">root@tonglele /mnt # python fun.py</span><br><span class="line">[0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100]</span><br></pre></td></tr></table></figure></p>
+<p>自己用代码实现map函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">li = [1,2,3,4,5,6,7,8,9,10]</span><br><span class="line"></span><br><span class="line">def mymap(f,li):</span><br><span class="line">    li1 = []</span><br><span class="line">    for i in li:</span><br><span class="line">        li1.append(f(i))</span><br><span class="line">    return li1</span><br><span class="line"></span><br><span class="line">def fun(x):</span><br><span class="line">    return x ** 2</span><br><span class="line"></span><br><span class="line">print mymap(fun,li)</span><br><span class="line">=========结果=======</span><br><span class="line">root@tonglele /home/tyj/Desktop/Python1[基础]/code/6-5 # python map.py   </span><br><span class="line">[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]</span><br></pre></td></tr></table></figure></p>
+<h2 id="reduce函数"><a href="#reduce函数" class="headerlink" title="reduce函数"></a>reduce函数</h2><p>reduce:reduce(function,seq)<br>先对进来的列表中的前两个元素进行function操作，得到的结果再与第三个元素一起进行function操作，所以function一定要是一个二元操作函数<br>简单使用reduce函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">li = [0,1,2,3,4,5,6,7,8,9,10]</span><br><span class="line"></span><br><span class="line">def comp(x,y):</span><br><span class="line">    if x &gt;= y:</span><br><span class="line">        return x</span><br><span class="line">    else:</span><br><span class="line">        return y</span><br><span class="line"></span><br><span class="line">print reduce(comp,li)</span><br><span class="line">=======结果======</span><br><span class="line">root@tonglele /mnt # python fun.py</span><br><span class="line">10</span><br></pre></td></tr></table></figure></p>
+<p>自己用代码实现reduce：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">li = [1,4,5,7,13,7,8,9,10]</span><br><span class="line"></span><br><span class="line">def myreduce(f,li):</span><br><span class="line">    answer = li[0]</span><br><span class="line">    li_len = len(li)</span><br><span class="line">    for index in  range(1,li_len):</span><br><span class="line">        answer = f(answer,li[index])</span><br><span class="line">    return answer</span><br><span class="line"></span><br><span class="line">def comp(x,y):</span><br><span class="line">    if x &lt;= y:</span><br><span class="line">        return y</span><br><span class="line">    else:</span><br><span class="line">        return x</span><br><span class="line"></span><br><span class="line">print myreduce(comp,li)</span><br><span class="line">=========结果=======</span><br><span class="line">root@tonglele /home/tyj/Desktop/Python1[基础]/code/6-5 # python reduce.py</span><br><span class="line">13</span><br></pre></td></tr></table></figure></p>
+<p>用自己实现的reduce 选取出一大组数中最大的两个:<br>先将一大组数划分为几个小块<br>选取出每个小块中最大的两个<br>再选取出原来的那个一大组数中的最大的两个<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">li = [[1,4,5],[7,13,7],[8,9,10]]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def myreduce(f,li):</span><br><span class="line">    answer = li[0]</span><br><span class="line">    li_len = len(li)</span><br><span class="line">    for index in  range(1,li_len):</span><br><span class="line">        answer = f(answer,li[index])</span><br><span class="line">    return answer</span><br><span class="line"></span><br><span class="line">def find_b(li1,li2):</span><br><span class="line">    li1.sort()</span><br><span class="line">    li2.sort()</span><br><span class="line">    li = []</span><br><span class="line">    for i in range(2):</span><br><span class="line">        li.append(li1.pop())</span><br><span class="line">        li.append(li2.pop())</span><br><span class="line">    li.sort()</span><br><span class="line">    li = li[len(li) - 2:len(li)]</span><br><span class="line">    return li</span><br><span class="line"></span><br><span class="line">print myreduce(find_b,li)</span><br><span class="line">===========结果========</span><br><span class="line">root@tonglele /home/tyj/Desktop/Python1[基础]/code/6-5 # python reduce++.py</span><br><span class="line">[10, 13]</span><br></pre></td></tr></table></figure></p>
+<p>感谢阅读，欢迎指正。</p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"> <i class="fa fa-tag"></i> Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/25/Python基础-基本语法，内置容器/" rel="next" title="Python基础-基本语法，内置容器 ">
+                <i class="fa fa-chevron-left"></i> Python基础-基本语法，内置容器 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/10/Python基础-函数-2/" rel="prev" title="Python基础-函数[2] ">
+                Python基础-函数[2]  <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/upload/im.jpg" alt="Tong yijia">
+            
+              <p class="site-author-name" itemprop="name">Tong yijia</p>
+              <p class="site-description motion-element" itemprop="description">abc~</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/tongyijia" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://me.csdn.net/tongyijia" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.jeyzhang.com/" title="xu" target="_blank">xu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wiki.archlinux.org/" title="arch" target="_blank">arch</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简单函数的定义"><span class="nav-number">1.</span> <span class="nav-text">简单函数的定义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#def-关键字定义函数"><span class="nav-number">1.1.</span> <span class="nav-text">def 关键字定义函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#局部变量和全局变量"><span class="nav-number">1.2.</span> <span class="nav-text">局部变量和全局变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#带不可变参数的函数"><span class="nav-number">2.</span> <span class="nav-text">带不可变参数的函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#传入多个参数"><span class="nav-number">2.1.</span> <span class="nav-text">传入多个参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#位置参数"><span class="nav-number">2.1.1.</span> <span class="nav-text">位置参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键字参数"><span class="nav-number">2.1.2.</span> <span class="nav-text">关键字参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键字参数和位置参数混合使用"><span class="nav-number">2.1.3.</span> <span class="nav-text">关键字参数和位置参数混合使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#默认参数"><span class="nav-number">2.1.4.</span> <span class="nav-text">默认参数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#带可变参数的函数"><span class="nav-number">3.</span> <span class="nav-text">带可变参数的函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#可变位置参数"><span class="nav-number">3.1.</span> <span class="nav-text">可变位置参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可变关键字参数"><span class="nav-number">3.2.</span> <span class="nav-text">可变关键字参数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#非可变参数与可变参数的结合"><span class="nav-number">4.</span> <span class="nav-text">非可变参数与可变参数的结合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参数解包"><span class="nav-number">5.</span> <span class="nav-text">参数解包</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#用于解包序列为位置参数"><span class="nav-number">5.1.</span> <span class="nav-text">*用于解包序列为位置参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用于解包字典为关键字参数"><span class="nav-number">5.2.</span> <span class="nav-text">** 用于解包字典为关键字参数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数返回值"><span class="nav-number">6.</span> <span class="nav-text">函数返回值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python中的递归函数"><span class="nav-number">7.</span> <span class="nav-text">python中的递归函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数作为参数"><span class="nav-number">8.</span> <span class="nav-text">函数作为参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高阶函数"><span class="nav-number">9.</span> <span class="nav-text">高阶函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#filter函数"><span class="nav-number">9.1.</span> <span class="nav-text">filter函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map函数"><span class="nav-number">9.2.</span> <span class="nav-text">map函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reduce函数"><span class="nav-number">9.3.</span> <span class="nav-text">reduce函数</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tong yijia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

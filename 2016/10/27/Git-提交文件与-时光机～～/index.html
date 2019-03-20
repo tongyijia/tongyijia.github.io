@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Git,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="这里要明确一下，所有的版本控制系统其时只能跟踪文本文件的改动。而图片视频这些二进制文件，虽然也能由版本控制系统管理，但没法跟踪文件的变化，只能把二进制文件每次改动串起来，也就是只知道图片从100KB改成了120KB，但到底改了什么，版本控制系统没法知道。 Microsoft的Word格式是二进制格式，因此，版本控制系统也没法跟踪Word文件的改动。 现在写一个file1文件，内容如下： 第一步，g">
+<meta name="keywords" content="Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git:提交文件与 时光机～～">
+<meta property="og:url" content="http://yoursite.com/2016/10/27/Git-提交文件与-时光机～～/index.html">
+<meta property="og:site_name" content="lele&#39;s home">
+<meta property="og:description" content="这里要明确一下，所有的版本控制系统其时只能跟踪文本文件的改动。而图片视频这些二进制文件，虽然也能由版本控制系统管理，但没法跟踪文件的变化，只能把二进制文件每次改动串起来，也就是只知道图片从100KB改成了120KB，但到底改了什么，版本控制系统没法知道。 Microsoft的Word格式是二进制格式，因此，版本控制系统也没法跟踪Word文件的改动。 现在写一个file1文件，内容如下： 第一步，g">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://img.blog.csdn.net/20161017113559064">
+<meta property="og:image" content="http://img.blog.csdn.net/20161018212123602">
+<meta property="og:image" content="http://img.blog.csdn.net/20161018212631135">
+<meta property="og:image" content="http://img.blog.csdn.net/20161018212903870">
+<meta property="og:image" content="http://img.blog.csdn.net/20161018213205131">
+<meta property="og:image" content="http://img.blog.csdn.net/20161018213335405">
+<meta property="og:image" content="http://img.blog.csdn.net/20161018213709199">
+<meta property="og:image" content="http://img.blog.csdn.net/20161018220730709">
+<meta property="og:image" content="http://img.blog.csdn.net/20161018220912305">
+<meta property="og:image" content="http://img.blog.csdn.net/20161018221041609">
+<meta property="og:image" content="http://img.blog.csdn.net/20161018221818518">
+<meta property="og:image" content="http://img.blog.csdn.net/20161018222450920">
+<meta property="og:image" content="http://img.blog.csdn.net/20161019001243272">
+<meta property="og:image" content="http://img.blog.csdn.net/20161019001316271">
+<meta property="og:image" content="http://img.blog.csdn.net/20161019001343334">
+<meta property="og:image" content="http://img.blog.csdn.net/20161019001428835">
+<meta property="og:updated_time" content="2019-03-20T07:19:54.430Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git:提交文件与 时光机～～">
+<meta name="twitter:description" content="这里要明确一下，所有的版本控制系统其时只能跟踪文本文件的改动。而图片视频这些二进制文件，虽然也能由版本控制系统管理，但没法跟踪文件的变化，只能把二进制文件每次改动串起来，也就是只知道图片从100KB改成了120KB，但到底改了什么，版本控制系统没法知道。 Microsoft的Word格式是二进制格式，因此，版本控制系统也没法跟踪Word文件的改动。 现在写一个file1文件，内容如下： 第一步，g">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20161017113559064">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/27/Git-提交文件与-时光机～～/">
+
+
+
+
+
+  <title>Git:提交文件与 时光机～～ | lele's home</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lele's home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-scategories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            scategories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/27/Git-提交文件与-时光机～～/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tong yijia">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/upload/im.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lele's home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Git:提交文件与 时光机～～</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-27T12:17:16+08:00">
+                2016-10-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这里要明确一下，所有的版本控制系统其时只能跟踪文本文件的改动。而图片视频这些二进制文件，虽然也能由版本控制系统管理，但没法跟踪文件的变化，只能把二进制文件每次改动串起来，也就是只知道图片从100KB改成了120KB，但到底改了什么，版本控制系统没法知道。</p>
+<p>Microsoft的Word格式是二进制格式，因此，版本控制系统也没法跟踪Word文件的改动。</p>
+<p>现在写一个file1文件，内容如下：<br><img src="http://img.blog.csdn.net/20161017113559064" alt></p>
+<p>第一步，git add告诉git把文件添加到仓库：</p>
+<p><img src="http://img.blog.csdn.net/20161018212123602" alt></p>
+<p>第二步，git commit把文件提交到仓库，- m后面输入的时本次提交的说明，这样可以再历史记录中更好的找到改动记录。</p>
+<p><img src="http://img.blog.csdn.net/20161018212631135" alt></p>
+<p>还可以一次提交很多个文件<br><img src="http://img.blog.csdn.net/20161018212903870" alt></p>
+<p>下面我们修改一下先前提交的file1为 </p>
+<p><img src="http://img.blog.csdn.net/20161018213205131" alt></p>
+<p>用git status可以查看仓库当前的状态</p>
+<p><img src="http://img.blog.csdn.net/20161018213335405" alt><br>我们可以看到git告诉我们file1被修改了，但还没有提交。</p>
+<p>git status只能告诉我们file1被修改了，但不能准确的告诉我们具体修改了什么内容，这时可以用git diff命令，git diff 和diff命令相似<br><img src="http://img.blog.csdn.net/20161018213709199" alt><br>这时我们可以看到第二行happy today是我们新加的数据。</p>
+<p>先git add file1,再git status看一下状态：<br><img src="http://img.blog.csdn.net/20161018220730709" alt><br>状态中显示file1等待commit.</p>
+<p>然后提交：<br><img src="http://img.blog.csdn.net/20161018220912305" alt></p>
+<p>当前没有需要提交的修改时git会提示我们工作目录是干净的。<br><img src="http://img.blog.csdn.net/20161018221041609" alt></p>
+<p>那么，如果我们修改提交之后又想要回到前面的某个状态呢？<br>git log可以由近到远查看我们所有的提交日志：<br><img src="http://img.blog.csdn.net/20161018221818518" alt><br>如图，最近一次提交是10-18-3，最远是first commit。<br>还可以通过加 – –pretty=oneline看的更加直观：<br><img src="http://img.blog.csdn.net/20161018222450920" alt><br>前面的一大串数字就是commit id（版本号）。<br>现在，我们试着把file1退回到我们第一次提交时的状态。<br>首先，我们必须知道，当前的版本表示为HEAD，也就是最新提交的371c5…..bfd，上一个版本就是HEAD^,上上一个就是HEAD^^,往上100个我们可以写成HEAD～100。<br>git reset 命令可以将当前版本退回到上上一个版本：</p>
+<p><img src="http://img.blog.csdn.net/20161019001243272" alt></p>
+<p>这里的– –hard先不用管它的意义，用就可以，以后会提到。</p>
+<p>这时，我们就退回到了file1最初的版本，那么，如果想再回到第三个（10-18-3）版本呢？</p>
+<p>这时，我们查看一下log：</p>
+<p><img src="http://img.blog.csdn.net/20161019001316271" alt></p>
+<p>第二和第三个版本已经看不到了，已经回不去了，怎么办？没关系，如果你的shell还没有关闭，那么就去上面查到第三个版本的commit id就可以还原了：</p>
+<p><img src="http://img.blog.csdn.net/20161019001343334" alt></p>
+<p>版本号不必写全，写前几位可以识别就行了。</p>
+<p>Git的版本回退速度很快，因为在Git内部有一个指向当前版本的HEAD指针，当你回退版本时，Git仅仅是把HEAD指向了目标版本（10-18-3）</p>
+<p>然后顺便把工作区的文件更新了，所以你让HEAD指向哪个版本号，就把当前版本定位在哪。</p>
+<p>比如说那个shell关掉了，或者你已经关闭了系统又重新打开想找回那个版本怎么办？这时我们就需要找到那个版本的commit id。Git中的git reflog用来记录你的每一次命令：</p>
+<p><img src="http://img.blog.csdn.net/20161019001428835" alt></p>
+<p>查到commit id之后按上面提到的方法就可以回到目标版本了。</p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Git/" rel="tag"> <i class="fa fa-tag"></i> Git</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/25/《TCP-IP详解：卷一》第3章：IP：网际协议/" rel="next" title="《TCP/IP详解：卷一》第3章：IP：网际协议">
+                <i class="fa fa-chevron-left"></i> 《TCP/IP详解：卷一》第3章：IP：网际协议
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/upload/im.jpg" alt="Tong yijia">
+            
+              <p class="site-author-name" itemprop="name">Tong yijia</p>
+              <p class="site-description motion-element" itemprop="description">abc~</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/tongyijia" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://me.csdn.net/tongyijia" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.jeyzhang.com/" title="xu" target="_blank">xu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wiki.archlinux.org/" title="arch" target="_blank">arch</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tong yijia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

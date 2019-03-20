@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据结构与算法,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="动态规划算法的基本要素（1）：最优子结构性质（2）：重叠子问题性质  动态规划法解题思路（1）：找出最优解的性质，并刻画其结构特征（2）：递归的定义最优值（3）：以自底向上的方式计算出最优值（4）：根据计算最优值得到的信息，构造最优解  动态规划与分治的主要区别（1）：分治的自顶向下进行计算的，动态规划是自底向上进行计算的（2）：动态规划法记录了已解决的子问题的解，分治法不记录  矩阵连乘问题的描">
+<meta name="keywords" content="数据结构与算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法[动态规划]-矩阵连乘问题 ">
+<meta property="og:url" content="http://yoursite.com/2016/06/10/算法-动态规划-矩阵连乘问题/index.html">
+<meta property="og:site_name" content="lele&#39;s home">
+<meta property="og:description" content="动态规划算法的基本要素（1）：最优子结构性质（2）：重叠子问题性质  动态规划法解题思路（1）：找出最优解的性质，并刻画其结构特征（2）：递归的定义最优值（3）：以自底向上的方式计算出最优值（4）：根据计算最优值得到的信息，构造最优解  动态规划与分治的主要区别（1）：分治的自顶向下进行计算的，动态规划是自底向上进行计算的（2）：动态规划法记录了已解决的子问题的解，分治法不记录  矩阵连乘问题的描">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-19T13:17:36.755Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="算法[动态规划]-矩阵连乘问题 ">
+<meta name="twitter:description" content="动态规划算法的基本要素（1）：最优子结构性质（2）：重叠子问题性质  动态规划法解题思路（1）：找出最优解的性质，并刻画其结构特征（2）：递归的定义最优值（3）：以自底向上的方式计算出最优值（4）：根据计算最优值得到的信息，构造最优解  动态规划与分治的主要区别（1）：分治的自顶向下进行计算的，动态规划是自底向上进行计算的（2）：动态规划法记录了已解决的子问题的解，分治法不记录  矩阵连乘问题的描">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/06/10/算法-动态规划-矩阵连乘问题/">
+
+
+
+
+
+  <title>算法[动态规划]-矩阵连乘问题  | lele's home</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lele's home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-scategories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            scategories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/06/10/算法-动态规划-矩阵连乘问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tong yijia">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/upload/im.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lele's home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">算法[动态规划]-矩阵连乘问题 </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-10T21:13:32+08:00">
+                2016-06-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="动态规划算法的基本要素"><a href="#动态规划算法的基本要素" class="headerlink" title="动态规划算法的基本要素"></a>动态规划算法的基本要素</h1><p>（1）：最优子结构性质<br>（2）：重叠子问题性质 </p>
+<h1 id="动态规划法解题思路"><a href="#动态规划法解题思路" class="headerlink" title="动态规划法解题思路"></a>动态规划法解题思路</h1><p>（1）：找出最优解的性质，并刻画其结构特征<br>（2）：递归的定义最优值<br>（3）：以自底向上的方式计算出最优值<br>（4）：根据计算最优值得到的信息，构造最优解 </p>
+<h1 id="动态规划与分治的主要区别"><a href="#动态规划与分治的主要区别" class="headerlink" title="动态规划与分治的主要区别"></a>动态规划与分治的主要区别</h1><p>（1）：分治的自顶向下进行计算的，动态规划是自底向上进行计算的<br>（2）：动态规划法记录了已解决的子问题的解，分治法不记录 </p>
+<h1 id="矩阵连乘问题的描述"><a href="#矩阵连乘问题的描述" class="headerlink" title="矩阵连乘问题的描述"></a>矩阵连乘问题的描述</h1><p>给定N个矩阵A1，A2…An,其中，A(i)和A(i+1)是可乘的，确定计算次序，使得依此次序计算矩阵连乘积需要的数乘次数最少 </p>
+<h1 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h1><p>1：将N个矩阵的行列数存入一个大小为N+1的一维数组A中，即：A[0]为第一个矩阵的行数，A[1]为第一个矩阵的列数，又因为第一二个矩阵是可乘的，所以同时又是第二个矩阵的行数，依次存入N个矩阵的行列数<br>申请一个规格为(N+1) (N+1)的二维数组M用以记录动态规划中的一步步所得的子问题的解，规格为N+1是因为便于在填表时方便易懂。第0行，第0列不填。<br>再申请一个此规格的二维数组S，用以存储得出的最优子结构的分割点<br>2：我们再来详细解释一下1中的二维数组M的意义，M[i][j]的意义则代表从第i个矩阵乘到第j个矩阵所乘的最小次数，所以，我们最终所需的结果便是M[1][6]。<br>由上述亦可得，M表沿对角线左下部分是无用的，对角线上M[i][i]=0,S表亦是。<br>填完对角线的所有0之后，我们可以考虑填沿对角线向右上方向上的一层，比如M[1][2],M[2][3],M[3][4]…这些我们都可以直接填，因为，它们没有其他解可以比较<br>沿右上方向，我们再走一层，此时，我们考虑M[1][3],这时，我们知道我们可以(A1 A2) A3 即当2做cut点时，也可以A1 (A2 A3) 即当1做cut点时 。这时我们将这两种情况所得结果比较，取得最小次数存入。<br>这两种情况的结果如何得到呢？我们可以有这样的公式(当k为cut点时)<code>times=M[i][k] + M[k+1][j] + A[i-1] A[k] * A[j]</code><br>这样，我们就可以依次填表，最后得到了M[1][N]</p>
+<h1 id="C代码实现"><a href="#C代码实现" class="headerlink" title="C代码实现"></a>C代码实现</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line"></span><br><span class="line">int Matrix(int *A,int **M,int **S,int n)</span><br><span class="line">&#123;</span><br><span class="line">    int i,l,j,k,q;</span><br><span class="line">    for(i = 1;i &lt; n; i++)&#123;                      //将对角线置为0</span><br><span class="line">        M[i][i] = 0;</span><br><span class="line">    &#125;</span><br><span class="line">    for(l = 2;l &lt; n; l++)&#123; //第一层循环，从对角线向右上方向推进</span><br><span class="line">         for(i = 1;i &lt;= n - l; i++)  //第二层循环，从左上至右下填写</span><br><span class="line">         &#123;</span><br><span class="line">             j = i + l -1;</span><br><span class="line">             M[i][j] = 999999;      //将此值初始为很大的值，便于下面的比较</span><br><span class="line">             for(k = i ;k &lt;= j -1; k++)&#123;   //第三层循环，列出所有有可能作为cut点的情况并计算结果</span><br><span class="line">                    q = M[i][k] + M[k+1][j] + A[i-1] * A[k] * A[j];</span><br><span class="line">                   if (q &lt; M[i][j])&#123;</span><br><span class="line">                       M[i][j] = q;  //再一次次比较中找出最小次数的情况</span><br><span class="line">                       S[i][j] = k;  //并将cut点存入S表作以记录</span><br><span class="line">                   &#125;</span><br><span class="line"></span><br><span class="line">                 &#125;</span><br><span class="line">             &#125;</span><br><span class="line"></span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line">int PrintMatrix(int **S,int i, int j)    //依据S表打印结果，思想为递归</span><br><span class="line">&#123;</span><br><span class="line">    if (i == j)&#123;</span><br><span class="line">        printf(&quot;A%d&quot;,i);</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        printf(&quot;(&quot;);</span><br><span class="line">        PrintMatrix(S,i,S[i][j]);</span><br><span class="line">        PrintMatrix(S,S[i][j] + 1,j);</span><br><span class="line">        printf(&quot;)&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int A[] = &#123;30,35,15,5,10,20,25&#125;;</span><br><span class="line">    int i,j;</span><br><span class="line">    int n = sizeof(A) / sizeof(int) ;</span><br><span class="line">    int **M = (int **)malloc(sizeof(int *) * n);    //申请二维数组</span><br><span class="line">    for(i = 0; i &lt; n; i++)&#123;</span><br><span class="line">        M[i] = (int*)malloc(sizeof(int) * n);</span><br><span class="line">    &#125;</span><br><span class="line">    int **S = (int **)malloc(sizeof(int *) * n);</span><br><span class="line">    for(i = 0; i &lt; n; i++)&#123;</span><br><span class="line">        S[i] = (int*)malloc(sizeof(int) * n);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    printf(&quot;\n&quot;);</span><br><span class="line">    Matrix(A,M,S,n);  //调用函数</span><br><span class="line"></span><br><span class="line">    for ( i = 0; i &lt; n; i++ )&#123;   //打印M表</span><br><span class="line">        for( j = 0; j &lt; n; j++ )&#123;</span><br><span class="line">            printf(&quot;%5d &quot;,M[i][j]);</span><br><span class="line">        &#125;</span><br><span class="line">        printf(&quot;\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    printf(&quot;==============================================================\n&quot;);</span><br><span class="line"></span><br><span class="line">    for ( i = 0; i &lt; n; i++ )&#123;   //打印S表</span><br><span class="line">        for( j = 0; j &lt; n; j++ )&#123;</span><br><span class="line">            printf(&quot;%5d&quot;,S[i][j]);</span><br><span class="line">        &#125;</span><br><span class="line">        printf(&quot;\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    PrintMatrix(S,1,6);   //显示结果</span><br><span class="line">    printf(&quot;\n&quot;);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">  0     0     0     0     0     0     0 </span><br><span class="line">    0     0 15750  7875  9375 11875 15125 </span><br><span class="line">    0     0     0  2625  4375  7125 10500 </span><br><span class="line">    0     0     0     0   750  2500  5375 </span><br><span class="line">    0     0     0     0     0  1000  3500 </span><br><span class="line">    0     0     0     0     0     0  5000 </span><br><span class="line">    0     0     0     0     0     0     0 </span><br><span class="line">==============================================================</span><br><span class="line">    0    0    0    0    0    0    0</span><br><span class="line">    0    0    1    1    3    3    3</span><br><span class="line">    0    0    0    2    3    3    3</span><br><span class="line">    0    0    0    0    3    3    3</span><br><span class="line">    0    0    0    0    0    4    5</span><br><span class="line">    0    0    0    0    0    0    5</span><br><span class="line">    0    0    0    0    0    0    0</span><br><span class="line">((A1(A2A3))((A4A5)A6))</span><br></pre></td></tr></table></figure>
+<p>感谢阅读，欢迎指正。</p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构与算法/" rel="tag"> <i class="fa fa-tag"></i> 数据结构与算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/08/docker的基础知识-1/" rel="next" title="docker的基础知识[1] ">
+                <i class="fa fa-chevron-left"></i> docker的基础知识[1] 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/20/0-1背包的动态规划，回溯，分支限界三种解法/" rel="prev" title="0-1背包的动态规划，回溯，分支限界三种解法 ">
+                0-1背包的动态规划，回溯，分支限界三种解法  <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/upload/im.jpg" alt="Tong yijia">
+            
+              <p class="site-author-name" itemprop="name">Tong yijia</p>
+              <p class="site-description motion-element" itemprop="description">abc~</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/tongyijia" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://me.csdn.net/tongyijia" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.jeyzhang.com/" title="xu" target="_blank">xu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wiki.archlinux.org/" title="arch" target="_blank">arch</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#动态规划算法的基本要素"><span class="nav-number">1.</span> <span class="nav-text">动态规划算法的基本要素</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动态规划法解题思路"><span class="nav-number">2.</span> <span class="nav-text">动态规划法解题思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动态规划与分治的主要区别"><span class="nav-number">3.</span> <span class="nav-text">动态规划与分治的主要区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#矩阵连乘问题的描述"><span class="nav-number">4.</span> <span class="nav-text">矩阵连乘问题的描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决思路"><span class="nav-number">5.</span> <span class="nav-text">解决思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C代码实现"><span class="nav-number">6.</span> <span class="nav-text">C代码实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验结果"><span class="nav-number">7.</span> <span class="nav-text">实验结果</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tong yijia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

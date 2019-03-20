@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="标准IO设备的操作print语句print语句可以将内容输出到标准输出上，如print ‘hello’;除此之外，print还可以将内容输出到文件对象里123&amp;gt;&amp;gt;&amp;gt; import sys&amp;gt;&amp;gt;&amp;gt; print &amp;gt;&amp;gt; sys.stderr,&amp;apos;hello&amp;apos;  #将内容输出到标准错误中hello print函数包含在future模块中：12">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python基础-IO与文本处理 ">
+<meta property="og:url" content="http://yoursite.com/2016/07/18/Python基础-IO与文本处理/index.html">
+<meta property="og:site_name" content="lele&#39;s home">
+<meta property="og:description" content="标准IO设备的操作print语句print语句可以将内容输出到标准输出上，如print ‘hello’;除此之外，print还可以将内容输出到文件对象里123&amp;gt;&amp;gt;&amp;gt; import sys&amp;gt;&amp;gt;&amp;gt; print &amp;gt;&amp;gt; sys.stderr,&amp;apos;hello&amp;apos;  #将内容输出到标准错误中hello print函数包含在future模块中：12">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-19T14:16:22.248Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python基础-IO与文本处理 ">
+<meta name="twitter:description" content="标准IO设备的操作print语句print语句可以将内容输出到标准输出上，如print ‘hello’;除此之外，print还可以将内容输出到文件对象里123&amp;gt;&amp;gt;&amp;gt; import sys&amp;gt;&amp;gt;&amp;gt; print &amp;gt;&amp;gt; sys.stderr,&amp;apos;hello&amp;apos;  #将内容输出到标准错误中hello print函数包含在future模块中：12">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/18/Python基础-IO与文本处理/">
+
+
+
+
+
+  <title>Python基础-IO与文本处理  | lele's home</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lele's home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-scategories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            scategories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/18/Python基础-IO与文本处理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tong yijia">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/upload/im.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lele's home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python基础-IO与文本处理 </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-18T22:09:51+08:00">
+                2016-07-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="标准IO设备的操作"><a href="#标准IO设备的操作" class="headerlink" title="标准IO设备的操作"></a>标准IO设备的操作</h1><h2 id="print语句"><a href="#print语句" class="headerlink" title="print语句"></a>print语句</h2><p>print语句可以将内容输出到标准输出上，如print ‘hello’;除此之外，print还可以将内容输出到文件对象里<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import sys</span><br><span class="line">&gt;&gt;&gt; print &gt;&gt; sys.stderr,&apos;hello&apos;  #将内容输出到标准错误中</span><br><span class="line">hello</span><br></pre></td></tr></table></figure></p>
+<p>print函数包含在<strong>future</strong>模块中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from __future__ import print_function     #从__future__函数中导入print函数</span><br><span class="line">&gt;&gt;&gt; type(print)</span><br><span class="line">&lt;type &apos;builtin_function_or_method&apos;&gt;    #此时，print不再是一个语句，而是一个函数</span><br><span class="line">&gt;&gt;&gt; </span><br><span class="line">&gt;&gt;&gt; print(&quot;hello&quot;,&quot;world&quot;)</span><br><span class="line">hello world</span><br><span class="line">&gt;&gt;&gt; print(&quot;hello&quot;,&quot;world&quot;,sep=&apos;\n&apos;)    #print函数具有比print语句更强大的功能，sep：分隔符</span><br><span class="line">hello</span><br><span class="line">world</span><br><span class="line">&gt;&gt;&gt; print(&quot;hello&quot;,&quot;world&quot;,sep=&apos;*&apos;)</span><br><span class="line">hello*world</span><br></pre></td></tr></table></figure></p>
+<h2 id="raw-input函数"><a href="#raw-input函数" class="headerlink" title="raw_input函数"></a>raw_input函数</h2><p>一个内置函数，从标准输入读取内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = raw_input()</span><br><span class="line">hello</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">&apos;hello&apos;</span><br><span class="line">&gt;&gt;&gt; s = raw_input(&quot;please input a word &gt;&gt; &quot;)</span><br><span class="line">please input a word &gt;&gt; key</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">&apos;key&apos;</span><br></pre></td></tr></table></figure></p>
+<h2 id="open函数与file对象"><a href="#open函数与file对象" class="headerlink" title="open函数与file对象"></a>open函数与file对象</h2><p>open()是一个内置函数。open(name[,mode[,buffering]]),其实是对file的一个封装，返回一个file对象 </p>
+<h3 id="具体参数"><a href="#具体参数" class="headerlink" title="具体参数"></a>具体参数</h3><p>r 以读的方式打开,定位到文件开头,默认的mode<br>r+ 以读写的方式打开,定位文件开头,可以写入内容到文件<br>w 以写的方式打开,打开文件的时候会清空文件的内容,并且不能读<br>w+ 以读写的方式打开,定位到文件头,并且打开文件的时候也会清空文件的内容<br>a 以写的方式打开,定位到文件的末尾,是一个追加的操作,但并不允许读<br>a+ 以读写的方式打开,定位到文件的末尾,追加的方式。<br>在使用以上mode打开文件的时候,如果增加了b 模式,表示以二进制方式打开<br>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = open(&apos;/mnt/file&apos;,&apos;r&apos;)   #以只读方式打开/mnt/file文件</span><br><span class="line">&gt;&gt;&gt; f.read()   #文件为空，所以读出来的为空</span><br><span class="line">&apos;&apos;</span><br><span class="line">&gt;&gt;&gt; f.close()   #打开的文件最终要关闭。每打开一个文件会消耗一个文件描述符，</span><br><span class="line">如果打开太多会消耗掉所有的文件描述符就不能再打开文件了，关闭之后可以释放文件描述符，所以要记得关闭</span><br><span class="line">&gt;&gt;&gt; f = open(&apos;/mnt/file&apos;,&apos;w&apos;)</span><br><span class="line">&gt;&gt;&gt; f.read()</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">IOError: File not open for reading    #以只写方式打开则不能读</span><br><span class="line">&gt;&gt;&gt; f.write(&apos;hello&apos;)</span><br><span class="line">&gt;&gt;&gt; f.close()</span><br><span class="line">&gt;&gt;&gt; f = open(&apos;/mnt/file&apos;)   #默认的为只读方式打开</span><br><span class="line">&gt;&gt;&gt; f.read()</span><br><span class="line">&apos;hello&apos;</span><br><span class="line">&gt;&gt;&gt; f.read()</span><br><span class="line">&apos;&apos;</span><br><span class="line">&gt;&gt;&gt; f.close()</span><br></pre></td></tr></table></figure></p>
+<h3 id="file对象的一些操作"><a href="#file对象的一些操作" class="headerlink" title="file对象的一些操作"></a>file对象的一些操作</h3><h4 id="read"><a href="#read" class="headerlink" title="read()"></a>read()</h4><p>read()表示读取文件所有内容到内存里，可以带一个可选参数表示读取多少字节。当打开较大的文件时慎用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">10</span><br><span class="line">&gt;&gt;&gt; f = open(&apos;/mnt/file&apos;) #只读形式打开</span><br><span class="line">&gt;&gt;&gt; f.read()</span><br><span class="line">&apos;12345678910\n12345678910\n12345678910\n&apos;</span><br><span class="line">&gt;&gt;&gt; f.read(4)  #意图读四个字节，但文件指针已经到了文件末尾，读不出东西了</span><br><span class="line">&apos;&apos;</span><br><span class="line">&gt;&gt;&gt; f = open(&apos;/mnt/file&apos;)</span><br><span class="line">&gt;&gt;&gt; f.read(4)  #一次读取四个字节</span><br><span class="line">&apos;1234&apos;</span><br><span class="line">&gt;&gt;&gt; f.read(4)</span><br><span class="line">&apos;5678&apos;</span><br></pre></td></tr></table></figure></p>
+<h4 id="readline"><a href="#readline" class="headerlink" title="readline()"></a>readline()</h4><p>读取一行内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = open(&apos;/mnt/file&apos;)</span><br><span class="line">&gt;&gt;&gt; f.readline()</span><br><span class="line">&apos;12345678910\n&apos;</span><br><span class="line">&gt;&gt;&gt; f.readline()</span><br><span class="line">&apos;dshdiaufhies\n&apos;</span><br><span class="line">&gt;&gt;&gt; f.readline()</span><br><span class="line">&apos;hello\n&apos;</span><br><span class="line">&gt;&gt;&gt; f.readline()</span><br><span class="line">&apos;&apos;</span><br></pre></td></tr></table></figure></p>
+<h4 id="readlines"><a href="#readlines" class="headerlink" title="readlines()"></a>readlines()</h4><p>将所有行内容读到一个列表里，会将换行符读取进来<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = open(&apos;/mnt/file&apos;)</span><br><span class="line">&gt;&gt;&gt; f.readlines()</span><br><span class="line">[&apos;12345678910\n&apos;, &apos;dshdiaufhies\n&apos;, &apos;hello\n&apos;]</span><br><span class="line">&gt;&gt;&gt; f.close()</span><br></pre></td></tr></table></figure></p>
+<h4 id="write"><a href="#write" class="headerlink" title="write()"></a>write()</h4><p>将内容写入到文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = open(&apos;/mnt/file&apos;,&apos;w&apos;)</span><br><span class="line">&gt;&gt;&gt; f.write(&apos;hello world hello tonglele&apos;)</span><br><span class="line">&gt;&gt;&gt; f.close()</span><br><span class="line">&gt;&gt;&gt; f = open(&apos;/mnt/file&apos;)</span><br><span class="line">&gt;&gt;&gt; f.read()</span><br><span class="line">&apos;hello world hello tonglele&apos;</span><br><span class="line">&gt;&gt;&gt; f.close()</span><br></pre></td></tr></table></figure></p>
+<h4 id="writelines"><a href="#writelines" class="headerlink" title="writelines()"></a>writelines()</h4><p>将一个序列写入到文件中，但不会加换行符<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;&gt;&gt; f = open(&apos;/mnt/file&apos;,&apos;w&apos;)</span><br><span class="line">&gt;&gt;&gt; f.writelines([&apos;hello world&apos;,&apos;hello tonglele&apos;])</span><br><span class="line">&gt;&gt;&gt; f.close()</span><br><span class="line">&gt;&gt;&gt; f = open(&apos;/mnt/file&apos;)</span><br><span class="line">&gt;&gt;&gt; f.read()</span><br><span class="line">&apos;hello worldhello tonglele&apos;</span><br><span class="line">&gt;&gt;&gt; f.close()</span><br></pre></td></tr></table></figure></p>
+<h4 id="truncate"><a href="#truncate" class="headerlink" title="truncate()"></a>truncate()</h4><p>f.truncate()清空文件，但是！！如果以a的方式打开，则不会清空，因为a的方式是定位到文件末尾，<br>该函数是从文件指针当前位置开始清空的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">root@tonglele /code/Python/IO/test # cat /mnt/file</span><br><span class="line">hello worldhello tonglele</span><br><span class="line">root@tonglele /code/Python/IO/test # python</span><br><span class="line">Python 2.7.5 (default, Feb 11 2014, 07:46:25) </span><br><span class="line">[GCC 4.8.2 20140120 (Red Hat 4.8.2-13)] on linux2</span><br><span class="line">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span><br><span class="line">&gt;&gt;&gt; f = open(&apos;/mnt/file&apos;,&apos;a&apos;)</span><br><span class="line">&gt;&gt;&gt; f.truncate()</span><br><span class="line">&gt;&gt;&gt; f.close()</span><br><span class="line">&gt;&gt;&gt; </span><br><span class="line">root@tonglele /code/Python/IO/test # cat /mnt/file</span><br><span class="line">hello worldhello tonglele</span><br><span class="line">root@tonglele /code/Python/IO/test # python       </span><br><span class="line">Python 2.7.5 (default, Feb 11 2014, 07:46:25) </span><br><span class="line">[GCC 4.8.2 20140120 (Red Hat 4.8.2-13)] on linux2</span><br><span class="line">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span><br><span class="line">&gt;&gt;&gt; f = open(&apos;/mnt/file&apos;,&apos;w&apos;)</span><br><span class="line">&gt;&gt;&gt; f.truncate()</span><br><span class="line">&gt;&gt;&gt; f.close()</span><br><span class="line">&gt;&gt;&gt; </span><br><span class="line">root@tonglele /code/Python/IO/test # cat /mnt/file</span><br><span class="line">root@tonglele /code/Python/IO/test #</span><br></pre></td></tr></table></figure></p>
+<h4 id="flush"><a href="#flush" class="headerlink" title="flush()"></a>flush()</h4><p>flush()函数，将缓冲区的内容写入到硬盘中，close()函数在关闭文件之前会执行此操作。<br>tell()<br>返回当前文件指针的偏移量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = open(&apos;/mnt/file&apos;,&apos;r&apos;)</span><br><span class="line">&gt;&gt;&gt; f.tell()</span><br><span class="line">0</span><br><span class="line">&gt;&gt;&gt; f.read()</span><br><span class="line">&apos;dhsiadh\nhdsaih\nhsaifuf\nfsoh\nasi\n&apos;</span><br><span class="line">&gt;&gt;&gt; f.tell()</span><br><span class="line">32</span><br><span class="line">&gt;&gt;&gt; f.close()</span><br></pre></td></tr></table></figure></p>
+<h4 id="seek"><a href="#seek" class="headerlink" title="seek()"></a>seek()</h4><p>seek,seek(offset[,whence])offset表示移动多少字节,whence为1的时候表示相对于当前位置移动的;<br>当2的时候从文件的末尾往后移动,但不一定所有的平台都支持;默认为0表示从文件开头往后移动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = open(&apos;/mnt/file&apos;,&apos;r&apos;)</span><br><span class="line">&gt;&gt;&gt; f.tell()</span><br><span class="line">0</span><br><span class="line">&gt;&gt;&gt; f.read()</span><br><span class="line">&apos;dhsiadh\nhdsaih\nhsaifuf\nfsoh\nasi\n&apos;</span><br><span class="line">&gt;&gt;&gt; f.read()</span><br><span class="line">&apos;&apos;</span><br><span class="line">&gt;&gt;&gt; f.tell()</span><br><span class="line">32</span><br><span class="line">&gt;&gt;&gt; f.seek(10)</span><br><span class="line">&gt;&gt;&gt; f.tell()</span><br><span class="line">10</span><br><span class="line">&gt;&gt;&gt; f.read()</span><br><span class="line">&apos;saih\nhsaifuf\nfsoh\nasi\n&apos;</span><br></pre></td></tr></table></figure></p>
+<h4 id="close"><a href="#close" class="headerlink" title="close()"></a>close()</h4><p>close()函数，关闭当前打开的文件</p>
+<h4 id="fileno"><a href="#fileno" class="headerlink" title="fileno()"></a>fileno()</h4><p>fileno()函数，返回当前的文件描述符，一个数字<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = open(&apos;/mnt/file&apos;,&apos;r&apos;)</span><br><span class="line">&gt;&gt;&gt; f.fileno()</span><br><span class="line">4</span><br><span class="line">&gt;&gt;&gt; f.close()</span><br></pre></td></tr></table></figure></p>
+<h4 id="isatty"><a href="#isatty" class="headerlink" title="isatty()"></a>isatty()</h4><p>isatty()函数，当前打开的文件是否是一个终端设备<br>如果该文件被连接（与终端设备相关联）到一个tty（类似终端）设备，此方法返回True,否则False<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = open(&apos;/mnt/file&apos;,&apos;r&apos;)</span><br><span class="line">&gt;&gt;&gt; f.isatty()</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; f.close()</span><br></pre></td></tr></table></figure></p>
+<h4 id="closed"><a href="#closed" class="headerlink" title="closed"></a>closed</h4><p>closed属性，查看当前文件对象是否被关闭<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = open(&apos;/mnt/file&apos;,&apos;r&apos;)</span><br><span class="line">&gt;&gt;&gt; f.closed</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; f.close()</span><br><span class="line">&gt;&gt;&gt; f.closed</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
+<h4 id="next"><a href="#next" class="headerlink" title="next()"></a>next()</h4><p>next()方法，一行一行的读取，（file对象是一个迭代器，可以放在for循环里）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = open(&apos;/mnt/file&apos;,&apos;r&apos;)</span><br><span class="line">&gt;&gt;&gt; f.next()</span><br><span class="line">&apos;dhsiadh\n&apos;</span><br><span class="line">&gt;&gt;&gt; f.next()</span><br><span class="line">&apos;hdsaih\n&apos;</span><br><span class="line">&gt;&gt;&gt; f.next()</span><br><span class="line">&apos;hsaifuf\n&apos;</span><br><span class="line">&gt;&gt;&gt; f.next()</span><br><span class="line">&apos;fsoh\n&apos;</span><br><span class="line">&gt;&gt;&gt; f.next()</span><br><span class="line">&apos;asi\n&apos;</span><br><span class="line">&gt;&gt;&gt; f.next()</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">  StopIteration</span><br><span class="line">  &gt;&gt;&gt; f.close()</span><br><span class="line">  &gt;&gt;&gt; for line in open(&apos;/mnt/file&apos;):</span><br><span class="line">  ...     print line</span><br><span class="line">  ... </span><br><span class="line">  dhsiadh</span><br><span class="line">  </span><br><span class="line">  hdsaih</span><br><span class="line">  </span><br><span class="line">  hsaifuf</span><br><span class="line">  </span><br><span class="line">  fsoh</span><br><span class="line">  </span><br><span class="line">  asi</span><br></pre></td></tr></table></figure></p>
+<h3 id="with语法"><a href="#with语法" class="headerlink" title="with语法"></a>with语法</h3><p>一般情况下打开一个文件，经过操作之后，都要显示的执行close()将其关闭<br>with用于需要打开，关闭成对的操作，可以自动关闭打开的对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">with expression as obj:</span><br><span class="line">   expression</span><br></pre></td></tr></table></figure></p>
+<p>将打开的对象赋给obj  obj的作用域只在with语句快中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; with open(&apos;/mnt/file&apos;) as f:</span><br><span class="line">...     for line in f:</span><br><span class="line">...             print line</span><br><span class="line">... </span><br><span class="line">dhsiadh</span><br><span class="line"></span><br><span class="line">hdsaih</span><br><span class="line"></span><br><span class="line">hsaifuf</span><br><span class="line"></span><br><span class="line">fsoh</span><br><span class="line"></span><br><span class="line">asi</span><br></pre></td></tr></table></figure></p>
+<h1 id="文本处理"><a href="#文本处理" class="headerlink" title="文本处理"></a>文本处理</h1><h2 id="字符串处理"><a href="#字符串处理" class="headerlink" title="字符串处理"></a>字符串处理</h2><h3 id="split函数"><a href="#split函数" class="headerlink" title="split函数"></a>split函数</h3><p>split函数，默认以空格分隔，可以传指定分隔符,传指定分隔片个数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; str = &apos;tonglele tongyijia&apos;</span><br><span class="line">&gt;&gt;&gt; str.split()</span><br><span class="line">[&apos;tonglele&apos;, &apos;tongyijia&apos;]</span><br><span class="line">&gt;&gt;&gt; str = &apos;hello!world&apos;</span><br><span class="line">&gt;&gt;&gt; str.split(&apos;!&apos;)  #指定分隔符</span><br><span class="line">[&apos;hello&apos;, &apos;world&apos;]</span><br><span class="line">&gt;&gt;&gt; str = &apos;hihialoloapjpjommmolll&apos;</span><br><span class="line">&gt;&gt;&gt; str.split(&apos;o&apos;,1) #指定分隔符及分隔片个数</span><br><span class="line">[&apos;hihial&apos;, &apos;loapjpjommmolll&apos;]</span><br><span class="line">&gt;&gt;&gt; str.split(&apos;o&apos;,2)</span><br><span class="line">[&apos;hihial&apos;, &apos;l&apos;, &apos;apjpjommmolll&apos;]</span><br><span class="line">&gt;&gt;&gt; str.split(&apos;o&apos;,3)</span><br><span class="line">[&apos;hihial&apos;, &apos;l&apos;, &apos;apjpj&apos;, &apos;mmmolll&apos;]</span><br></pre></td></tr></table></figure></p>
+<h3 id="join函数"><a href="#join函数" class="headerlink" title="join函数"></a>join函数</h3><p>join函数，字符串的连接，用于连接一个迭代器，返回一个字符串<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; it = [&apos;hel&apos;,&apos;lo&apos;]</span><br><span class="line">&gt;&gt;&gt; &quot;&quot;.join(it)</span><br><span class="line">&apos;hello&apos;</span><br><span class="line">&gt;&gt;&gt; it = [&apos;h&apos;,&apos;e&apos;,&apos;l&apos;,&apos;l&apos;,&apos;o&apos;]</span><br><span class="line">&gt;&gt;&gt; &quot;-&quot;.join(it)</span><br><span class="line">&apos;h-e-l-l-o&apos;</span><br></pre></td></tr></table></figure></p>
+<p>+也可以连接字符串，由于字符串是不可变的，所以在使用加号连接两个字符串的时候需要创建新的内存用来存储数据</p>
+<h2 id="字符串格式化"><a href="#字符串格式化" class="headerlink" title="字符串格式化"></a>字符串格式化</h2><p>Python中字符串格式化主要有两种方式<br>占位符，%s字符串，%d整数，%f浮点数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; &quot;hello %s&quot; % &quot;tonglele&quot;</span><br><span class="line">&apos;hello tonglele&apos;</span><br><span class="line">&gt;&gt;&gt; &quot;hello %s hello %d hello %f&quot; % (&quot;tonglele&quot;,18,7.7)</span><br><span class="line">&apos;hello tonglele hello 18 hello 7.700000&apos;</span><br></pre></td></tr></table></figure></p>
+<h2 id="字符串查找-find-函数"><a href="#字符串查找-find-函数" class="headerlink" title="字符串查找 find()函数"></a>字符串查找 find()函数</h2><p>find()函数，返回字符串在原字符串中第一次出现的位置，若没找到则返回-1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; str = &quot;hello tonglele&quot;</span><br><span class="line">&gt;&gt;&gt; str.find(&apos;o&apos;)</span><br><span class="line">4</span><br><span class="line">&gt;&gt;&gt; str.find(&apos;hell&apos;)</span><br><span class="line">0</span><br><span class="line">&gt;&gt;&gt; str.find(&apos;lele&apos;)</span><br><span class="line">10</span><br><span class="line">&gt;&gt;&gt; str.find(&apos;tongyijia&apos;)</span><br><span class="line">-1</span><br><span class="line">&gt;&gt;&gt; str.find(&apos;e&apos;,10,14) #还可以接受两个可选参数，start，end用于标示查找时的起始位置和结束位置</span><br><span class="line">11</span><br></pre></td></tr></table></figure></p>
+<h2 id="字符串替换"><a href="#字符串替换" class="headerlink" title="字符串替换"></a>字符串替换</h2><h3 id="replace函数"><a href="#replace函数" class="headerlink" title="replace函数"></a>replace函数</h3><p>replace函数，用于替换<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; str = &quot;hello tonglele&quot;</span><br><span class="line">&gt;&gt;&gt; str.replace(&quot;lele&quot;,&quot;yijia&quot;)</span><br><span class="line">&apos;hello tongyijia&apos;</span><br></pre></td></tr></table></figure></p>
+<h3 id="strip函数"><a href="#strip函数" class="headerlink" title="strip函数"></a>strip函数</h3><p>strip函数，用来替换字符串首尾的空白（空格、制表符\r、\n、\t）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; str = &quot;hello tonglele     &quot;</span><br><span class="line">&gt;&gt;&gt; str.strip()</span><br><span class="line">&apos;hello tonglele&apos;</span><br><span class="line">&gt;&gt;&gt; str = &quot;hello tonglele       &quot;</span><br><span class="line">&gt;&gt;&gt; str.strip()</span><br><span class="line">&apos;hello tonglele&apos;</span><br><span class="line">&gt;&gt;&gt; str = &quot;hello tonglele       &quot;</span><br><span class="line">&gt;&gt;&gt; str = &quot;hello tonglele\n&quot;</span><br><span class="line">&gt;&gt;&gt; str</span><br><span class="line">&apos;hello tonglele\n&apos;</span><br><span class="line">&gt;&gt;&gt; str.strip()</span><br><span class="line">&apos;hello tonglele&apos;</span><br></pre></td></tr></table></figure></p>
+<p>rstrip 移除右边的空白，lstrip移除左边的空白   </p>
+<p>感谢阅读，欢迎指正。</p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"> <i class="fa fa-tag"></i> Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/10/Python基础-函数-2/" rel="next" title="Python基础-函数[2] ">
+                <i class="fa fa-chevron-left"></i> Python基础-函数[2] 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/20/Python基础-面向对象基础/" rel="prev" title="Python基础-面向对象基础">
+                Python基础-面向对象基础 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/upload/im.jpg" alt="Tong yijia">
+            
+              <p class="site-author-name" itemprop="name">Tong yijia</p>
+              <p class="site-description motion-element" itemprop="description">abc~</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/tongyijia" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://me.csdn.net/tongyijia" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.jeyzhang.com/" title="xu" target="_blank">xu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wiki.archlinux.org/" title="arch" target="_blank">arch</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#标准IO设备的操作"><span class="nav-number">1.</span> <span class="nav-text">标准IO设备的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#print语句"><span class="nav-number">1.1.</span> <span class="nav-text">print语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#raw-input函数"><span class="nav-number">1.2.</span> <span class="nav-text">raw_input函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#open函数与file对象"><span class="nav-number">1.3.</span> <span class="nav-text">open函数与file对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#具体参数"><span class="nav-number">1.3.1.</span> <span class="nav-text">具体参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#file对象的一些操作"><span class="nav-number">1.3.2.</span> <span class="nav-text">file对象的一些操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#read"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">read()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#readline"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">readline()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#readlines"><span class="nav-number">1.3.2.3.</span> <span class="nav-text">readlines()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#write"><span class="nav-number">1.3.2.4.</span> <span class="nav-text">write()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#writelines"><span class="nav-number">1.3.2.5.</span> <span class="nav-text">writelines()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#truncate"><span class="nav-number">1.3.2.6.</span> <span class="nav-text">truncate()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flush"><span class="nav-number">1.3.2.7.</span> <span class="nav-text">flush()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#seek"><span class="nav-number">1.3.2.8.</span> <span class="nav-text">seek()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#close"><span class="nav-number">1.3.2.9.</span> <span class="nav-text">close()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#fileno"><span class="nav-number">1.3.2.10.</span> <span class="nav-text">fileno()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#isatty"><span class="nav-number">1.3.2.11.</span> <span class="nav-text">isatty()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#closed"><span class="nav-number">1.3.2.12.</span> <span class="nav-text">closed</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#next"><span class="nav-number">1.3.2.13.</span> <span class="nav-text">next()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#with语法"><span class="nav-number">1.3.3.</span> <span class="nav-text">with语法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文本处理"><span class="nav-number">2.</span> <span class="nav-text">文本处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串处理"><span class="nav-number">2.1.</span> <span class="nav-text">字符串处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#split函数"><span class="nav-number">2.1.1.</span> <span class="nav-text">split函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#join函数"><span class="nav-number">2.1.2.</span> <span class="nav-text">join函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串格式化"><span class="nav-number">2.2.</span> <span class="nav-text">字符串格式化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串查找-find-函数"><span class="nav-number">2.3.</span> <span class="nav-text">字符串查找 find()函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串替换"><span class="nav-number">2.4.</span> <span class="nav-text">字符串替换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#replace函数"><span class="nav-number">2.4.1.</span> <span class="nav-text">replace函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#strip函数"><span class="nav-number">2.4.2.</span> <span class="nav-text">strip函数</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tong yijia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

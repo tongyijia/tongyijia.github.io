@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="了解面向对象之前的一些知识编程范式是一种典型的编程风格，是一种方法学编程范式决定了程序员对程序执行的看法OOP中，程序是一系列对象之间的相互作用Python中支持多种编程范式：面向过程、面向对象，面向切面（装饰器部分）等  OOP思想面向对象的基本哲学：世界由具有各自运动规律和内部状态的对象组成，对象之间的相互作用和通讯构成了世界唯一性，世界上没有两片相同的叶子，同样的，也没有两个完全相同的对象分">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python基础-面向对象基础">
+<meta property="og:url" content="http://yoursite.com/2016/07/20/Python基础-面向对象基础/index.html">
+<meta property="og:site_name" content="lele&#39;s home">
+<meta property="og:description" content="了解面向对象之前的一些知识编程范式是一种典型的编程风格，是一种方法学编程范式决定了程序员对程序执行的看法OOP中，程序是一系列对象之间的相互作用Python中支持多种编程范式：面向过程、面向对象，面向切面（装饰器部分）等  OOP思想面向对象的基本哲学：世界由具有各自运动规律和内部状态的对象组成，对象之间的相互作用和通讯构成了世界唯一性，世界上没有两片相同的叶子，同样的，也没有两个完全相同的对象分">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-19T14:24:21.327Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python基础-面向对象基础">
+<meta name="twitter:description" content="了解面向对象之前的一些知识编程范式是一种典型的编程风格，是一种方法学编程范式决定了程序员对程序执行的看法OOP中，程序是一系列对象之间的相互作用Python中支持多种编程范式：面向过程、面向对象，面向切面（装饰器部分）等  OOP思想面向对象的基本哲学：世界由具有各自运动规律和内部状态的对象组成，对象之间的相互作用和通讯构成了世界唯一性，世界上没有两片相同的叶子，同样的，也没有两个完全相同的对象分">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/20/Python基础-面向对象基础/">
+
+
+
+
+
+  <title>Python基础-面向对象基础 | lele's home</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lele's home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-scategories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            scategories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/20/Python基础-面向对象基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tong yijia">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/upload/im.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lele's home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python基础-面向对象基础</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-20T22:16:45+08:00">
+                2016-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="了解面向对象之前的一些知识"><a href="#了解面向对象之前的一些知识" class="headerlink" title="了解面向对象之前的一些知识"></a>了解面向对象之前的一些知识</h1><h2 id="编程范式"><a href="#编程范式" class="headerlink" title="编程范式"></a>编程范式</h2><p>是一种典型的编程风格，是一种方法学<br>编程范式决定了程序员对程序执行的看法<br>OOP中，程序是一系列对象之间的相互作用<br>Python中支持多种编程范式：面向过程、面向对象，面向切面（装饰器部分）等 </p>
+<h1 id="OOP思想"><a href="#OOP思想" class="headerlink" title="OOP思想"></a>OOP思想</h1><p>面向对象的基本哲学：世界由具有各自运动规律和内部状态的对象组成，对象之间的相互作用和通讯构成了世界<br>唯一性，世界上没有两片相同的叶子，同样的，也没有两个完全相同的对象<br>分类性：分类是对现实世界的抽象<br>三大特性，继承，多态和封装 </p>
+<h1 id="类与实例"><a href="#类与实例" class="headerlink" title="类与实例"></a>类与实例</h1><p>类 是一类实例的抽象，抽象的属性和操作<br>实例 是类的具体化 </p>
+<h1 id="定义类"><a href="#定义类" class="headerlink" title="定义类"></a>定义类</h1><p>class Name:这种方式在python3和python2.3之前比较流行,但是在python2.4之后所有类都要继承自object 类。class Name(object): class Name(Parents):<br>一个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env Python</span><br><span class="line">#coding=utf-8</span><br><span class="line"></span><br><span class="line">class People(object):   #object是所有类的基类，它定义了一些基本的操作。继承了object的类称为新式类</span><br><span class="line"></span><br><span class="line">    def __init__(self,name,sex,age):  #__init__(self，...)，初始化方法，self，对象自身</span><br><span class="line">        self.name = name   #将传进来的值定义给对象自身的数据</span><br><span class="line">        self.sex = sex</span><br><span class="line">        self.age = age</span><br><span class="line"></span><br><span class="line">    def say(self,words):  #一个普通的方法</span><br><span class="line">        print &apos;saying %s .....&apos; % words</span><br><span class="line"></span><br><span class="line">    def walk(self):</span><br><span class="line">        print &quot;walking.....&quot;</span><br><span class="line"></span><br><span class="line">tom = People(&apos;tom&apos;,&apos;man&apos;,17)   #实例化一个对象，self参数会自动传入</span><br><span class="line"></span><br><span class="line">tom.say(&apos;hello&apos;)   #调用tom的say方法</span><br><span class="line">tom.walk()</span><br><span class="line">print tom.age   #打印tom的实例变量age</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">===============结果=============</span><br><span class="line">root@tonglele /code/Python/oop_base # python code1.py </span><br><span class="line">saying hello .....</span><br><span class="line">walking.....</span><br><span class="line">17</span><br></pre></td></tr></table></figure></p>
+<h1 id="类的封装性"><a href="#类的封装性" class="headerlink" title="类的封装性"></a>类的封装性</h1><h2 id="私有成员"><a href="#私有成员" class="headerlink" title="私有成员"></a>私有成员</h2><p>以双下划线开始，但不以双下划线结束<br>Python中没有真正的私有成员，我们可以通过一些方法调用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># coding=utf-8</span><br><span class="line"></span><br><span class="line">class People(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self,name,age):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.__age = age     #一个私有属性</span><br><span class="line"></span><br><span class="line">    def print_info(self):</span><br><span class="line">        print self.name</span><br><span class="line">        print self.__age</span><br><span class="line"></span><br><span class="line">    def __test(self):   #一个私有方法</span><br><span class="line">        print &apos;calling test.....&apos;</span><br><span class="line"></span><br><span class="line">tom = People(&apos;tom&apos;,60)</span><br><span class="line"></span><br><span class="line">print tom.name</span><br><span class="line">print tom.__age</span><br><span class="line"></span><br><span class="line">==========运行结果========</span><br><span class="line">root@tonglele /code/Python/oop_base # python code2.py</span><br><span class="line">tom</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;code2.py&quot;, line 20, in &lt;module&gt;</span><br><span class="line">      print tom.__age</span><br><span class="line">      AttributeError: &apos;People&apos; object has no attribute &apos;__age&apos;    #报错。</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#!/usr/bin/env python</span><br><span class="line"># coding=utf-8</span><br><span class="line"></span><br><span class="line">class People(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self,name,age):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.__age = age</span><br><span class="line"></span><br><span class="line">    def print_info(self):</span><br><span class="line">        print self.name</span><br><span class="line">        print self.__age</span><br><span class="line"></span><br><span class="line">    def __test(self):</span><br><span class="line">        print &apos;calling test.....&apos;</span><br><span class="line"></span><br><span class="line">tom = People(&apos;tom&apos;,60)</span><br><span class="line"></span><br><span class="line">#print tom.name</span><br><span class="line">#print tom.__age</span><br><span class="line"></span><br><span class="line">tom.print_info()</span><br><span class="line">tom.__test()</span><br><span class="line">===========运行结果=============</span><br><span class="line">1 root@tonglele /code/Python/oop_base # python code2.py                                                      :(</span><br><span class="line"> tom</span><br><span class="line"> 60</span><br><span class="line"> Traceback (most recent call last):</span><br><span class="line">   File &quot;code2.py&quot;, line 23, in &lt;module&gt;</span><br><span class="line">       tom.__test()</span><br><span class="line">       AttributeError: &apos;People&apos; object has no attribute &apos;__test&apos;</span><br></pre></td></tr></table></figure>
+<h2 id="类变量"><a href="#类变量" class="headerlink" title="类变量"></a>类变量</h2><p>定义在实例方法之外的变量<br>所有实例共享类变量，但某一个实例对类变量的修改不会影响其他的实例和类本身<br>类变量可以直接访问<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">#!/usr/bin/env python</span><br><span class="line">#coding=utf-8</span><br><span class="line"></span><br><span class="line">class People(object):</span><br><span class="line"></span><br><span class="line">    count = 0</span><br><span class="line">    def __init__(self,name,sex,age):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.sex = sex</span><br><span class="line">        self.age = age</span><br><span class="line"></span><br><span class="line">    def print_info(self):</span><br><span class="line">        print self.name</span><br><span class="line">        print self.sex</span><br><span class="line">        print self.age</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">tom = People(&apos;tom&apos;,&apos;man&apos;,19)</span><br><span class="line">marry = People(&apos;marry&apos;,&apos;women&apos;,18)</span><br><span class="line"></span><br><span class="line">print People.count</span><br><span class="line">print tom.count</span><br><span class="line">print marry.count</span><br><span class="line">People.count = 100</span><br><span class="line">tom.count = 99</span><br><span class="line">marry.count = 98</span><br><span class="line">print &apos;============&apos;</span><br><span class="line">print People.count</span><br><span class="line">print tom.count</span><br><span class="line">print marry.count</span><br><span class="line"></span><br><span class="line">==========结果===========</span><br><span class="line">root@tonglele /code/Python/oop_base # python code3.py</span><br><span class="line">0</span><br><span class="line">0</span><br><span class="line">0</span><br><span class="line">============</span><br><span class="line">100</span><br><span class="line">99</span><br><span class="line">98</span><br></pre></td></tr></table></figure></p>
+<h2 id="类方法"><a href="#类方法" class="headerlink" title="类方法"></a>类方法</h2><p>使用@classmethod装饰器装饰，第一个参数代表类本身，<br>类方法可以直接调用，类方法里可以定义类变量。在类方法里不能调用与实例相关的东西，即不能使用self<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line">#coding=utf-8</span><br><span class="line"></span><br><span class="line">class People(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self,name,sex,age):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.sex = sex</span><br><span class="line">        self.age = age</span><br><span class="line"></span><br><span class="line">    def print_info(self):</span><br><span class="line">        print self.name</span><br><span class="line">        print self.sex</span><br><span class="line">        print self.age</span><br><span class="line"></span><br><span class="line">    @classmethod</span><br><span class="line">    def test(cls):  #cls代表类本身</span><br><span class="line">        cls.count = 10  #定义一个类变量</span><br><span class="line">        print &apos;calling test.....&apos;</span><br><span class="line"></span><br><span class="line">People.test()    #类方法可以直接调用</span><br><span class="line">print People.count   #打印类变量</span><br><span class="line"></span><br><span class="line">tom = People(&apos;tom&apos;,&apos;man&apos;,19)</span><br><span class="line">tom.test()  #用实例调用类方法</span><br><span class="line"></span><br><span class="line">==========运行结果========</span><br><span class="line">root@tonglele /code/Python/oop_base # python code3.py</span><br><span class="line">calling test.....</span><br><span class="line">10</span><br><span class="line">calling test.....</span><br></pre></td></tr></table></figure></p>
+<h2 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h2><p>以@staticmethod装饰器装饰，可以直接调用，没有像类方法那样限定第一个参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#!/usr/bin/env python</span><br><span class="line">#coding=utf-8</span><br><span class="line"></span><br><span class="line">class People(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self,name,sex,age):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.sex = sex</span><br><span class="line">        self.age = age</span><br><span class="line"></span><br><span class="line">    def print_info(self):</span><br><span class="line">        print self.name</span><br><span class="line">        print self.sex</span><br><span class="line">        print self.age</span><br><span class="line"></span><br><span class="line">    @staticmethod</span><br><span class="line">    def test():</span><br><span class="line">        print &apos;calling static--test.....&apos;</span><br><span class="line"></span><br><span class="line">People.test()  #直接调用静态方法</span><br><span class="line"></span><br><span class="line">tom = People(&apos;tom&apos;,&apos;man&apos;,19)</span><br><span class="line">tom.test()  #通过实例调用静态方法</span><br><span class="line"></span><br><span class="line">========结果==========</span><br><span class="line">root@tonglele /code/Python/oop_base # python code3.py</span><br><span class="line">calling static--test.....</span><br><span class="line">calling static--test.....</span><br></pre></td></tr></table></figure></p>
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><p>@property装饰器可以使被装饰的方法称为一个属性，类似与其他语言中的get方法<br>属性的setter方法<br>其他的具体解释见代码片<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">import time</span><br><span class="line">import datetime</span><br><span class="line"></span><br><span class="line">class Dog(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self,n):</span><br><span class="line">        self.n = n</span><br><span class="line">        self.__a = None</span><br><span class="line"></span><br><span class="line">    def test(self):</span><br><span class="line">        print &apos;calling test.....&apos;</span><br><span class="line"></span><br><span class="line">    @property     #open_f方法被@property装饰器装饰了之后成为一个属性</span><br><span class="line">    def open_f(self):</span><br><span class="line">        return self.__a == None</span><br><span class="line"></span><br><span class="line">    @open_f.setter     #当open_f方法被装饰之后它自己也变成了一个另一个装饰器，用来装饰这个open_f方法之后此时的这个open_f就相当于其他语言的set方法</span><br><span class="line">    def open_f(self,value):</span><br><span class="line">        self.__a = value</span><br><span class="line"></span><br><span class="line">class Timef(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.__time = datetime.datetime.now()</span><br><span class="line"></span><br><span class="line">    @property</span><br><span class="line">    def time(self):</span><br><span class="line">        return self.__time.strftime(&apos;%Y-%m-%d %H:%M:%S&apos;)</span><br><span class="line"></span><br><span class="line">    @time.setter</span><br><span class="line">    def time(self,value):</span><br><span class="line">        self.__time = datetime.datetime.strptime(value,&apos;%Y-%m-%d %H:%M:%S&apos;)</span><br><span class="line"></span><br><span class="line">t = Dog(1212)</span><br><span class="line">print t.open_f</span><br><span class="line">t.open_f = 7878    #给该属性赋值，相当于调用了set方法</span><br><span class="line">print t.open_f     #调用该属性，相当于调用了get方法</span><br><span class="line"></span><br><span class="line">tt = Timef()</span><br><span class="line">print tt.time</span><br><span class="line">tt.time = &apos;2016-03-20 21:34:21&apos;</span><br><span class="line">print tt.time</span><br><span class="line">#time例子：</span><br><span class="line">#默认以字符串的形式返回当前的时间,也可以以字符串的形式设置时间,整体来说是封装了私有属性__time。</span><br><span class="line">==========运行结果=============</span><br><span class="line">root@tonglele /code/Python/oop_base # python code4.py</span><br><span class="line">True</span><br><span class="line">False</span><br><span class="line">2016-06-29 22:10:20</span><br><span class="line">2016-03-20 21:34:21</span><br></pre></td></tr></table></figure></p>
+<p>另一个常用的运用：<br>在工作中，有些需求需要对IP地址进行处理，因为在计算机中IP都是以整数的形式做运算的，<br>但是展现出来的时候都是以字符串形式（点分十进制），便于人类查看，就可以用上述方法实现对IP操作的封装</p>
+<h1 id="魔术方法"><a href="#魔术方法" class="headerlink" title="魔术方法"></a>魔术方法</h1><p>魔术方法总是以双下划线开头，并以双下划线结尾的，这些方法都是由特殊用途的<br>下面简单介绍一些：<br><strong>init</strong><br><strong>init</strong>初始化方法，对实例对象的一些数据进行初始化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">#!/usr/bin/env python</span><br><span class="line"># coding=utf-8</span><br><span class="line"></span><br><span class="line">class People(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self,name,age):   #初始化函数</span><br><span class="line">        self.name = name    #将类=实例对象的一些数据初始化。。</span><br><span class="line">        self.age = age</span><br><span class="line">        print &quot;init.....&quot;</span><br><span class="line"></span><br><span class="line">tom = People(&apos;tom&apos;,19)  #实例化一个对象</span><br><span class="line"></span><br><span class="line">==========运行结果=====</span><br><span class="line">root@tonglele /code/Python/oop_base # python code5.py </span><br><span class="line">init.....</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">__new__,__del__</span><br><span class="line">__new__方法，相当于C++中的构造函数,下一篇具体介绍</span><br><span class="line">__del__相当于C++中的析构函数，当对象被回收时做一些清理工作</span><br><span class="line">__eq__</span><br><span class="line">__eq__方法相当于重载了一个==等于运算符 </span><br><span class="line">__gt__</span><br><span class="line">__gt__方法相当于重载了一个&gt;大于号运算符</span><br><span class="line">__add__</span><br><span class="line">__add__方法相当与重载了一个+号</span><br><span class="line">__str__</span><br><span class="line">__str__方法，定义了我们使用str方法或直接print一个对象的时候的一个行为</span><br><span class="line">__repr__类似与__str__,不过__repr__返回的是机器可读的字符串，__str__返回的是人类可读的</span><br><span class="line">__hash__</span><br><span class="line">__enter__和__exit__</span><br><span class="line">只要一个类实现了这个两个方法就可以使用with 语法</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">#!/usr/bin/env python</span><br><span class="line">#coding=utf-8</span><br><span class="line"></span><br><span class="line">class W(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.fileName = open(&apos;/mnt/file&apos;,&apos;w&apos;)</span><br><span class="line"></span><br><span class="line">    def __enter__(self):</span><br><span class="line">        return self.fileName</span><br><span class="line"></span><br><span class="line">    def __exit__(self,*excinfo): #该方法接受一个可变参数，出现异常的时候将异常</span><br><span class="line">        self.fileName.close()    #传值给该参数，在该函数里根据异常可以做相应的处理</span><br><span class="line"></span><br><span class="line">with W() as f:</span><br><span class="line">    f.write(&quot;hello world&quot;)</span><br></pre></td></tr></table></figure>
+<p>以上魔术方法的一些应用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line">#coding=utf-8</span><br><span class="line"></span><br><span class="line">class Man(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self,name,sex,age):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.sex = sex</span><br><span class="line">        self.age = age</span><br><span class="line"></span><br><span class="line">    def __eq__(self,other):</span><br><span class="line">        return self.age == other.age and self.sex == other.sex and self.age == other.age</span><br><span class="line"></span><br><span class="line">    def __gt__(self,other):</span><br><span class="line">        return self.age &gt; other.age</span><br><span class="line"></span><br><span class="line">    def __ne__(self,other):</span><br><span class="line">        return self.age != other.age or self.name != other.name or self.sex != other.sex</span><br><span class="line"></span><br><span class="line">    def __add__(self,other):</span><br><span class="line">        return Man(self.name+other.name,self.sex+other.sex,self.age+other.age)</span><br><span class="line"></span><br><span class="line">    def __str__(self):</span><br><span class="line">        return &apos;name: %s sex: %s age: %s \n&apos; % (self.name,self.sex,self.age)</span><br><span class="line"></span><br><span class="line">    def __del__(self):</span><br><span class="line">        print &apos;del......&apos; #做一些清理工作</span><br><span class="line"></span><br><span class="line">man1 = Man(&apos;tom&apos;,&apos;man&apos;,19)</span><br><span class="line">man2 = Man(&apos;harry&apos;,&apos;man&apos;,17)</span><br><span class="line"></span><br><span class="line">print man1 == man2</span><br><span class="line"></span><br><span class="line">print man1 &gt; man2</span><br><span class="line"></span><br><span class="line">print man1 != man2</span><br><span class="line"></span><br><span class="line">print man1</span><br><span class="line"></span><br><span class="line">print man1 + man2</span><br><span class="line"></span><br><span class="line">===========结果==========</span><br><span class="line">False</span><br><span class="line">True</span><br><span class="line">True</span><br><span class="line">name: tom sex: man age: 19 </span><br><span class="line"></span><br><span class="line">name: tomharry sex: manman age: 36 </span><br><span class="line"> del......</span><br><span class="line"></span><br><span class="line"> del......</span><br><span class="line"> del......</span><br></pre></td></tr></table></figure></p>
+<h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p>子类与父类：子类是对父类的扩展，在父类的属性和方法的基础上做一些扩展 </p>
+<h2 id="一个继承的例子"><a href="#一个继承的例子" class="headerlink" title="一个继承的例子"></a>一个继承的例子</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">class Phone(object):    #父类</span><br><span class="line"></span><br><span class="line">    def __init__(self,size,color,mem):  #父类的初始化方法，父类拥有尺寸，颜色，内存三个数据</span><br><span class="line">        self.size = size</span><br><span class="line">        self.color = color</span><br><span class="line">        self.mem = mem</span><br><span class="line"></span><br><span class="line">    def call(self):    #父类的call方法</span><br><span class="line">        print &apos;calling.....&apos;</span><br><span class="line"></span><br><span class="line">    def msg(self):   #父类的msg方法</span><br><span class="line">        print &apos;sending msg......&apos;</span><br><span class="line"></span><br><span class="line">class Phones(Phone):    #Phones类，继承了Phone类</span><br><span class="line"></span><br><span class="line">    def __init__(self,size,color,mem,pix):   #重写了初始化方法，加入了pix数据</span><br><span class="line">        self.pix = pix   #将新加入的数据写入</span><br><span class="line">        super(Phones,self).__init__(size,color,mem)  #再调用父类的初始化方法</span><br><span class="line"></span><br><span class="line">    def install_app(self,app):   #在父类的方法基础上，增加了一个install_app方法</span><br><span class="line">        print &apos;installing %s ......&apos; % app</span><br><span class="line"></span><br><span class="line">class Huawei(Phone):</span><br><span class="line"></span><br><span class="line">    def weixin(self,msg):</span><br><span class="line">        if msg.find(&apos;jiangfan&apos;) == -1:</span><br><span class="line">            print &apos;can\&apos;t send....&apos;</span><br><span class="line">        else:</span><br><span class="line">            print &apos;sending.....&apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p = Phone(&apos;4,0&apos;,&apos;black&apos;,&apos;4M&apos;)</span><br><span class="line"></span><br><span class="line">p.call()</span><br><span class="line"></span><br><span class="line">iphone = Phones(&apos;4.7&apos;,&apos;white&apos;,&apos;4G&apos;,&apos;1080*699&apos;)</span><br><span class="line">iphone.install_app(&apos;dangdang&apos;)</span><br><span class="line"></span><br><span class="line">hua = Huawei(&apos;3.5&apos;,&apos;black&apos;,&apos;2G&apos;)</span><br><span class="line">hua.weixin(&apos;jiangfan&apos;)</span><br><span class="line">==============结果===============</span><br><span class="line">calling.....</span><br><span class="line">installing dangdang ......</span><br><span class="line">sending.....</span><br></pre></td></tr></table></figure>
+<h2 id="多继承"><a href="#多继承" class="headerlink" title="多继承"></a>多继承</h2><p>我们大多数情况下只会使用单继承，但python也提供多继承class ClassName(c1,c2…)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">class A(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">    def m(self):</span><br><span class="line">        print &apos;A  -- m....&apos;</span><br><span class="line"></span><br><span class="line">class B(object):</span><br><span class="line"></span><br><span class="line">    def n(self):</span><br><span class="line">        print &apos;B -- n....&apos;</span><br><span class="line"></span><br><span class="line">class C(A,B):</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">c = C()</span><br><span class="line"></span><br><span class="line">c.m()</span><br><span class="line">c.n()</span><br><span class="line">===========运行结果========</span><br><span class="line">A  -- m....</span><br><span class="line">B -- n....</span><br></pre></td></tr></table></figure></p>
+<p>但是多继承中也会出现一些问题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">class A(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">    def m(self):</span><br><span class="line">        print &apos;A  -- m....&apos;</span><br><span class="line"></span><br><span class="line">class B(object):</span><br><span class="line"></span><br><span class="line">    def m(self):</span><br><span class="line">        print &apos;B -- m....&apos;</span><br><span class="line"></span><br><span class="line">class C(A,B):</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">c = C()</span><br><span class="line"></span><br><span class="line">c.m()</span><br><span class="line">=========结果===========</span><br><span class="line">A  -- m....   #当多个父类中拥有同一个名称的方法时，子类采用继承顺序靠前的那个</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"></span><br><span class="line">class A(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">    def m(self):</span><br><span class="line">        print &apos;A  -- m....&apos;</span><br><span class="line"></span><br><span class="line">class B(A):   #B继承于A</span><br><span class="line"></span><br><span class="line">    def m(self):</span><br><span class="line">        print &apos;B -- m....&apos;</span><br><span class="line"></span><br><span class="line">class C(A,B):</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">c = C()</span><br><span class="line"></span><br><span class="line">c.m()</span><br><span class="line">=========结果===========</span><br><span class="line">Traceback (most recent call last):    #继承关系发生混淆</span><br><span class="line">  File &quot;test5.py&quot;, line 16, in &lt;module&gt;</span><br><span class="line">      class C(A,B):</span><br><span class="line">TypeError: Error when calling the metaclass bases</span><br><span class="line">        Cannot create a consistent method resolution</span><br><span class="line">order (MRO) for bases A, B</span><br></pre></td></tr></table></figure>
+<p>MRO：一种算法,在python中存在多继承,当继承列表中有同名方法的时候,python就是根据这个MRO来选择子类该执行哪个方法的。 </p>
+<p>感谢阅读，欢迎指正。</p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"> <i class="fa fa-tag"></i> Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/18/Python基础-IO与文本处理/" rel="next" title="Python基础-IO与文本处理 ">
+                <i class="fa fa-chevron-left"></i> Python基础-IO与文本处理 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/25/树莓派（一）安装系统与连接/" rel="prev" title="树莓派（一）安装系统与连接 ">
+                树莓派（一）安装系统与连接  <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/upload/im.jpg" alt="Tong yijia">
+            
+              <p class="site-author-name" itemprop="name">Tong yijia</p>
+              <p class="site-description motion-element" itemprop="description">abc~</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/tongyijia" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://me.csdn.net/tongyijia" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.jeyzhang.com/" title="xu" target="_blank">xu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wiki.archlinux.org/" title="arch" target="_blank">arch</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#了解面向对象之前的一些知识"><span class="nav-number">1.</span> <span class="nav-text">了解面向对象之前的一些知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编程范式"><span class="nav-number">1.1.</span> <span class="nav-text">编程范式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OOP思想"><span class="nav-number">2.</span> <span class="nav-text">OOP思想</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类与实例"><span class="nav-number">3.</span> <span class="nav-text">类与实例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定义类"><span class="nav-number">4.</span> <span class="nav-text">定义类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类的封装性"><span class="nav-number">5.</span> <span class="nav-text">类的封装性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#私有成员"><span class="nav-number">5.1.</span> <span class="nav-text">私有成员</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类变量"><span class="nav-number">5.2.</span> <span class="nav-text">类变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类方法"><span class="nav-number">5.3.</span> <span class="nav-text">类方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态方法"><span class="nav-number">5.4.</span> <span class="nav-text">静态方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性"><span class="nav-number">5.5.</span> <span class="nav-text">属性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#魔术方法"><span class="nav-number">6.</span> <span class="nav-text">魔术方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#继承"><span class="nav-number">7.</span> <span class="nav-text">继承</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一个继承的例子"><span class="nav-number">7.1.</span> <span class="nav-text">一个继承的例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多继承"><span class="nav-number">7.2.</span> <span class="nav-text">多继承</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tong yijia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

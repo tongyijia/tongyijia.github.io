@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="函数嵌套在一个函数定义中再定义一个函数 def outfunc(): def infunc(): expression返回一个函数：格式：1234def outfunc():    def infunc():        expression    return infunc eg:12345678910111213141516#!/usr/bin/env  python# coding=utf">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python基础-函数[2] ">
+<meta property="og:url" content="http://yoursite.com/2016/07/10/Python基础-函数-2/index.html">
+<meta property="og:site_name" content="lele&#39;s home">
+<meta property="og:description" content="函数嵌套在一个函数定义中再定义一个函数 def outfunc(): def infunc(): expression返回一个函数：格式：1234def outfunc():    def infunc():        expression    return infunc eg:12345678910111213141516#!/usr/bin/env  python# coding=utf">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-19T14:08:39.167Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python基础-函数[2] ">
+<meta name="twitter:description" content="函数嵌套在一个函数定义中再定义一个函数 def outfunc(): def infunc(): expression返回一个函数：格式：1234def outfunc():    def infunc():        expression    return infunc eg:12345678910111213141516#!/usr/bin/env  python# coding=utf">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/10/Python基础-函数-2/">
+
+
+
+
+
+  <title>Python基础-函数[2]  | lele's home</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lele's home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-scategories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            scategories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/10/Python基础-函数-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tong yijia">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/upload/im.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lele's home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python基础-函数[2] </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-10T21:59:30+08:00">
+                2016-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="函数嵌套"><a href="#函数嵌套" class="headerlink" title="函数嵌套"></a>函数嵌套</h1><p>在一个函数定义中再定义一个函数 def outfunc(): def infunc(): expression<br>返回一个函数：<br>格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def outfunc():</span><br><span class="line">    def infunc():</span><br><span class="line">        expression</span><br><span class="line">    return infunc</span><br></pre></td></tr></table></figure></p>
+<p>eg:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env  python</span><br><span class="line"># coding=utf-8</span><br><span class="line">def outfunc():</span><br><span class="line">    print &apos;this is calling outfunc.....&apos;</span><br><span class="line">    def infunc():</span><br><span class="line">        print &apos;this is calling infunc....&apos;</span><br><span class="line">    return infunc</span><br><span class="line"></span><br><span class="line">f = outfunc()    #这里返回infunc函数</span><br><span class="line"></span><br><span class="line">f()</span><br><span class="line"></span><br><span class="line">=========结果==========</span><br><span class="line">root@tonglele /code/Python/function/test # python code1.py</span><br><span class="line">this is calling outfunc.....</span><br><span class="line">this is calling infunc....</span><br></pre></td></tr></table></figure></p>
+<p>此时我们举一个例子：例如，我们现在想测试一个函数的运行时间，但又不破坏这个函数，不给这个函数增加代码，我们该怎样做？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env  python</span><br><span class="line"># coding=utf-8</span><br><span class="line"></span><br><span class="line">import time</span><br><span class="line">import datetime</span><br><span class="line"></span><br><span class="line">def func(arg):</span><br><span class="line">    time.sleep(arg)</span><br><span class="line"></span><br><span class="line">def timeIt(func):</span><br><span class="line"></span><br><span class="line">    def warp(arg):</span><br><span class="line">        start = datetime.datetime.now()</span><br><span class="line">        func(arg)</span><br><span class="line">        end = datetime.datetime.now()</span><br><span class="line">        cost = end - start</span><br><span class="line">        print &quot;execute %s spend %s&quot; % (func.__name__,cost.total_seconds())</span><br><span class="line"></span><br><span class="line">    return warp</span><br><span class="line"></span><br><span class="line">new_func = timeIt(func)    #此时timeIt返回一个新的函数warp</span><br><span class="line"></span><br><span class="line">new_func(3)    #调用新的函数，并传值进去</span><br><span class="line"></span><br><span class="line">=========运行结果===========</span><br><span class="line">root@tonglele /code/Python/function/test # python code2.py</span><br><span class="line">execute func spend 3.003061</span><br></pre></td></tr></table></figure></p>
+<p>这样我们便使用了一种非入侵的方式包装了这个函数，并且增加了我们需要的功能，这就是Python中的装饰器。</p>
+<h1 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#!/usr/bin/env  python</span><br><span class="line"># coding=utf-8</span><br><span class="line"></span><br><span class="line">import time</span><br><span class="line">import datetime</span><br><span class="line"></span><br><span class="line">def timeIt(func):</span><br><span class="line"></span><br><span class="line">    def warp(arg):</span><br><span class="line">        start = datetime.datetime.now()</span><br><span class="line">        func(arg)</span><br><span class="line">        end = datetime.datetime.now()</span><br><span class="line">        cost = end - start</span><br><span class="line">        print &quot;execute %s spend %s&quot; % (func.__name__,cost.total_seconds())</span><br><span class="line"></span><br><span class="line">    return warp</span><br><span class="line"></span><br><span class="line">@timeIt   #此时，func函数被timeIt装饰器包装</span><br><span class="line">def func(arg):</span><br><span class="line">    print func.__name__</span><br><span class="line">    time.sleep(arg)</span><br><span class="line"></span><br><span class="line">func(3)</span><br><span class="line">============运行结果=========</span><br><span class="line">root@tonglele /code/Python/function/test # python code2.py</span><br><span class="line">warp        #此时func.__name__返回的名字不再是‘func’了，而是被装饰器改变成了warp。如果想要保留原来的__name__,__doc__等元信息，需要做如下修改。</span><br><span class="line">execute func spend 3.003148</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env  python</span><br><span class="line"># coding=utf-8</span><br><span class="line"></span><br><span class="line">import time</span><br><span class="line">import datetime</span><br><span class="line">import functools</span><br><span class="line"></span><br><span class="line">def timeIt(func):</span><br><span class="line"></span><br><span class="line">    @functools.wraps(func)    #增加这一行，将原函数作为值传进去，表示将原函数的__name__,__moudle__,__doc__等信息更新到装饰器里</span><br><span class="line">    def warp(arg):</span><br><span class="line">        start = datetime.datetime.now()</span><br><span class="line">        func(arg)</span><br><span class="line">        end = datetime.datetime.now()</span><br><span class="line">        cost = end - start</span><br><span class="line">        print &quot;execute %s spend %s&quot; % (func.__name__,cost.total_seconds())</span><br><span class="line"></span><br><span class="line">    return warp</span><br><span class="line"></span><br><span class="line">@timeIt</span><br><span class="line">def func(arg):</span><br><span class="line">    print func.__name__</span><br><span class="line">    time.sleep(arg)</span><br><span class="line"></span><br><span class="line">func(3)</span><br></pre></td></tr></table></figure>
+<h1 id="lambda匿名函数"><a href="#lambda匿名函数" class="headerlink" title="lambda匿名函数"></a>lambda匿名函数</h1><p>Python使用lambda关键字创造匿名函数。匿名，即不再用def语句这样的标准形式定义一个函数。<br>这种语句的目的是由于性能原因，在调用时绕过函数的栈分配<br>语法为：lambda [arg1[,arg2,…argN]]:expression其中，参数是可选的，如果使用参数的话，参数通常也会在表达式中出现</p>
+<h2 id="lambda语句的使用方法（无参数）"><a href="#lambda语句的使用方法（无参数）" class="headerlink" title="lambda语句的使用方法（无参数）"></a>lambda语句的使用方法（无参数）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; lambda:1</span><br><span class="line">&lt;function &lt;lambda&gt; at 0x7f02d5f3f398&gt;</span><br><span class="line">&gt;&gt;&gt; f = lambda:1    #lambda会返回一个函数，将该函数赋值给变量f</span><br><span class="line">&gt;&gt;&gt; f()</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+<h2 id="lambda语句的使用方法（有参数）"><a href="#lambda语句的使用方法（有参数）" class="headerlink" title="lambda语句的使用方法（有参数）"></a>lambda语句的使用方法（有参数）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = lambda x,y:x+y</span><br><span class="line">&gt;&gt;&gt; f(2,3)</span><br><span class="line">5</span><br><span class="line">&gt;&gt;&gt; f = lambda x,y = 10:x+y     #带默认值参数</span><br><span class="line">&gt;&gt;&gt; f(2)</span><br><span class="line">12</span><br><span class="line">&gt;&gt;&gt; f(19,20)</span><br><span class="line">39</span><br><span class="line">&gt;&gt;&gt; f = lambda *x:map(lambda x:x + 10,x)  #可变位置参数</span><br><span class="line">&gt;&gt;&gt; f(1,2,3,4)</span><br><span class="line">[11, 12, 13, 14]</span><br><span class="line">&gt;&gt;&gt; f(*[2,3,4,5,6])</span><br><span class="line">[12, 13, 14, 15, 16]</span><br></pre></td></tr></table></figure>
+<h2 id="一个计算器的例子"><a href="#一个计算器的例子" class="headerlink" title="一个计算器的例子"></a>一个计算器的例子</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">#!/usr/bin/env python</span><br><span class="line"># coding=utf-8</span><br><span class="line"></span><br><span class="line">func = &#123;</span><br><span class="line">    &quot;add&quot;:lambda x,y : x + y,</span><br><span class="line">    &quot;sub&quot;:lambda x,y : x - y,</span><br><span class="line">    &quot;mul&quot;:lambda x,y : x * y,</span><br><span class="line">    &quot;div&quot;:lambda x,y : x / y</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">print func[&quot;add&quot;](3,4)</span><br><span class="line">print func[&quot;sub&quot;](3,4)</span><br><span class="line">print func[&quot;mul&quot;](3,4)</span><br><span class="line">print func[&quot;div&quot;](3,4)</span><br><span class="line">=============运行结果======</span><br><span class="line">root@tonglele /code/Python/function/test # python code3.py</span><br><span class="line">7</span><br><span class="line">-1</span><br><span class="line">12</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+<h1 id="generator生成器"><a href="#generator生成器" class="headerlink" title="generator生成器"></a>generator生成器</h1><p>与列表解析语法类似，只不过把列表解析的[]换成了()<br>生成器表达式能做的事，列表解析基本都能处理，只不过在需要处理的序列比较大时，列表解析比较费内存 </p>
+<h2 id="简单的生成器表达示例"><a href="#简单的生成器表达示例" class="headerlink" title="简单的生成器表达示例"></a>简单的生成器表达示例</h2><p>1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; gen = (x ** 2 for x in range(5))</span><br><span class="line">&gt;&gt;&gt; gen</span><br><span class="line">&lt;generator object &lt;genexpr&gt; at 0x7fc2e26b3690&gt;</span><br><span class="line">&gt;&gt;&gt; </span><br><span class="line">&gt;&gt;&gt; gen.next()</span><br><span class="line">0</span><br><span class="line">&gt;&gt;&gt; gen.next()</span><br><span class="line">1</span><br><span class="line">&gt;&gt;&gt; gen.next()</span><br><span class="line">4</span><br><span class="line">&gt;&gt;&gt; gen.next()</span><br><span class="line">9</span><br><span class="line">&gt;&gt;&gt; gen.next()</span><br><span class="line">16</span><br><span class="line">&gt;&gt;&gt; gen.next()</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">  StopIteration</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>生成器表达式并不能实现较为复杂的功能，所以我们一般都使用生成器函数 </p>
+<h2 id="生成器函数"><a href="#生成器函数" class="headerlink" title="生成器函数"></a>生成器函数</h2><p>在函数中如果出现了yield关键字，那么该函数就不再是普通函数，而是生成器函数<br>生成器函数可以生成一个无限的序列，列表解析是无法这么做的<br>yield的作用就是把一个函数变成一个generator，带有yield的函数不再是一个普通函数，Python解释器会将其视为一个<br>generator。<br>eg1:简单使用生成器函数 ：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># coding=utf-8</span><br><span class="line"></span><br><span class="line">def odd():</span><br><span class="line">    n = 1</span><br><span class="line">    while True:</span><br><span class="line">        yield n</span><br><span class="line">        n += 2</span><br><span class="line"></span><br><span class="line">od = odd()</span><br><span class="line"></span><br><span class="line">count = 0</span><br><span class="line"></span><br><span class="line">for i in od:</span><br><span class="line">    if count &gt; 5:</span><br><span class="line">        break</span><br><span class="line">    print i</span><br><span class="line">    count += 1</span><br><span class="line"></span><br><span class="line">=========运算结果=======</span><br><span class="line">root@tonglele /code/Python/function/test # python code4.py </span><br><span class="line">1</span><br><span class="line">3</span><br><span class="line">5</span><br><span class="line">7</span><br><span class="line">9</span><br><span class="line">11</span><br></pre></td></tr></table></figure></p>
+<p>在for 循环执行的时候,每次都会执行odd 函数内的代码。<br>执行到yield n 时,将n 的值返回出去,此时函数内的代码不再往下执行, 挂起状态,但会保存函内变量的相关信息<br>下次迭代的时,从yield n 的下一条语句,n += 2 开始执行,<br>这个时候n 的值是之前保留的值,函数体内的while 循环继续执行,当再次执行到yield n 的时候,将n 返回出去,此时的n 是已经计算过n+=2 了<br>看起来就好像一个函数在正常执行的过程中被 yield 中断了数次,每次中断都会通过 yield 返回当前的迭代值。</p>
+<h2 id="yeild与return"><a href="#yeild与return" class="headerlink" title="yeild与return"></a>yeild与return</h2><p>在一个生成器中，如果没有return，则默认执行到函数结束时返回stopiteration；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def gen():    #定义一个生成器</span><br><span class="line">...     yield 1</span><br><span class="line">... </span><br><span class="line">&gt;&gt;&gt; g = gen()</span><br><span class="line">&gt;&gt;&gt; next(g)   #第一次使用next（g）时，会在执行完yield语句后挂起，此时程序并没有执行结束</span><br><span class="line">1</span><br><span class="line">&gt;&gt;&gt; next(g)   #此时，程序从yield语句的下一条语句开始执行，发现已经到了结尾，所以抛出StopIteration异常。</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">StopIteration</span><br></pre></td></tr></table></figure></p>
+<p>如果在执行的过程中遇到了return，则直接抛出StopIteration终止迭代<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def gen():</span><br><span class="line">...     count = 0</span><br><span class="line">...     while count &lt; 3:</span><br><span class="line">...             yield count</span><br><span class="line">...             count += 1</span><br><span class="line">...             return</span><br><span class="line">... </span><br><span class="line">&gt;&gt;&gt; g = gen()</span><br><span class="line">&gt;&gt;&gt; next(g)        #第一次执行next时，程序停留在执行完yield count之后的位置</span><br><span class="line">0</span><br><span class="line">&gt;&gt;&gt; next(g)    #当这次执行时，先执行count += 1，再向下执行时，遇到了return，所以抛出StopIteration 异常，退出</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">StopIteration</span><br><span class="line">&gt;&gt;&gt; def gen():</span><br><span class="line">...     count = 0</span><br><span class="line">...     while count &lt; 3:</span><br><span class="line">...             yield count</span><br><span class="line">...             count += 1</span><br><span class="line">... </span><br><span class="line">&gt;&gt;&gt; g = gen()</span><br><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">0</span><br><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">1</span><br><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">2</span><br><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">StopIteration</span><br></pre></td></tr></table></figure></p>
+<h2 id="close"><a href="#close" class="headerlink" title="close()"></a>close()</h2><p>手动关闭生成器函数，后面的调用会直接返回StopIteration 异常。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> &gt;&gt;&gt; def gen():</span><br><span class="line">...     count = 0</span><br><span class="line">...     while count &lt; 3:</span><br><span class="line">...             yield count</span><br><span class="line">...             count += 1</span><br><span class="line">... </span><br><span class="line">&gt;&gt;&gt; g = gen()</span><br><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">0</span><br><span class="line">&gt;&gt;&gt; g.close()</span><br><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">StopIteration</span><br></pre></td></tr></table></figure></p>
+<h2 id="send"><a href="#send" class="headerlink" title="send()"></a>send()</h2><p>生成器函数最大的特点就是可以接受外部传入的一个变量，并根据变量内容计算结果后返回。这是生成器函数最难理解也是最重要的地方。后面的协程部分会经常用到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line">#coding=utf-8</span><br><span class="line"></span><br><span class="line">def gen():</span><br><span class="line">    value = 0</span><br><span class="line">    while True:</span><br><span class="line">        receive = yield value</span><br><span class="line">        if receive == &apos;e&apos;:</span><br><span class="line">            break</span><br><span class="line">        value = &apos;got : %s&apos; % receive</span><br><span class="line"></span><br><span class="line">g = gen()</span><br><span class="line">print g.send(None)</span><br><span class="line">print g.send(&apos;hello&apos;)</span><br><span class="line">print g.send(8989)</span><br><span class="line">print g.send(&apos;e&apos;)</span><br><span class="line">print g.send(&apos;world&apos;)</span><br><span class="line"></span><br><span class="line">===========运行结果===========</span><br><span class="line">root@tonglele /code/Python/function/test # python code6.py</span><br><span class="line">0</span><br><span class="line">got : hello</span><br><span class="line">got : 8989</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;code6.py&quot;, line 16, in &lt;module&gt;</span><br><span class="line">    print g.send(&apos;e&apos;)</span><br><span class="line">StopIteration</span><br><span class="line"></span><br><span class="line">###执行流程：</span><br><span class="line">1. 通过g.send(None)或者next(g)可以启动生成器函数,并执行到第一个yield语句结束的位置。此时,执行完了yield语句,但是没有给receive赋值。yield</span><br><span class="line">value会输出初始值0注意:在启动生成器函数时只能send(None),如果试图输入其它的值都会得到错误提示信息。</span><br><span class="line">2. 通过g.send(‘hello’),会传入hello,并赋值给receive,然后计算出value的值,并回到while头部,执行yield value语句有停止。此时yield value会输出”got:</span><br><span class="line">hello”,然后挂起。</span><br><span class="line">3. 通过g.send(8989),会重复第2步,最后输出结果为”got: 8989′′</span><br><span class="line">4. 当我们g.send(‘e’)时,程序会执行break然后推出循环,最后整个函数执行完毕,所以会得到StopIteration异常。</span><br></pre></td></tr></table></figure></p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>1、 按照鸭子模型理论,生成器就是一种迭代器,可以使用for进行迭代。<br>2、第一次执行next(generator)时,会执行完yield语句后程序进行挂起,所有的参数和状态会进行保存。再一次执行next(generator)时,会从挂起的状态开<br>始往后执行。在遇到程序的结尾或者遇到StopIteration时,循环结束。<br>3、 可以通过generator.send(arg)来传入参数,这是协程模型。<br>4、 next()等价于send(None)</p>
+<p>感谢阅读，欢迎指正。</p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"> <i class="fa fa-tag"></i> Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/05/Python基础-函数-1/" rel="next" title="Python基础-函数[1] ">
+                <i class="fa fa-chevron-left"></i> Python基础-函数[1] 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/18/Python基础-IO与文本处理/" rel="prev" title="Python基础-IO与文本处理 ">
+                Python基础-IO与文本处理  <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/upload/im.jpg" alt="Tong yijia">
+            
+              <p class="site-author-name" itemprop="name">Tong yijia</p>
+              <p class="site-description motion-element" itemprop="description">abc~</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/tongyijia" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://me.csdn.net/tongyijia" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.jeyzhang.com/" title="xu" target="_blank">xu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wiki.archlinux.org/" title="arch" target="_blank">arch</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#函数嵌套"><span class="nav-number">1.</span> <span class="nav-text">函数嵌套</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#装饰器"><span class="nav-number">2.</span> <span class="nav-text">装饰器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lambda匿名函数"><span class="nav-number">3.</span> <span class="nav-text">lambda匿名函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#lambda语句的使用方法（无参数）"><span class="nav-number">3.1.</span> <span class="nav-text">lambda语句的使用方法（无参数）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lambda语句的使用方法（有参数）"><span class="nav-number">3.2.</span> <span class="nav-text">lambda语句的使用方法（有参数）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个计算器的例子"><span class="nav-number">3.3.</span> <span class="nav-text">一个计算器的例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#generator生成器"><span class="nav-number">4.</span> <span class="nav-text">generator生成器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单的生成器表达示例"><span class="nav-number">4.1.</span> <span class="nav-text">简单的生成器表达示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成器函数"><span class="nav-number">4.2.</span> <span class="nav-text">生成器函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#yeild与return"><span class="nav-number">4.3.</span> <span class="nav-text">yeild与return</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#close"><span class="nav-number">4.4.</span> <span class="nav-text">close()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#send"><span class="nav-number">4.5.</span> <span class="nav-text">send()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结："><span class="nav-number">4.6.</span> <span class="nav-text">总结：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tong yijia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

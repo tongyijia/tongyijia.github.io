@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="计算机网络,读书笔记,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="引言IP是TCP/IP协议族中最核心的协议。所有的TCP,UDP,ICMP,IGMP数据都以IP数据报格式传输。IP提供不可靠，无连接的数据报传送服务。 不可靠：不能保证IP数据报能够成功地到达目的地。如果发生某种错误时，如某个路由器暂时用完了缓冲区，IP有一个简单的错误处理算法：丢弃该数据报，然后发送ICMP消息报给信源端。任何要求的可靠性必须由上层来提供。 无连接：IP并不维护后续数据报的状态">
+<meta name="keywords" content="计算机网络,读书笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《TCP&#x2F;IP详解：卷一》第3章：IP：网际协议">
+<meta property="og:url" content="http://yoursite.com/2016/10/25/《TCP-IP详解：卷一》第3章：IP：网际协议/index.html">
+<meta property="og:site_name" content="lele&#39;s home">
+<meta property="og:description" content="引言IP是TCP/IP协议族中最核心的协议。所有的TCP,UDP,ICMP,IGMP数据都以IP数据报格式传输。IP提供不可靠，无连接的数据报传送服务。 不可靠：不能保证IP数据报能够成功地到达目的地。如果发生某种错误时，如某个路由器暂时用完了缓冲区，IP有一个简单的错误处理算法：丢弃该数据报，然后发送ICMP消息报给信源端。任何要求的可靠性必须由上层来提供。 无连接：IP并不维护后续数据报的状态">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://img.blog.csdn.net/20161027195157487">
+<meta property="og:image" content="http://img.blog.csdn.net/20161027200209491">
+<meta property="og:image" content="http://img.blog.csdn.net/20161027205348684">
+<meta property="og:image" content="http://img.blog.csdn.net/20161027205802369">
+<meta property="og:image" content="http://img.blog.csdn.net/20161027210349909">
+<meta property="og:updated_time" content="2019-03-20T04:34:12.807Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《TCP&#x2F;IP详解：卷一》第3章：IP：网际协议">
+<meta name="twitter:description" content="引言IP是TCP/IP协议族中最核心的协议。所有的TCP,UDP,ICMP,IGMP数据都以IP数据报格式传输。IP提供不可靠，无连接的数据报传送服务。 不可靠：不能保证IP数据报能够成功地到达目的地。如果发生某种错误时，如某个路由器暂时用完了缓冲区，IP有一个简单的错误处理算法：丢弃该数据报，然后发送ICMP消息报给信源端。任何要求的可靠性必须由上层来提供。 无连接：IP并不维护后续数据报的状态">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20161027195157487">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/25/《TCP-IP详解：卷一》第3章：IP：网际协议/">
+
+
+
+
+
+  <title>《TCP/IP详解：卷一》第3章：IP：网际协议 | lele's home</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lele's home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-scategories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            scategories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/25/《TCP-IP详解：卷一》第3章：IP：网际协议/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tong yijia">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/upload/im.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lele's home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">《TCP/IP详解：卷一》第3章：IP：网际协议</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-25T12:29:54+08:00">
+                2016-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>IP是TCP/IP协议族中最核心的协议。所有的TCP,UDP,ICMP,IGMP数据都以IP数据报格式传输。IP提供不可靠，无连接的数据报传送服务。</p>
+<p><strong>不可靠</strong>：不能保证IP数据报能够成功地到达目的地。如果发生某种错误时，如某个路由器暂时用完了缓冲区，IP有一个简单的错误处理算法：丢弃该数据报，然后发送ICMP消息报给信源端。任何要求的可靠性必须由上层来提供。</p>
+<p><strong>无连接</strong>：IP并不维护后续数据报的状态信息。每个数据报的处理是相互独立的。可不按发送顺序接收。</p>
+<h1 id="IP首部"><a href="#IP首部" class="headerlink" title="IP首部"></a>IP首部</h1><p>普通IP首部长20个字节，除非含有选项字段。<br><img src="http://img.blog.csdn.net/20161027195157487" alt></p>
+<p>4位协议版本号，目前为4（IPv4）。</p>
+<p>首部长度，指首部占32bit字的数目，普通IP数据报（没有任何选项）为5。也因它只占4bit，所以首部最长为60字节。</p>
+<p>服务类型，3bit的优先权子字段（现已被忽略），4bit的TOS字段，1bit未用位但必须置为0。4bit TOS分别代表：最小时延，最大吞吐量，最高可靠性和最小费用。4bit中只能置其中1bit。如果4bit全为0则为一般服务。</p>
+<p>服务类型字段推荐值：<br><img src="http://img.blog.csdn.net/20161027200209491" alt></p>
+<p>Telnet和Rlogin是交互应用，要求最小传输时延。FTP文件传输则需要最大吞吐量。</p>
+<p>路由协议OSPE和IS-IS都能根据这些字段进行路由决策。</p>
+<p>总长度字段：指整个IP数据报的长度。利用总长度字段和首部长度字段就可以知道IP数据报中数据的起始位置和长度。该字段16bit，所以IP数据报最长到65535字节。数据报被分片时，该字段的值也随着变化。</p>
+<p>总长度字段是IP首部中必要的内容，因为一些数据链路（如以太网）需要填充一些数据以达到最小长度。尽管以太网的数据帧最小为46字节，但是IP数据报可能更短。如果没用总长度字段，IP层就不知道多少是IP数据报的内容。</p>
+<p>标识字段是唯一地标识主机发送的每一份数据报。在讨论分片时再讨论它和标志字段，片偏移字段。</p>
+<p>TTL生存时间字段设置了数据报可以经过的最多路由数。指定了数据报的生存时间。</p>
+<p>协议字段可以是哪个协议向IP传送数据。</p>
+<p>首部检验和字段是根据IP首部计算的检验和码。不对首部后面的数据进行计算。</p>
+<p>源IP地址，目的IP地址。</p>
+<p>选项字段，是数据报中的一个可变长的可选信息。以32bit为界限，在必要时插入值为0的填充字节。这样就保证IP首部始终是32bit的整数倍（首部长度字段要求）。</p>
+<h1 id="IP路由选择"><a href="#IP路由选择" class="headerlink" title="IP路由选择"></a>IP路由选择</h1><p>对于<strong>主机</strong>来说，如果目的主机与源主机直接相连（如点对点链路）或都在一个共享网络上，那么IP数据报就直接送到目的主机上。否则，主机吧数据报发往一默认路由器上，由路由器来转发数据报。</p>
+<p>IP层即可以配置成路由器的功能又可配置成主机功能。<br>本质上的区别是主机不把数据报从一个接口转发到另一个接口，而路由器则要转发数据报。</p>
+<p>IP层在内存中有一个<strong>路由表</strong>。当收到一份数据报并进行发送时，它都要对该表搜索一次。当数据报来自某个网络接口时，IP首先检查IP地址是否是本机的IP地址之一或者IP广播地址。如果是，数据报就被送到由IP首部协议字段所指定的协议模块处理。如果数据报的目的不是这些地址，那么（1）如果IP层被设置成了路由器功能，则对数据报进行转发；否则（2）丢弃。</p>
+<p><strong>数据表中每一项包含的信息：</strong></p>
+<ul>
+<li>目的IP地址，可以是一个完整的主机地址也可以是一个网络地址，由标志字段指定。</li>
+<li>下一站路由器的IP地址，或者有直接连接的网络IP地址。</li>
+<li>标志，其中一个标志如上第一条所示，另一个标志指明下一站路由器是否为真正的下一站路由器，还是一个直接相连的接口。</li>
+<li>为数据报的传输指定一个网络接口</li>
+</ul>
+<p><strong>IP路由选择主要完成下列的功能：</strong></p>
+<ul>
+<li>搜索路由表，寻找能与IP地址完全匹配的表目（网络号+主机号）。</li>
+<li>搜索路由表，寻找能与目的网络号相匹配的表目。</li>
+<li>搜索路由表，寻找标为“默认”的表目。</li>
+</ul>
+<p>如果都未成功，则该数据报不能被传送。</p>
+<p>为一个网络指定一个路由而不是为每一个主机指定一个路由器，这是IP路由选择机制另一个基本特性。这样做可以极大的缩小路由表的规模。</p>
+<h1 id="子网寻址"><a href="#子网寻址" class="headerlink" title="子网寻址"></a>子网寻址</h1><p>子网编址。把主机号再分为一个子网号和一个主机号。</p>
+<p>减少IP地址浪费。</p>
+<p>子网对外部路由器影藏了内部网络组织的细节。</p>
+<h1 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h1><p>子网掩码以确定IP地址中多少bit用于子网号，多少用于主机号。值为1的bit留给网络号和子网号，0留给主机号。</p>
+<p>当给定IP地址和子网掩码时，主机就可以确定IP数据报的目的是：（1）本子网上的主机（2）本网络中其它子网中的主机（3）其它网络上的主机。</p>
+<h1 id="特殊情况的IP地址"><a href="#特殊情况的IP地址" class="headerlink" title="特殊情况的IP地址"></a>特殊情况的IP地址</h1><p>0：所有bit全为0；-1：全为1；netid、subnetid、hostid分别表示不全为0或全为1的对应字段。子网号为空代表没有进行子网划分。</p>
+<p><img src="http://img.blog.csdn.net/20161027205348684" alt></p>
+<p>头两项为特殊的源地址，中间项是特殊的环回地址，最后四项是广播地址。</p>
+<h1 id="ifconfig，netstat命令"><a href="#ifconfig，netstat命令" class="headerlink" title="ifconfig，netstat命令"></a>ifconfig，netstat命令</h1><p><img src="http://img.blog.csdn.net/20161027205802369" alt></p>
+<p><img src="http://img.blog.csdn.net/20161027210349909" alt><br>查看系统上的接口信息</p>
+<h1 id="几个问题"><a href="#几个问题" class="headerlink" title="几个问题"></a>几个问题</h1><p>1：环回地址必须是127.0.0.1吗？<br>不，任何网络号为127的A类地址都可以</p>
+<p>2：子网号为16bit的A类地址与子网号为8bit的B类地址的子网掩码有什么不同？<br>没有什么不同。</p>
+<p>3：子网掩码255.255.0.255是否对A类地址有效？<br>这是非连续的子网掩码，目前已不提倡使用。</p>
+<p>4：TCP/IP技术是基于一种数据报的网络技术，即IP层，其他协议族则基于面向连接的网络技术。试找出数据报网络层提供的三个优点。</p>
+<ul>
+<li>数据报降低了路由器中对连接状态的需求。</li>
+<li>数据报提供了基本的构件，在它上面可以构造不可靠（UDP）和可靠的（TCP）运输层。</li>
+<li>数据报代表了最小的网络层假定，使得可以使用很大范围的数据链路层服务。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/计算机网络/" rel="tag"> <i class="fa fa-tag"></i> 计算机网络</a>
+          
+            <a href="/tags/读书笔记/" rel="tag"> <i class="fa fa-tag"></i> 读书笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/20/《TCP-IP详解：卷一》第2章：链路层/" rel="next" title="《TCP/IP详解：卷一》第2章：链路层">
+                <i class="fa fa-chevron-left"></i> 《TCP/IP详解：卷一》第2章：链路层
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/27/Git-提交文件与-时光机～～/" rel="prev" title="Git:提交文件与 时光机～～">
+                Git:提交文件与 时光机～～ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/upload/im.jpg" alt="Tong yijia">
+            
+              <p class="site-author-name" itemprop="name">Tong yijia</p>
+              <p class="site-description motion-element" itemprop="description">abc~</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/tongyijia" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://me.csdn.net/tongyijia" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.jeyzhang.com/" title="xu" target="_blank">xu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wiki.archlinux.org/" title="arch" target="_blank">arch</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IP首部"><span class="nav-number">2.</span> <span class="nav-text">IP首部</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IP路由选择"><span class="nav-number">3.</span> <span class="nav-text">IP路由选择</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#子网寻址"><span class="nav-number">4.</span> <span class="nav-text">子网寻址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#子网掩码"><span class="nav-number">5.</span> <span class="nav-text">子网掩码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#特殊情况的IP地址"><span class="nav-number">6.</span> <span class="nav-text">特殊情况的IP地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ifconfig，netstat命令"><span class="nav-number">7.</span> <span class="nav-text">ifconfig，netstat命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#几个问题"><span class="nav-number">8.</span> <span class="nav-text">几个问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tong yijia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
