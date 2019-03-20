@@ -79,16 +79,13 @@
 
 
 
-<meta name="description" content="abc~">
 <meta property="og:type" content="website">
 <meta property="og:title" content="lele&#39;s home">
 <meta property="og:url" content="http://yoursite.com/page/3/index.html">
 <meta property="og:site_name" content="lele&#39;s home">
-<meta property="og:description" content="abc~">
 <meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="lele&#39;s home">
-<meta name="twitter:description" content="abc~">
 
 
 
@@ -98,7 +95,7 @@
     root: '/',
     scheme: 'Pisces',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"always","offset":18,"b2t":true,"scrollpercent":true,"onmobile":true},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -208,16 +205,6 @@
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             Tags
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-scategories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
-            
-            scategories
           </a>
         </li>
       
@@ -1584,6 +1571,8 @@
 
   <aside id="sidebar" class="sidebar">
     
+      <div id="sidebar-dimmer"></div>
+    
     <div class="sidebar-inner">
 
       
@@ -1597,7 +1586,7 @@
               <img class="site-author-image" itemprop="image" src="/images/upload/im.jpg" alt="Tong yijia">
             
               <p class="site-author-name" itemprop="name">Tong yijia</p>
-              <p class="site-description motion-element" itemprop="description">abc~</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
           <nav class="site-state motion-element">
@@ -1653,7 +1642,7 @@
 
           
           
-            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
               <div class="links-of-blogroll-title">
                 <i class="fa  fa-fw fa-link"></i>
                 Links
@@ -1679,6 +1668,13 @@
 
       
 
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
       
 
     </div>
@@ -1726,11 +1722,6 @@
       </div>
     </footer>
 
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
     
 
     
@@ -1900,6 +1891,7 @@
   
 
 
-
+<script type="text/javascript" src="/js/src/love.js"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
+
